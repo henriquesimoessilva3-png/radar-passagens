@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radar de Passagens</title>
+<style>
+:root{--bg:#f4f1ea;--card:#fffdf8;--ink:#17202a;--mut:#667085;--line:#e2ddd0;--acc:#0b5c8f;
+--otimo:#0a7d4f;--otimo-bg:#dff5ea;--bom:#3d7a12;--bom-bg:#eaf5d8;--obs:#8a6a00;--obs-bg:#fbf0c9;--norm:#667085;--norm-bg:#eceae4}
+@media (prefers-color-scheme:dark){:root{--bg:#10151b;--card:#19212b;--ink:#eef2f6;--mut:#9aa7b5;--line:#2a3441;--acc:#6cbcf0;
+--otimo:#5fe0a6;--otimo-bg:#0e3a28;--bom:#b4e07a;--bom-bg:#26380f;--obs:#f1cf62;--obs-bg:#3b3110;--norm:#9aa7b5;--norm-bg:#232c37}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:1080px;margin:0 auto;padding:20px 16px 60px}
+header h1{margin:0;font-size:26px;letter-spacing:-.02em}
+header p{margin:4px 0 0;color:var(--mut);font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px}
+.seg button{border:0;background:none;color:var(--mut);font:inherit;font-weight:600;padding:7px 12px;border-radius:7px;cursor:pointer}
+.seg button.on{background:var(--acc);color:#fff}
+@media (prefers-color-scheme:dark){.seg button.on{color:#06141f}}
+.resumo{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0 22px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.kpi b{display:block;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
+.kpi span{color:var(--mut);font-size:12px}
+h2{font-size:18px;margin:28px 0 10px;display:flex;align-items:baseline;gap:10px}
+h2::first-letter{text-transform:uppercase}
+h2 small{font-size:12px;color:var(--mut);font-weight:500;text-transform:none}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.of{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.of.otimo{border-color:var(--otimo)}.of.bom{border-color:var(--bom)}
+.top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.dest{font-weight:700;font-size:17px;line-height:1.2}
+.dest small{display:block;font-weight:500;color:var(--mut);font-size:12px}
+.tag{font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;white-space:nowrap}
+.tag.otimo{background:var(--otimo-bg);color:var(--otimo)}.tag.bom{background:var(--bom-bg);color:var(--bom)}
+.tag.observacao{background:var(--obs-bg);color:var(--obs)}.tag.normal{background:var(--norm-bg);color:var(--norm)}
+.nums{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.preco{font-size:30px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.pct{font-size:22px;font-weight:800;color:var(--otimo)}
+.meta{color:var(--mut);font-size:12.5px}
+.links{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.links a{font-size:12px;font-weight:600;color:var(--acc);text-decoration:none;border:1px solid var(--line);border-radius:7px;padding:4px 8px}
+.links a:hover{border-color:var(--acc)}
+.extra{border-top:1px solid var(--line);padding-top:8px;font-size:12.5px;color:var(--mut)}
+.extra b{color:var(--ink);font-size:14px}
+.extra svg{display:block;width:100%;height:auto;margin:4px 0 2px}
+.extra .t{font-weight:700;color:var(--ink);font-size:11px;letter-spacing:.04em;text-transform:uppercase}
+.bar-n{fill:var(--norm)}.bar-min{fill:var(--acc)}.eixo{stroke:var(--line);stroke-width:1}
+.lin{fill:none;stroke:var(--acc);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}.pt{fill:var(--acc);stroke:var(--card);stroke-width:2}
+.rot{font-size:9px;fill:var(--mut);text-anchor:middle}.hit{fill:transparent}.hit:hover{fill:var(--ink);fill-opacity:.08}
+.tab{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13px}
+.tab th{text-align:left;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);padding:10px 12px;border-bottom:1px solid var(--line)}
+.tab td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+.tab tr:last-child td{border-bottom:0}
+.tab td b{font-size:16px}.tab .g{color:var(--otimo)}.tab .r{color:var(--mut)}
+.rolar{overflow-x:auto}.nota{color:var(--mut);font-size:12.5px;margin:0 0 12px}
+.vazio{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:22px;color:var(--mut);text-align:center}
+footer{margin-top:36px;color:var(--mut);font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>✈ Radar de Passagens</h1>
+  <p id="sub">Carregando…</p>
+</header>
+<div class="bar">
+  <div class="seg" id="visao">
+    <button data-v="ofertas" class="on">Passagens</button><button data-v="anac">Histórico por destino</button>
+  </div>
+  <div class="seg" id="origens"></div>
+  <div class="seg" id="tipo">
+    <button data-v="todos" class="on">Todos</button><button data-v="nac">Nacionais</button><button data-v="int">Internacionais</button>
+  </div>
+  <div class="seg" id="filtro">
+    <button data-v="bons" class="on">Só preço bom</button><button data-v="tudo">Tudo</button>
+  </div>
+</div>
+<div class="resumo" id="resumo"></div>
+<main id="lista"></main>
+<footer id="rodape"></footer>
+</div>
+<script>
+const $ = s => document.querySelector(s);
+const st = {origem: null, tipo: "todos", filtro: "bons", visao: "ofertas"};
+let D = null, A = null;
+const MES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
+const pct = v => (v >= 1 ? "+" : "−") + Math.abs(Math.round((v - 1) * 100)) + "%";
+
+function grafSaz(saz) {
+  const W = 276, mid = 30, lb = 23, mx = Math.max(.1, ...saz.filter(v => v != null).map(v => Math.abs(v - 1)));
+  const min = Math.min(...saz.filter(v => v != null));
+  let g = `<line class="eixo" x1="0" x2="${W}" y1="${mid}" y2="${mid}"/>`;
+  saz.forEach((v, i) => {
+    const x = i * lb + 3;
+    if (v != null) {
+      const h = Math.max(2, Math.abs(v - 1) / mx * 24), y = v >= 1 ? mid - h : mid;
+      g += `<rect class="${v === min ? "bar-min" : "bar-n"}" x="${x}" y="${y}" width="17" height="${h}" rx="2"/>`;
+    }
+    g += `<text class="rot" x="${x + 8.5}" y="68">${MES[i][0].toUpperCase()}</text>`;
+    g += `<rect class="hit" x="${x - 3}" y="0" width="${lb}" height="58"><title>${MES[i]}: ${v == null ? "sem dados" : pct(v) + " vs média do ano"}</title></rect>`;
+  });
+  return `<svg viewBox="0 0 ${W} 72" role="img" aria-label="Sazonalidade do preço por mês de compra">${g}</svg>`;
+}
+
+function grafHist(h) {
+  const W = 276, H = 46, ps = h.map(p => p[1]), lo = Math.min(...ps), hi = Math.max(...ps), am = hi - lo || 1;
+  const X = i => 4 + i * (W - 8) / Math.max(1, h.length - 1), Y = p => 6 + (1 - (p - lo) / am) * (H - 12);
+  const pts = h.map((p, i) => `${X(i).toFixed(1)},${Y(p[1]).toFixed(1)}`).join(" ");
+  const lg = (W - 8) / h.length;
+  const hits = h.map((p, i) => `<rect class="hit" x="${(X(i) - lg / 2).toFixed(1)}" y="0" width="${lg.toFixed(1)}" height="${H}"><title>${new Date(p[0] * 1000).toLocaleDateString("pt-BR")}: ${brl(p[1])}</title></rect>`).join("");
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Preço nos últimos dias"><polyline class="lin" points="${pts}"/><circle class="pt" cx="${X(h.length - 1)}" cy="${Y(ps[ps.length - 1])}" r="4"/>${hits}</svg>`;
+}
+
+function extras(o) {
+  let x = "";
+  const h = o.google && o.google.hist;
+  if (h && h.length > 5) {
+    const ps = h.map(p => p[1]);
+    x += `<div class="extra"><span class="t">Google Flights · últimos ${h.length} dias</span>${grafHist(h)}mín <b>${brl(Math.min(...ps))}</b> · máx <b>${brl(Math.max(...ps))}</b> · agora <b>${brl(ps[ps.length - 1])}</b></div>`;
+  }
+  const r = A && A.rotas[o.origem + "|" + o.codigo];
+  if (r && r.saz) {
+    const cias = r.cias.filter(c => c.saz).slice(0, 3).map(c => `${esc(c.nome)}: <b>${MES[c.barato - 1].slice(0, 3)}</b> (${pct(c.saz[c.barato - 1])})`).join(" · ");
+    x += `<div class="extra"><span class="t">Histórico ANAC · quando comprar</span>${grafSaz(r.saz)}Mais barato comprar em <b>${MES[r.barato - 1]}</b> (<b>${pct(r.saz[r.barato - 1])}</b>) · mais caro em <b>${MES[r.caro - 1]}</b> (<b>${pct(r.saz[r.caro - 1])}</b>)${cias ? "<br>" + cias : ""}</div>`;
+  }
+  return x;
+}
+
+function renderAnac() {
+  const og = D.origens.find(x => x.id === st.origem);
+  $("#resumo").innerHTML = "";
+  if (!A) { $("#lista").innerHTML = `<div class="vazio">O histórico da ANAC ainda não foi carregado. Ele é baixado aos poucos nas primeiras execuções do robô.</div>`; return; }
+  const rs = Object.entries(A.rotas).filter(([k]) => k.startsWith(st.origem + "|")).map(([, r]) => r).sort((a, b) => b.assentos12 - a.assentos12);
+  const am = s => s.slice(4) + "/" + s.slice(0, 4);
+  let h = `<p class="nota">Voos nacionais saindo de ${esc(og.nome)}. Tarifa média <b>por trecho</b> nos últimos 12 meses e variação típica do preço conforme o <b>mês da compra</b>, calculada sobre ${A.meses_carregados} meses de vendas (${am(A.periodo[0])} a ${am(A.periodo[1])}). Fonte: microdados de tarifas da ANAC.</p>`;
+  if (!rs.length) h += `<div class="vazio">Sem rotas com volume suficiente para esta origem.</div>`;
+  else {
+    h += `<div class="rolar"><table class="tab"><thead><tr><th>Destino</th><th>Tarifa média</th><th>Mais barato comprar em</th><th>Mais caro</th><th>Por companhia (mês mais barato)</th></tr></thead><tbody>`;
+    for (const r of rs) {
+      const cias = r.cias.map(c => `${esc(c.nome)} <b>${brl(c.tarifa12)}</b>${c.saz ? ` · ${MES[c.barato - 1].slice(0, 3)} <span class="g">${pct(c.saz[c.barato - 1])}</span>` : ""}`).join("<br>");
+      h += `<tr><td><b>${esc(r.destino)}</b><br>${esc(r.iata)}</td><td><b>${brl(r.tarifa12)}</b></td>` +
+        (r.saz ? `<td><b>${MES[r.barato - 1]}</b> <b class="g">${pct(r.saz[r.barato - 1])}</b></td><td><b>${MES[r.caro - 1]}</b> <b class="r">${pct(r.saz[r.caro - 1])}</b></td>` : `<td colspan="2">histórico insuficiente</td>`) +
+        `<td>${cias}</td></tr>`;
+    }
+    h += `</tbody></table></div>`;
+  }
+  $("#lista").innerHTML = h;
+}
+const brl = n => n == null ? "–" : n.toLocaleString("pt-BR", {style: "currency", currency: D.moeda || "BRL", maximumFractionDigits: 0});
+const dataBR = s => s ? s.slice(8) + "/" + s.slice(5, 7) : "";
+const nomeMes = ym => new Date(ym + "-15T12:00:00").toLocaleDateString("pt-BR", {month: "long", year: "numeric"});
+const ROT = {otimo: "Preço ótimo", bom: "Preço bom", observacao: "Em observação", normal: "Normal"};
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;"}[c]));
+
+function links(o, og) {
+  const c = o.codigo, i = o.ida, v = o.volta || o.ida, yy = d => d.slice(2).replace(/-/g, "");
+  const q = encodeURIComponent(`Flights from ${og.nome} to ${c} on ${i} through ${v}`);
+  return [
+    ["Google Flights", `https://www.google.com/travel/flights?hl=pt-BR&curr=BRL&q=${q}`],
+    ["Kayak", `https://www.kayak.com.br/flights/${og.kayak}-${c}/${i}/${v}?sort=price_a`],
+    ["Momondo", `https://www.momondo.com.br/flight-search/${og.kayak}-${c}/${i}/${v}?sort=price_a`],
+    ["Skyscanner", `https://www.skyscanner.com.br/transport/flights/${og.skyscanner}/${c.toLowerCase()}/${yy(i)}/${yy(v)}/`],
+    ["Booking", `https://flights.booking.com/flights/${og.booking}-${c}.AIRPORT/?type=ROUNDTRIP&adults=1&cabinClass=ECONOMY&depart=${i}&return=${v}&sort=CHEAPEST`]
+  ].map(([n, u]) => `<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join("");
+}
+
+function card(o, og) {
+  const pct = o.desconto != null && o.desconto > 0 ? `<span class="pct">−${Math.round(o.desconto * 100)}%</span>` : "";
+  const ref = o.ref ? `Mediana da rota: <b>${brl(o.ref)}</b> (${o.dias_hist} dias)` : `Histórico: ${o.dias_hist || 0} de ${D.dias_minimos_historico} dias`;
+  const g = o.google && o.google.min ? ` · Faixa típica Google: <b>${brl(o.google.min)}–${brl(o.google.max)}</b>` : "";
+  const par = o.paradas == null ? "" : o.paradas === 0 ? "direto" : o.paradas + (o.paradas > 1 ? " paradas" : " parada");
+  return `<article class="of ${o.nivel}">
+    <div class="top"><div class="dest">${esc(o.destino)} <small>${esc(o.codigo)} · ${esc(o.pais)}</small></div><span class="tag ${o.nivel}">${ROT[o.nivel]}</span></div>
+    <div class="nums"><span class="preco">${brl(o.preco)}</span>${pct}</div>
+    <div class="meta"><b>${dataBR(o.ida)} → ${dataBR(o.volta)}</b> · ${esc(o.cia)}${par ? " · " + par : ""}<br>${ref}${g}<br>${esc(o.motivo)}</div>
+    ${extras(o)}<div class="links">${links(o, og)}</div></article>`;
+}
+
+function render() {
+  const anac = st.visao === "anac";
+  $("#tipo").style.display = $("#filtro").style.display = anac ? "none" : "";
+  if (anac) return renderAnac();
+  const og = D.origens.find(x => x.id === st.origem);
+  let ofs = D.ofertas.filter(o => o.origem === st.origem);
+  if (st.tipo === "nac") ofs = ofs.filter(o => o.nacional);
+  if (st.tipo === "int") ofs = ofs.filter(o => !o.nacional);
+  const bons = ofs.filter(o => o.nivel === "bom" || o.nivel === "otimo");
+  const menor = ofs.reduce((m, o) => !m || o.preco < m.preco ? o : m, null);
+  const top = bons.reduce((m, o) => !m || (o.desconto || 0) > (m.desconto || 0) ? o : m, null);
+  $("#resumo").innerHTML = `
+    <div class="kpi"><b>${bons.length}</b><span>passagens com preço bom</span></div>
+    <div class="kpi"><b>${ofs.length}</b><span>ofertas monitoradas</span></div>
+    <div class="kpi"><b>${menor ? brl(menor.preco) : "–"}</b><span>menor preço${menor ? " · " + esc(menor.destino) : ""}</span></div>
+    <div class="kpi"><b>${top && top.desconto ? "−" + Math.round(top.desconto * 100) + "%" : "–"}</b><span>maior desconto${top && top.desconto ? " · " + esc(top.destino) : ""}</span></div>`;
+  const mostra = st.filtro === "bons" ? bons : ofs;
+  const meses = [...new Set(ofs.map(o => o.ida.slice(0, 7)))].sort();
+  const ord = {otimo: 0, bom: 1, observacao: 2, normal: 3};
+  let html = "";
+  for (const m of meses) {
+    const doMes = mostra.filter(o => o.ida.startsWith(m)).sort((a, b) => ord[a.nivel] - ord[b.nivel] || (b.desconto || 0) - (a.desconto || 0) || a.preco - b.preco);
+    html += `<h2>${nomeMes(m)} <small>${doMes.length} ${st.filtro === "bons" ? "com preço bom" : "ofertas"}</small></h2>`;
+    html += doMes.length ? `<div class="grid">${doMes.map(o => card(o, og)).join("")}</div>`
+      : `<div class="vazio">Nenhuma passagem com preço bom neste mês por enquanto.</div>`;
+  }
+  if (!meses.length) html = `<div class="vazio">Ainda não há dados para ${esc(og.nome)}. As origens secundárias entram em rodízio — aparecem nos primeiros dias de execução.</div>`;
+  else if (st.filtro === "bons" && !bons.length && ofs.some(o => o.nivel === "observacao"))
+    html = `<div class="vazio">O radar ainda está formando o histórico (precisa de ${D.dias_minimos_historico} dias por rota para dizer o que é barato). Clique em <b>Tudo</b> para ver os preços já coletados.</div>` + html;
+  $("#lista").innerHTML = html;
+}
+
+function seg(id, chave) {
+  $(id).addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    st[chave] = b.dataset.v;
+    [...$(id).children].forEach(x => x.classList.toggle("on", x === b));
+    render();
+  });
+}
+
+const pega = u => fetch(u + "?t=" + Date.now()).then(r => { if (!r.ok) throw 0; return r.json(); });
+Promise.all([pega("data/deals.json"), pega("data/anac.json").catch(() => null)]).then(([d, a]) => {
+  D = d; A = a;
+  st.origem = (d.origens.find(o => o.principal) || d.origens[0]).id;
+  $("#origens").innerHTML = d.origens.map(o => `<button data-v="${o.id}" class="${o.id === st.origem ? "on" : ""}">${esc(o.nome)}</button>`).join("");
+  $("#sub").textContent = `Ida e volta, 1 adulto, preços do Google Flights · atualizado em ${d.atualizado.slice(8, 10)}/${d.atualizado.slice(5, 7)} às ${d.atualizado.slice(11)}`;
+  $("#rodape").innerHTML = `Histórico ANAC: só voos nacionais; mostra em que meses a passagem costuma ser <b>vendida</b> mais barata (mês da compra, não da viagem). “Preço bom” = pelo menos 15% abaixo da mediana do histórico da rota, ou classificado como baixo pelo Google Flights. Buscas usadas no mês: <b>${d.buscas_no_mes}</b> de ${d.limite_mensal}. Confira sempre o preço final no site antes de comprar.`;
+  seg("#visao", "visao"); seg("#origens", "origem"); seg("#tipo", "tipo"); seg("#filtro", "filtro");
+  render();
+}).catch(() => { $("#sub").textContent = "Ainda sem dados — rode o robô uma vez (aba Actions no GitHub)."; });
+</script>
+</body>
+</html>

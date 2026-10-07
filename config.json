@@ -1,0 +1,73 @@
+{
+  "_ajuda": "orcamento_diario = buscas SerpApi por dia (plano gratis = 250/mes, entao 7/dia). confirmacoes_google = quantas dessas buscas checam o nivel de preco no Google Flights. duracao_viagem: 1 = fim de semana, 2 = 1 semana, 3 = 2 semanas.",
+  "orcamento_diario": 7,
+  "confirmacoes_google": 2,
+  "limite_mensal": 245,
+  "meses_a_frente": 6,
+  "duracao_viagem": 2,
+  "moeda": "BRL",
+  "pais_local": [
+    "Brasil",
+    "Brazil"
+  ],
+  "desconto_bom": 0.15,
+  "desconto_otimo": 0.3,
+  "dias_minimos_historico": 5,
+  "origens": [
+    {
+      "id": "BH",
+      "nome": "Belo Horizonte",
+      "aeroportos": "CNF",
+      "principal": true,
+      "kayak": "CNF",
+      "skyscanner": "cnf",
+      "booking": "CNF.AIRPORT"
+    },
+    {
+      "id": "RIO",
+      "nome": "Rio de Janeiro",
+      "aeroportos": "GIG,SDU",
+      "principal": false,
+      "kayak": "RIO",
+      "skyscanner": "rioa",
+      "booking": "RIO.CITY"
+    },
+    {
+      "id": "SP",
+      "nome": "São Paulo",
+      "aeroportos": "GRU,CGH",
+      "principal": false,
+      "kayak": "SAO",
+      "skyscanner": "saoa",
+      "booking": "SAO.CITY"
+    },
+    {
+      "id": "VCP",
+      "nome": "Campinas",
+      "aeroportos": "VCP",
+      "principal": false,
+      "kayak": "VCP",
+      "skyscanner": "vcp",
+      "booking": "VCP.AIRPORT"
+    }
+  ],
+  "areas": [
+    {
+      "id": "BR",
+      "nome": "Brasil",
+      "kgmid": "/m/015fr"
+    },
+    {
+      "id": "MUNDO",
+      "nome": "Mundo",
+      "kgmid": ""
+    }
+  ],
+  "anac": {
+    "meses": 48,
+    "minutos_por_execucao": 15,
+    "assentos_minimos_mes": 30,
+    "assentos_minimos_ano": 500,
+    "dias_entre_checagens": 7
+  }
+}

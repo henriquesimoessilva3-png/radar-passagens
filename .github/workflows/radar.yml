@@ -1,0 +1,39 @@
+name: Radar de passagens
+
+on:
+  schedule:
+    - cron: "17 9 * * *"   # todo dia às 06:17 (Brasília)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: radar
+  cancel-in-progress: false
+
+jobs:
+  buscar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Buscar preços
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+        run: python fetch.py
+      - name: Histórico ANAC
+        if: always()
+        continue-on-error: true
+        timeout-minutes: 25
+        run: python anac.py
+      - name: Salvar dados
+        if: always()
+        run: |
+          git config user.name "radar-bot"
+          git config user.email "radar-bot@users.noreply.github.com"
+          git add data
+          git diff --cached --quiet || git commit -m "Atualiza preços $(date -u +%F)"
+          git push
