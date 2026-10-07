@@ -19,6 +19,8 @@ header p{margin:4px 0 0;color:var(--mut);font-size:13px}
 .seg button{border:0;background:none;color:var(--mut);font:inherit;font-weight:600;padding:7px 12px;border-radius:7px;cursor:pointer}
 .seg button.on{background:var(--acc);color:#fff}
 @media (prefers-color-scheme:dark){.seg button.on{color:#06141f}}
+.busca{flex:1 1 220px;min-width:200px;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 12px}
+.busca:focus{outline:2px solid var(--acc);outline-offset:1px}
 .resumo{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0 22px}
 .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
 .kpi b{display:block;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
@@ -73,6 +75,11 @@ footer{margin-top:36px;color:var(--mut);font-size:12px}
   <div class="seg" id="tipo">
     <button data-v="todos" class="on">Todos</button><button data-v="nac">Nacionais</button><button data-v="int">Internacionais</button>
   </div>
+  <div class="seg" id="regiao">
+    <button data-v="todas" class="on">Todas as regiões</button><button data-v="NE">Nordeste</button><button data-v="SE">Sudeste</button><button data-v="S">Sul</button><button data-v="CO">Centro-Oeste</button><button data-v="N">Norte</button>
+  </div>
+  <input class="busca" id="cidades" type="search" list="lista-cidades" placeholder="Filtrar cidades (ex.: Recife, Maceió)" aria-label="Filtrar cidades">
+  <datalist id="lista-cidades"></datalist>
   <div class="seg" id="filtro">
     <button data-v="bons" class="on">Só preço bom</button><button data-v="tudo">Tudo</button>
   </div>
@@ -83,7 +90,14 @@ footer{margin-top:36px;color:var(--mut);font-size:12px}
 </div>
 <script>
 const $ = s => document.querySelector(s);
-const st = {origem: null, tipo: "todos", filtro: "bons", visao: "ofertas"};
+const st = {origem: null, tipo: "todos", filtro: "bons", visao: "ofertas", regiao: "todas", cidades: ""};
+const REG = {NE: "AL BA CE MA PB PE PI RN SE", SE: "ES MG RJ SP", S: "PR RS SC", CO: "DF GO MS MT", N: "AC AM AP PA RO RR TO"};
+const UF_REG = {}; for (const r in REG) REG[r].split(" ").forEach(u => UF_REG[u] = r);
+let UF = {};
+const norm = t => String(t || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+const termos = () => norm(st.cidades).split(",").map(t => t.trim()).filter(Boolean);
+const bateCidade = (nome, cod) => { const ts = termos(); return !ts.length || ts.some(t => norm(nome).includes(t) || norm(cod) === t); };
+const regiaoDe = iata => UF_REG[UF[iata]] || null;
 let D = null, A = null;
 const MES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro"];
 const pct = v => (v >= 1 ? "+" : "−") + Math.abs(Math.round((v - 1) * 100)) + "%";
@@ -132,7 +146,7 @@ function renderAnac() {
   const og = D.origens.find(x => x.id === st.origem);
   $("#resumo").innerHTML = "";
   if (!A) { $("#lista").innerHTML = `<div class="vazio">O histórico da ANAC ainda não foi carregado. Ele é baixado aos poucos nas primeiras execuções do robô.</div>`; return; }
-  const rs = Object.entries(A.rotas).filter(([k]) => k.startsWith(st.origem + "|")).map(([, r]) => r).sort((a, b) => b.assentos12 - a.assentos12);
+  const rs = Object.entries(A.rotas).filter(([k]) => k.startsWith(st.origem + "|")).map(([, r]) => r).filter(r => (st.regiao === "todas" || regiaoDe(r.iata) === st.regiao) && bateCidade(r.destino, r.iata)).sort((a, b) => b.assentos12 - a.assentos12);
   const am = s => s.slice(4) + "/" + s.slice(0, 4);
   let h = `<p class="nota">Voos nacionais saindo de ${esc(og.nome)}. Tarifa média <b>por trecho</b> nos últimos 12 meses e variação típica do preço conforme o <b>mês da compra</b>, calculada sobre ${A.meses_carregados} meses de vendas (${am(A.periodo[0])} a ${am(A.periodo[1])}). Fonte: microdados de tarifas da ANAC.</p>`;
   if (!rs.length) h += `<div class="vazio">Sem rotas com volume suficiente para esta origem.</div>`;
@@ -178,14 +192,24 @@ function card(o, og) {
     ${extras(o)}<div class="links">${links(o, og)}</div></article>`;
 }
 
+function opcoes() {
+  const nomes = new Set(D.ofertas.filter(o => o.origem === st.origem).map(o => o.destino));
+  if (A) Object.entries(A.rotas).forEach(([k, r]) => { if (k.startsWith(st.origem + "|")) nomes.add(r.destino); });
+  $("#lista-cidades").innerHTML = [...nomes].sort((a, b) => a.localeCompare(b, "pt-BR")).map(n => `<option value="${esc(n)}">`).join("");
+}
+
 function render() {
   const anac = st.visao === "anac";
+  opcoes();
   $("#tipo").style.display = $("#filtro").style.display = anac ? "none" : "";
+  $("#regiao").style.display = !anac && st.tipo === "int" ? "none" : "";
   if (anac) return renderAnac();
   const og = D.origens.find(x => x.id === st.origem);
   let ofs = D.ofertas.filter(o => o.origem === st.origem);
   if (st.tipo === "nac") ofs = ofs.filter(o => o.nacional);
   if (st.tipo === "int") ofs = ofs.filter(o => !o.nacional);
+  else if (st.regiao !== "todas") ofs = ofs.filter(o => o.nacional && regiaoDe(o.codigo) === st.regiao);
+  ofs = ofs.filter(o => bateCidade(o.destino, o.codigo));
   const bons = ofs.filter(o => o.nivel === "bom" || o.nivel === "otimo");
   const menor = ofs.reduce((m, o) => !m || o.preco < m.preco ? o : m, null);
   const top = bons.reduce((m, o) => !m || (o.desconto || 0) > (m.desconto || 0) ? o : m, null);
@@ -220,13 +244,17 @@ function seg(id, chave) {
 }
 
 const pega = u => fetch(u + "?t=" + Date.now()).then(r => { if (!r.ok) throw 0; return r.json(); });
-Promise.all([pega("data/deals.json"), pega("data/anac.json").catch(() => null)]).then(([d, a]) => {
+Promise.all([pega("data/deals.json"), pega("data/anac.json").catch(() => null), pega("aeroportos_br.json").catch(() => ({}))]).then(([d, a, ap]) => {
   D = d; A = a;
+  Object.values(ap).forEach(v => UF[v[0]] = v[2]);
   st.origem = (d.origens.find(o => o.principal) || d.origens[0]).id;
   $("#origens").innerHTML = d.origens.map(o => `<button data-v="${o.id}" class="${o.id === st.origem ? "on" : ""}">${esc(o.nome)}</button>`).join("");
   $("#sub").textContent = `Ida e volta, 1 adulto, preços do Google Flights · atualizado em ${d.atualizado.slice(8, 10)}/${d.atualizado.slice(5, 7)} às ${d.atualizado.slice(11)}`;
   $("#rodape").innerHTML = `Histórico ANAC: só voos nacionais; mostra em que meses a passagem costuma ser <b>vendida</b> mais barata (mês da compra, não da viagem). “Preço bom” = pelo menos 15% abaixo da mediana do histórico da rota, ou classificado como baixo pelo Google Flights. Buscas usadas no mês: <b>${d.buscas_no_mes}</b> de ${d.limite_mensal}. Confira sempre o preço final no site antes de comprar.`;
-  seg("#visao", "visao"); seg("#origens", "origem"); seg("#tipo", "tipo"); seg("#filtro", "filtro");
+  seg("#visao", "visao"); seg("#origens", "origem"); seg("#tipo", "tipo"); seg("#regiao", "regiao");
+  try { st.cidades = localStorage.getItem("radar-cidades") || ""; } catch (e) {}
+  $("#cidades").value = st.cidades;
+  $("#cidades").addEventListener("input", e => { st.cidades = e.target.value; try { localStorage.setItem("radar-cidades", st.cidades); } catch (e2) {} render(); }); seg("#filtro", "filtro");
   render();
 }).catch(() => { $("#sub").textContent = "Ainda sem dados — rode o robô uma vez (aba Actions no GitHub)."; });
 </script>
