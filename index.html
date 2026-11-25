@@ -4,144 +4,234 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Radar de Viagens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#ffffff;--card:#ffffff;--ink:#1a1a1a;--mut:#595959;--line:#e7e7e7;--acc:#0096c7;--acc-2:#008234;--sea1:#003b95;--sea2:#003b95;
---otimo:#008234;--otimo-bg:#e7f6ec;--bom:#3f7d12;--bom-bg:#eaf6d9;--obs:#8a6a00;--obs-bg:#fdf3d0;--norm:#595959;--norm-bg:#f2f2f2;--chip:#ebf3ff;--amarelo:#febb02;--azul:#0aa5b8;--coral:#ff6b5b;--sol:#ffc93c}
+:root{
+  --tinta:#23213a; --tinta-2:#5b5873; --papel:#ffffff; --ceu:#e9f6ff; --mar:#00a3a3; --mar-esc:#007f86; --sol:#ffc22e; --coral:#ff6b4a; --linha:#dcdfee;
+  --bg:#f5fbff; --card:#fff; --ink:var(--tinta); --mut:var(--tinta-2); --line:var(--linha); --acc:var(--mar-esc); --chip:#e6f7f6;
+  --otimo:#0f9d58; --otimo-bg:#e3f7ec; --bom:#4d8f12; --bom-bg:#ecf7dd; --obs:#9a6b00; --obs-bg:#fff2cc; --norm:#5b5873; --norm-bg:#eef0f7;
+  --disp:"Unbounded",Arial,Helvetica,sans-serif;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Arial,Helvetica,sans-serif}
-a{color:var(--acc)}
-.hero{background:linear-gradient(120deg,#00c6c2 0%,#14a9e0 55%,#ff9f6e 100%);color:#fff;padding:22px 0 46px;position:relative}
-.hero:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:34px;background:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1200 40%27 preserveAspectRatio=%27none%27%3E%3Cpath d=%27M0 22 C200 2 400 40 600 22 S1000 4 1200 22 V40 H0Z%27 fill=%27%23ffffff%27/%3E%3C/svg%3E") center/100% 100% no-repeat}
-.hero h1:before{content:"☀️ ";}
-.hero .in,.wrap{max-width:1140px;margin:0 auto;padding:0 16px}
-.hero h1{margin:0;font-size:28px;text-shadow:0 1px 2px rgba(0,0,0,.15);letter-spacing:-.01em}
-.hero p{margin:4px 0 18px;opacity:.9;font-size:14px}
-.nav{display:flex;gap:6px;flex-wrap:wrap}
-.nav button{border:1px solid transparent;background:none;color:#fff;font:inherit;font-weight:500;padding:9px 16px;border-radius:99px;cursor:pointer}
-.nav button:hover{background:rgba(255,255,255,.1)}
-.nav button.on{border-color:#fff;background:rgba(255,255,255,.12);font-weight:700}
-.wrap{padding-top:22px;padding-bottom:60px}
-.bar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px;align-items:center}
-.seg{display:flex;flex-wrap:wrap;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px}
-.seg button{border:0;background:none;color:var(--mut);font:inherit;font-weight:700;padding:7px 12px;border-radius:9px;cursor:pointer}
-.seg button.on{background:var(--acc);color:#fff}
-.busca{flex:1 1 220px;min-width:200px;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
-.resumo{margin-top:-8px!important;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:6px 0 24px}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;box-shadow:0 2px 8px rgba(26,26,26,.08)}
-.kpi b{display:block;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
-.kpi span{color:var(--mut);font-size:12.5px}
-h2{font-size:22px;color:#0b6f86;margin:30px 0 4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
-h2 small{font-size:13px;color:var(--mut);font-weight:400}
-.sub{color:var(--mut);font-size:13px;margin:0 0 12px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
-.of{background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:0 2px 8px rgba(26,26,26,.06);padding:16px;display:flex;flex-direction:column;gap:8px}
-.of.otimo{border-color:var(--otimo)}.of.bom{border-color:var(--bom)}
-.top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
-.dest{font-weight:700;font-size:17px;line-height:1.25}
-.dest small{display:block;font-weight:400;color:var(--mut);font-size:12.5px}
-.tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap}
-.tag.otimo{background:var(--otimo-bg);color:var(--otimo)}.tag.bom{background:var(--bom-bg);color:var(--bom)}
-.tag.observacao{background:var(--obs-bg);color:var(--obs)}.tag.normal{background:var(--norm-bg);color:var(--norm)}
-.nums{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
-.preco{font-size:30px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.pct{font-size:22px;font-weight:800;color:var(--otimo)}
-.meta{color:var(--mut);font-size:13px}
-.links{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
-.links a{font-size:12.5px;font-weight:700;color:var(--acc);text-decoration:none;border:1px solid var(--line);border-radius:9px;padding:5px 10px;background:var(--card)}
-.links a:hover{border-color:var(--acc)}
-.extra{border-top:1px solid var(--line);padding-top:8px;font-size:12.5px;color:var(--mut)}
-.extra b{color:var(--ink);font-size:14px}
-.extra svg{display:block;width:100%;height:auto;margin:4px 0 2px}
-.extra .t{font-weight:700;color:var(--ink);font-size:11px;letter-spacing:.04em;text-transform:uppercase}
-.bar-n{fill:var(--norm)}.bar-min{fill:var(--acc)}.eixo{stroke:var(--line);stroke-width:1}
-.lin{fill:none;stroke:var(--acc);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}.pt{fill:var(--acc);stroke:var(--card);stroke-width:2}
-.rot{font-size:9px;fill:var(--mut);text-anchor:middle}.hit{fill:transparent}.hit:hover{fill:var(--ink);fill-opacity:.08}
-.tab{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:13px}
-.tab th{text-align:left;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);padding:10px 12px;border-bottom:1px solid var(--line)}
-.tab td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
-.tab tr:last-child td{border-bottom:0}
-.tab td b{font-size:16px}.tab .g{color:var(--otimo)}.tab .r{color:var(--mut)}
-.rolar{overflow-x:auto}.nota{color:var(--mut);font-size:13px;margin:0 0 12px}
-.vazio{background:var(--card);border:1px dashed var(--line);border-radius:16px;padding:22px;color:var(--mut);text-align:center}
-footer{margin-top:36px;color:var(--mut);font-size:12px}
-.form{background:var(--card);border:4px solid var(--sol);border-radius:8px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;align-items:end;margin-bottom:14px}
-.form label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--mut);font-weight:700}
-.form input,.form select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 10px}
-.form .chk{flex-direction:row;align-items:center;gap:8px;color:var(--ink)}
-.form .full{grid-column:1/-1}
-.btn{display:inline-block;font:inherit;font-weight:700;font-size:14px;color:#fff;background:var(--coral);border:0;border-radius:4px;padding:10px 16px;text-decoration:none;cursor:pointer}
-.alerta{background:var(--otimo-bg);border:1px solid var(--otimo);border-radius:14px;padding:12px 16px;margin:0 0 8px;font-size:14px}
-.alerta b.q{color:var(--otimo);font-size:18px}
-.star{color:#e0a100;letter-spacing:1px}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--tinta);font:15px/1.5 Arial,Helvetica,sans-serif}
+a{color:var(--mar-esc)}
+:focus-visible{outline:3px solid var(--sol);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- topo: a viagem como rota ---------- */
+.hero{background:var(--mar);color:#fff;position:relative;overflow:hidden}
+.hero .in{max-width:1160px;margin:0 auto;padding:18px 20px 0;position:relative;z-index:2}
+.hero .marca{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.hero h1{margin:0;font:700 17px/1 var(--disp);letter-spacing:.01em}
+.hero h1 span{color:var(--sol)}
+#sub{margin:6px 0 0;font-size:12.5px;opacity:.85}
+.nav{display:flex;gap:2px;flex-wrap:wrap;margin-right:120px}
+.nav button{border:0;background:none;color:#fff;font:700 14px/1 Arial,sans-serif;padding:10px 14px 12px;cursor:pointer;border-bottom:4px solid transparent;opacity:.85}
+.nav button:hover{opacity:1}
+.nav button.on{border-bottom-color:var(--sol);opacity:1}
+.rota{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:end;gap:14px;padding:26px 0 50px}
+.rota .cod{font:900 clamp(44px,9vw,104px)/.9 var(--disp);letter-spacing:-.03em}
+.rota .cod small{display:block;font:700 13px/1.3 Arial,sans-serif;letter-spacing:0;opacity:.85;margin-top:8px}
+.rota .cod.dir{text-align:right}
+.rota svg{width:100%;height:110px;overflow:visible;align-self:center}
+.rota .arco{fill:none;stroke:#fff;stroke-width:2.5;stroke-dasharray:2 9;stroke-linecap:round;opacity:.9}
+.rota .aviao{fill:var(--sol)}
+.conta{text-align:center;margin:-40px 0 0;padding-bottom:74px}
+.conta b{display:block;font:900 clamp(22px,3.2vw,34px)/1 var(--disp)}
+.conta span{font-size:13px;opacity:.9}
+.sol{position:absolute;right:-70px;top:-90px;width:210px;height:210px;border-radius:50%;background:var(--sol);opacity:.95;z-index:1}
+.ondas{position:absolute;left:0;bottom:-1px;width:100%;height:46px;z-index:3;display:block}
+.hero.curto .rota{display:none}
+.hero.curto .in{padding-bottom:54px}
+
+/* ---------- base ---------- */
+.wrap{max-width:1160px;margin:0 auto;padding:26px 20px 80px}
+h2{font:700 21px/1.25 var(--disp);margin:34px 0 6px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;color:var(--tinta)}
+h2 small{font:400 13px/1.4 Arial,sans-serif;color:var(--tinta-2)}
+.sub,.nota{color:var(--tinta-2);font-size:13.5px;margin:0 0 14px}
+.meta{color:var(--tinta-2);font-size:13px}
+.vazio{border:2px dashed var(--linha);border-radius:22px;padding:26px;color:var(--tinta-2);text-align:center;background:#fff}
+footer{margin-top:40px;color:var(--tinta-2);font-size:12px}
+.star{color:#f0a500;letter-spacing:1px}
 .sobe{color:#c2410c;font-weight:700}.desce{color:var(--otimo);font-weight:700}
-.of>svg,.tab svg,.hc svg{display:block;width:100%;height:40px}
-/* cartoes de hotel */
-.lh{display:flex;flex-direction:column;gap:14px}
-.hc{background:#fff;border:1px solid var(--line);border-radius:8px;display:grid;grid-template-columns:220px 1fr 210px;gap:16px;padding:16px;box-shadow:0 2px 8px rgba(26,26,26,.06)}
-.hc:hover{box-shadow:0 4px 16px rgba(26,26,26,.14)}
-.hc .img{height:200px;border-radius:8px;background:linear-gradient(160deg,#bff1f0 0%,#38c6d9 55%,#f6dcae 56%,#fbe8c6 100%);background-size:cover;background-position:center;position:relative}
-.hc .img i{position:absolute;left:8px;top:8px;background:var(--otimo);color:#fff;font-style:normal;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px}
-.hc .mid{display:flex;flex-direction:column;gap:6px;min-width:0}
-.hc h3{margin:0;font-size:20px;line-height:1.25;color:#0b6f86}
-.hc .loc{font-size:13px;color:var(--acc);text-decoration:underline}
-.hc .tg{display:flex;flex-wrap:wrap;gap:6px}
-.hc .tg span{font-size:12px;border:1px solid var(--otimo);color:var(--otimo);border-radius:4px;padding:2px 6px}
-.hc .tg span.az{border-color:var(--line);color:var(--mut)}
-.hc .dir{display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:4px;border-left:1px solid var(--line);padding-left:16px}
-.hc .sc{display:flex;gap:8px;align-items:center}
-.hc .sc div{font-size:13px;line-height:1.2}.hc .sc div b{display:block;font-size:15px;color:var(--ink)}
-.nb{background:var(--azul);color:#fff;font-weight:700;font-size:16px;min-width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px 6px 6px 0;padding:0 4px}
-.hc .vl{font-size:26px;font-weight:800;margin-top:auto;font-variant-numeric:tabular-nums}
-.hc .pn{font-size:12.5px;color:var(--mut)}
-.hc .go{display:block;text-align:center;font-weight:700;font-size:15px;color:#fff;background:var(--coral);text-decoration:none;border-radius:4px;padding:10px 14px;width:100%}
-.hc .go:hover{background:#f0503f}
-@media (max-width:760px){.hc{grid-template-columns:1fr}.hc .img{height:170px}.hc .dir{border-left:0;padding-left:0;align-items:stretch;text-align:left;border-top:1px solid var(--line);padding-top:10px}}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
-.chips button{font:inherit;font-size:13px;font-weight:700;border:1px solid var(--line);background:var(--card);color:var(--mut);padding:6px 12px;border-radius:99px;cursor:pointer}
-.chips button.on{background:var(--chip);border-color:var(--acc);color:var(--acc)}
-.chips button{border-radius:99px}
-.voo{display:grid;grid-template-columns:minmax(220px,1fr) 2fr;gap:16px;align-items:center}
-@media (max-width:640px){.voo{grid-template-columns:1fr}.hero h1{font-size:24px}.nav button{padding:9px 12px;font-size:14px}}
-.opc{display:grid;gap:6px}.opc div{display:flex;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13.5px}
-.opc div b{font-size:16px}
-.busca-form{grid-template-columns:repeat(4,minmax(0,1fr))}
-.busca-form .dois{grid-column:span 2}
-.prefs{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:13px}
-.btn.grande{font-size:16px;padding:13px 22px}
-.duas{display:grid;grid-template-columns:1fr 1.35fr;gap:22px;align-items:start}
-.duas h2{margin-top:10px}
-.rc{display:flex;gap:12px;justify-content:space-between;align-items:center;background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-bottom:8px;box-shadow:0 1px 4px rgba(26,26,26,.05)}
-.rc.melhor{border:2px solid var(--otimo)}
-.rc .rt{font-weight:700;font-size:15px}
-.rc .rp{display:flex;flex-direction:column;align-items:flex-end;gap:2px;text-align:right;min-width:110px}
-.rc .rp b{font-size:21px;font-variant-numeric:tabular-nums}
+
+/* números: sem caixas, só tipografia grande separada por fio vertical */
+.resumo{display:flex;flex-wrap:wrap;gap:0;margin:0 0 10px}
+.kpi{padding:6px 28px 6px 0;margin-right:28px;border-right:2px solid var(--linha);min-width:150px}
+.kpi:last-child{border-right:0}
+.kpi b{display:block;font:900 30px/1.1 var(--disp);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.kpi span{color:var(--tinta-2);font-size:12.5px}
+.kpi-l{display:flex;flex-wrap:wrap;margin:10px 0 16px}
+
+/* filtros e controles */
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px;align-items:center}
+.seg{display:inline-flex;flex-wrap:wrap;gap:4px;background:#fff;border:2px solid var(--linha);border-radius:99px;padding:4px}
+.seg button{border:0;background:none;color:var(--tinta-2);font:700 13.5px/1 Arial,sans-serif;padding:9px 14px;border-radius:99px;cursor:pointer}
+.seg button.on{background:var(--tinta);color:#fff}
+.busca{flex:1 1 220px;min-width:200px;font:inherit;color:var(--tinta);background:#fff;border:2px solid var(--linha);border-radius:99px;padding:10px 16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 14px}
+.chips button{font:700 13px/1 Arial,sans-serif;border:2px solid var(--linha);background:#fff;color:var(--tinta-2);padding:9px 14px;border-radius:99px;cursor:pointer}
+.chips button.on{background:var(--tinta);border-color:var(--tinta);color:#fff}
+.links{display:flex;flex-wrap:wrap;gap:6px}
+.links a{font-size:13px;font-weight:700;color:var(--tinta);text-decoration:none;border:2px solid var(--linha);border-radius:99px;padding:6px 12px;background:#fff}
+.links a:hover{border-color:var(--mar)}
+.btn{display:inline-flex;align-items:center;gap:8px;font:700 15px/1 Arial,sans-serif;color:#fff;background:var(--coral);border:0;border-radius:99px;padding:13px 22px;text-decoration:none;cursor:pointer;box-shadow:0 6px 0 #d9472a}
+.btn:active{transform:translateY(3px);box-shadow:0 3px 0 #d9472a}
+.btn.grande{font-size:17px;padding:17px 30px}
+.tag{font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:99px;white-space:nowrap}
+.tag.otimo{background:var(--otimo-bg);color:var(--otimo)}.tag.bom{background:var(--bom-bg);color:var(--bom)}.tag.observacao{background:var(--obs-bg);color:var(--obs)}.tag.normal{background:var(--norm-bg);color:var(--norm)}
+.alerta{background:#fff;border-left:6px solid var(--otimo);border-radius:12px;padding:12px 16px;margin:0 0 8px;font-size:14px}
+.alerta b.q{color:var(--otimo);font:900 18px var(--disp)}
+
+/* ---------- cartão de embarque ---------- */
+.of,.rc:not(.hotel),.bp{--furo:var(--bg);position:relative;background:#fff;border-radius:22px;box-shadow:0 1px 0 rgba(35,33,58,.06),0 14px 28px -20px rgba(35,33,58,.45)}
+.of{padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.rc{display:flex;gap:14px;justify-content:space-between;align-items:center;padding:16px 18px;margin-bottom:12px}
+.rc:not(.hotel){padding:0;align-items:stretch}
+.rc:not(.hotel)>div:first-child{flex:1;padding:16px 20px;min-width:0}
+.rc:not(.hotel) .rp{position:relative;padding:16px 20px;border-left:2px dashed var(--linha);background:var(--ceu);min-width:150px;border-radius:0 22px 22px 0}
+.rc:not(.hotel) .rp:before,.rc:not(.hotel) .rp:after{content:"";position:absolute;left:-12px;width:22px;height:22px;border-radius:50%;background:var(--bg)}
+.rc:not(.hotel) .rp:before{top:-11px}.rc:not(.hotel) .rp:after{bottom:-11px}
+.rc .rt{font:700 15px/1.3 Arial,sans-serif}
+.rc .horas{font:900 22px/1.15 var(--disp);letter-spacing:-.02em;margin-bottom:4px}
+.rc .horas i{font-style:normal;color:var(--mar);margin:0 8px;font-size:16px}
+.rc .rp{display:flex;flex-direction:column;align-items:flex-end;gap:3px;text-align:right}
+.rc .rp b{font:900 24px/1.1 var(--disp);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .rc .rp a{font-size:12.5px;font-weight:700}
-.src{font-size:11px;font-weight:700;background:var(--chip);color:#0b6f86;border-radius:4px;padding:2px 6px}
-.rc.hotel{align-items:stretch}.rc .ft{width:96px;min-height:84px;flex:none;border-radius:6px;background:linear-gradient(160deg,#bff1f0 0%,#38c6d9 55%,#f6dcae 56%,#fbe8c6 100%);background-size:cover;background-position:center}
-.rc .hm{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
-.go2{background:var(--coral);color:#fff!important;text-decoration:none;border-radius:4px;padding:5px 12px;margin-top:3px}
-.fst{margin-top:12px}.fch{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:6px 12px;background:#fff}
-.fch.ok{border-color:var(--otimo)}.fch.erro,.fch.vazio{border-color:#e0a100}
-@media (max-width:860px){.duas{grid-template-columns:1fr}.busca-form{grid-template-columns:1fr 1fr}}
-.modo{margin:0 0 12px;width:max-content;max-width:100%}
-.ng{display:inline-block;font-weight:700;font-size:13px;color:#fff;background:#1a73e8;border-radius:6px;padding:3px 6px;margin-left:4px}
-.ng.off{background:#e7e7e7;color:#595959}
-.notas{display:flex;justify-content:flex-end;gap:2px}
-.kpi-l{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:8px 0 14px}
-.grafico{display:flex;align-items:flex-end;gap:4px;height:210px;overflow-x:auto;padding:6px 2px;border-bottom:1px solid var(--line)}
-.bar{flex:1 0 34px;display:flex;flex-direction:column;align-items:center;height:100%;text-decoration:none;color:var(--mut)}
-.bar .col{flex:1;width:100%;display:flex;align-items:flex-end}.bar.sem i{background:#e7e7e7}
-.bar i{display:block;width:100%;border-radius:4px 4px 0 0;background:#f2b8a8}
-.bar.b1 i{background:#12a150}.bar.b2 i{background:#ffc93c}.bar:hover i{opacity:.8}
-.bar .v{font-size:10px;font-weight:700;color:var(--ink)}.bar .d{font-size:10px;margin-top:3px;white-space:nowrap}
+.rc.melhor{outline:3px solid var(--sol);outline-offset:-3px}
+.rc.melhor:after{content:"mais barato";position:absolute;left:18px;top:-11px;background:var(--sol);color:var(--tinta);font:700 11px/1 Arial,sans-serif;padding:5px 9px;border-radius:99px}
+.rc.hotel.melhor:after{left:auto;right:18px}
+.src{font-size:11px;font-weight:700;color:var(--mar-esc);background:#fff;border:1.5px solid #bfe9e7;border-radius:99px;padding:2px 8px}
+
+/* ---------- cartão-postal (hotéis) ---------- */
+.rc.hotel{position:relative;background:#fff;border-radius:6px;padding:12px;align-items:stretch;box-shadow:0 1px 0 rgba(35,33,58,.06),0 16px 30px -22px rgba(35,33,58,.55);transform:rotate(-.25deg)}
+.rc.hotel:nth-child(even){transform:rotate(.3deg)}
+.rc .ft{width:150px;min-height:120px;flex:none;border-radius:3px;background:linear-gradient(180deg,#8fd9ff 0 55%,#00a3a3 55% 75%,#ffe1a6 75%);background-size:cover;background-position:center}
+.rc .hm{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px;padding:2px 4px}
+.rc.hotel .rt{font:700 16px/1.25 var(--disp)}
+.rc.hotel .rp{min-width:130px;padding-left:12px;border-left:1.5px solid var(--linha)}
+.notas{display:flex;justify-content:flex-end;gap:6px;margin-bottom:4px}
+.nb,.ng{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:50%;font:900 13px/1 var(--disp);color:var(--tinta);background:var(--sol);outline:2px dashed var(--sol);outline-offset:2px;transform:rotate(-8deg)}
+.ng{background:#fff;color:#1a73e8;outline-color:#1a73e8;border:2px solid #1a73e8;font-size:11.5px;transform:rotate(6deg)}
+.ng small{display:block;font:700 7.5px/1 Arial,sans-serif;margin-bottom:1px}
+.nb,.ng{line-height:1}
+.ng{display:inline-flex;flex-direction:column;align-items:center;justify-content:center}
+.ng.off{color:var(--tinta-2);border-color:var(--linha);outline-color:var(--linha)}
+.go2{background:var(--coral);color:#fff!important;text-decoration:none;border-radius:99px;padding:7px 14px;margin-top:4px;font-size:13px}
+
+/* postais grandes em Minhas viagens */
+.lh{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px}
+.hc{background:#fff;border-radius:6px;padding:12px 12px 16px;display:flex;flex-direction:column;gap:10px;box-shadow:0 1px 0 rgba(35,33,58,.06),0 18px 34px -24px rgba(35,33,58,.6);position:relative}
+.hc:nth-child(3n+1){transform:rotate(-.6deg)}.hc:nth-child(3n+2){transform:rotate(.4deg)}
+.hc .img{height:190px;border-radius:3px;background:linear-gradient(180deg,#8fd9ff 0 55%,#00a3a3 55% 75%,#ffe1a6 75%);background-size:cover;background-position:center;position:relative}
+.hc .img i{position:absolute;left:10px;bottom:10px;background:var(--coral);color:#fff;font:700 12px/1 Arial,sans-serif;font-style:normal;padding:6px 10px;border-radius:99px}
+.hc .mid{display:flex;flex-direction:column;gap:6px;padding:0 4px}
+.hc h3{margin:0;font:700 17px/1.25 var(--disp);color:var(--tinta)}
+.hc h3 .star{font-family:Arial,sans-serif}
+.hc .loc{font-size:13px;color:var(--mar-esc);font-weight:700;text-decoration:none}
+.hc .tg{display:flex;flex-wrap:wrap;gap:6px}
+.hc .tg span{font-size:12px;font-weight:700;border-radius:99px;padding:3px 9px;background:var(--chip);color:var(--mar-esc)}
+.hc .tg span.az{background:var(--norm-bg);color:var(--tinta-2)}
+.hc .dir{display:flex;flex-direction:column;gap:4px;padding:10px 4px 0;border-top:1.5px dashed var(--linha)}
+.hc .sc{position:absolute;right:14px;top:14px;display:flex;align-items:center;gap:6px}
+.hc .sc div{display:none}
+.hc .vl{font:900 30px/1 var(--disp);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.hc .pn{font-size:12.5px;color:var(--tinta-2)}
+.hc .go{display:block;text-align:center;font-weight:700;font-size:14px;color:#fff;background:var(--tinta);text-decoration:none;border-radius:99px;padding:11px;margin-top:6px}
+.hc .go:hover{background:var(--mar-esc)}
+.hc svg,.of>svg{display:block;width:100%;height:40px}
+.lin{fill:none;stroke:var(--mar);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}.pt{fill:var(--coral);stroke:#fff;stroke-width:2}
+.rot{font-size:9px;fill:var(--tinta-2);text-anchor:middle}.hit{fill:transparent}.hit:hover{fill:var(--tinta);fill-opacity:.06}
+.bar-n{fill:var(--norm)}.bar-min{fill:var(--mar)}.eixo{stroke:var(--linha);stroke-width:1}
+
+/* voo monitorado = cartão de embarque grande */
+.of.voo{display:grid;grid-template-columns:1.1fr 1.4fr;gap:0;padding:0;overflow:hidden}
+.of.voo>div:first-child{padding:20px 22px;background:var(--ceu);border-right:2px dashed var(--linha);position:relative}
+.of.voo .preco{font:900 40px/1 var(--disp);letter-spacing:-.03em;margin:4px 0}
+.opc{display:grid;gap:0;padding:12px 18px;align-content:start}
+.opc div{display:flex;justify-content:space-between;gap:10px;padding:11px 4px;border-bottom:1.5px dashed var(--linha);font-size:13.5px}
+.opc div:last-child{border-bottom:0}
+.opc div b{font:900 17px/1.2 var(--disp)}
+
+/* ofertas (Passagens em promoção) */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.dest{font:700 17px/1.25 var(--disp)}
+.dest small{display:block;font:400 12.5px/1.4 Arial,sans-serif;color:var(--tinta-2);margin-top:3px}
+.nums{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.preco{font:900 28px/1.1 var(--disp);letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.pct{font:900 20px var(--disp);color:var(--otimo)}
+.extra{border-top:1.5px dashed var(--linha);padding-top:8px;font-size:12.5px;color:var(--tinta-2)}
+.extra b{color:var(--tinta);font-size:14px}
+.extra svg{display:block;width:100%;height:auto;margin:4px 0 2px}
+.extra .t{font-weight:700;color:var(--tinta);font-size:12px}
+.tab{width:100%;border-collapse:collapse;background:#fff;border-radius:18px;overflow:hidden;font-size:13px}
+.tab th{text-align:left;font-size:12px;color:var(--tinta-2);padding:10px 12px;border-bottom:2px solid var(--linha)}
+.tab td{padding:10px 12px;border-bottom:1px solid var(--linha);vertical-align:top}
+.tab td b{font-size:16px}.tab .g{color:var(--otimo)}.tab .r{color:var(--tinta-2)}
+.tab svg{display:block;width:100%;height:40px}
+.rolar{overflow-x:auto}
+
+/* ---------- busca = bilhete ---------- */
+.modo{margin:0 0 18px}
+.form{background:#fff;border-radius:28px;padding:22px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:end;margin-bottom:16px;box-shadow:0 1px 0 rgba(35,33,58,.06),0 22px 40px -28px rgba(35,33,58,.6)}
+.form label{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--tinta-2);font-weight:700}
+.form>*,.form label{min-width:0}
+.form input,.form select{min-width:0;width:100%;font:inherit;font-size:15px;color:var(--tinta);background:var(--bg);border:2px solid transparent;border-radius:14px;padding:11px 12px}
+.form input:focus,.form select:focus{border-color:var(--mar);outline:0;background:#fff}
+.form .chk{flex-direction:row;align-items:center;gap:7px;color:var(--tinta);font-size:13.5px}
+.form .chk input{width:auto}
+.form .full{grid-column:1/-1}
+.form .dois{grid-column:span 2}
+.prefs{display:flex;flex-wrap:wrap;gap:16px;align-items:center;font-size:13px;padding-top:4px}
+.prefs b{font-size:12px;color:var(--tinta-2)}
+.bilhete{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:14px;align-items:center;padding:4px 4px 18px;margin-bottom:4px;border-bottom:2px dashed var(--linha);position:relative}
+.bilhete:before,.bilhete:after{content:"";position:absolute;bottom:-12px;width:24px;height:24px;border-radius:50%;background:var(--bg)}
+.bilhete:before{left:-34px}.bilhete:after{right:-34px}
+.bilhete label{font-size:12px}
+.bilhete input.iata{font:900 clamp(40px,7vw,76px)/1 var(--disp);letter-spacing:-.03em;text-transform:uppercase;background:none;border:0;border-bottom:3px solid var(--linha);border-radius:0;padding:2px 0 6px;width:100%;color:var(--tinta)}
+.bilhete input.iata:focus{border-bottom-color:var(--coral)}
+.bilhete .dir2{text-align:right}.bilhete .dir2 input{text-align:right}
+.bilhete svg{width:84px;height:40px}
+.bilhete .cidade{grid-column:1/-1;flex-direction:row;align-items:center;gap:10px}
+.bilhete .cidade input{flex:1;font-size:16px}
+#extst{display:inline-block;margin-left:12px;vertical-align:middle}
+.duas{display:grid;grid-template-columns:1fr 1.25fr;gap:28px;align-items:start}
+.duas h2{margin-top:14px}
+.fst{margin-top:6px}
+.fch{font:700 13px/1 Arial,sans-serif;text-decoration:none;color:var(--tinta);border:2px solid var(--linha);border-radius:99px;padding:8px 13px;background:#fff}
+.fch.ok{border-color:var(--otimo)}.fch.erro,.fch.vazio{border-color:var(--sol)}
+
+/* melhores datas */
+.grafico{display:flex;align-items:flex-end;gap:5px;height:230px;overflow-x:auto;padding:8px 2px;margin-top:6px}
+.gbar{flex:1 0 34px;display:flex;flex-direction:column;align-items:center;height:100%;text-decoration:none;color:var(--tinta-2)}
+.gbar .col{flex:1;width:100%;display:flex;align-items:flex-end}
+.gbar i{display:block;width:100%;border-radius:10px 10px 3px 3px;background:#c9cde3}
+.gbar.b1 i{background:var(--mar)}.gbar.b2 i{background:var(--sol)}.gbar.sem i{background:#eef0f7}
+.gbar:hover i{background:var(--coral)}
+.gbar .v{font:700 10.5px/1.4 var(--disp);color:var(--tinta)}.gbar .d{font-size:10.5px;margin-top:4px;white-space:nowrap}
+
+@media (max-width:860px){
+  .nav{margin-right:0}.nav button{padding:9px 10px 11px;font-size:13px}
+  .duas{grid-template-columns:1fr}.form{grid-template-columns:1fr 1fr}.form .dois{grid-column:1/-1}
+  .of.voo{grid-template-columns:1fr}.of.voo>div:first-child{border-right:0;border-bottom:2px dashed var(--linha)}
+  .rota{padding-bottom:40px;gap:6px}.rota svg{height:56px}.conta{margin-top:-18px;padding-bottom:64px}.sol{width:150px;height:150px;right:-60px;top:-70px}
+  .resumo{display:grid;grid-template-columns:1fr 1fr;gap:14px}.kpi{border:0;margin:0;padding:0;min-width:0}
+  .form{padding:16px}.bilhete svg{width:48px}.bilhete:before{left:-28px}.bilhete:after{right:-28px}.bilhete .cidade{flex-direction:column;align-items:stretch}
+  .rc.hotel{flex-wrap:wrap}.rc .ft{width:100%;min-height:150px}.rc.hotel .rp{border-left:0;padding-left:0;width:100%;flex-direction:row;flex-wrap:wrap;align-items:center;justify-content:space-between}
+  .kpi{padding-right:16px;margin-right:16px;min-width:130px}.kpi b{font-size:24px}
+}
 </style>
 </head>
 <body>
-<header class="hero"><div class="in">
-  <h1>Radar de Viagens</h1>
+<header class="hero" id="hero"><div class="sol" aria-hidden="true"></div><div class="in">
+  <div class="marca"><h1>radar<span>.</span>viagens</h1>
+  <nav class="nav" id="visao"><button data-v="viagens" class="on">Minhas viagens</button><button data-v="hoteis">Buscar viagem</button><button data-v="ofertas">Passagens em promoção</button><button data-v="anac">Quando comprar</button></nav></div>
   <p id="sub">Carregando…</p>
-  <nav class="nav" id="visao"><button data-v="viagens" class="on">Minhas viagens</button><button data-v="hoteis">🔎 Buscar viagem</button><button data-v="ofertas">Passagens em promoção</button><button data-v="anac">Quando comprar</button></nav>
-</div></header>
+  <div id="rotaTopo"></div>
+</div><svg class="ondas" viewBox="0 0 1200 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 26 C150 6 300 44 450 24 S750 4 900 24 S1100 40 1200 20 V46 H0Z" fill="#5fd0cc" opacity=".55"/><path d="M0 34 C200 18 380 46 600 30 S950 18 1200 32 V46 H0Z" fill="#f5fbff"/></svg></header>
 <div class="wrap">
 <div class="bar" id="barra">
   <div class="seg" id="origens"></div>
@@ -369,11 +459,12 @@ function renderHoteis() {
   const chk = (n, t) => `<label class="chk"><input type="checkbox" name="${n}" ${f[n] ? "checked" : ""}>${t}</label>`;
   const fon = n => `<label class="chk"><input type="checkbox" name="fonte" value="${n}" ${f.fontes.includes(n) ? "checked" : ""}>${n}</label>`;
   const CIAS = [["", "Todas"], ["AD", "Azul"], ["LA", "LATAM"], ["G3", "GOL"], ["CM", "Copa"], ["AV", "Avianca"], ["AA", "American"], ["UA", "United"], ["DL", "Delta"], ["TP", "TAP"], ["IB", "Iberia"], ["AF", "Air France"], ["KL", "KLM"], ["AR", "Aerolíneas Arg."], ["JA", "JetSMART"]];
-  const modos = `<div class="seg modo" id="modo"><button data-m="viagem" class="${bx.modo === "viagem" ? "on" : ""}">✈️🏨 Voo + hotel</button><button data-m="datas" class="${bx.modo === "datas" ? "on" : ""}">📅 Melhores datas do voo</button></div>`;
+  const modos = `<div class="seg modo" id="modo"><button data-m="viagem" class="${bx.modo === "viagem" ? "on" : ""}">Voo + hotel</button><button data-m="datas" class="${bx.modo === "datas" ? "on" : ""}">Melhores datas do voo</button></div>`;
   if (bx.modo === "datas") {
     $("#lista").innerHTML = modos + `<div class="form busca-form" id="fd">
-      <label>Saindo de (aeroporto)<input name="origem" value="${esc(f.origem)}" maxlength="3" style="text-transform:uppercase"></label>
-      <label>Indo para (aeroporto)<input name="aeroporto" value="${esc(f.aeroporto)}" maxlength="3" style="text-transform:uppercase"></label>
+      <div class="bilhete"><label>De<input class="iata" name="origem" value="${esc(f.origem)}" maxlength="3" aria-label="Aeroporto de saída"></label>
+      <svg viewBox="0 0 84 40" aria-hidden="true"><path d="M2 30 Q42 -6 82 30" fill="none" stroke="#00a3a3" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round"/><path d="M36 9 l12 4 l7-3 c2-1 4 0 3 2 l-5 4 l1 9 l-3 1 l-4-7 l-7 2 l-1 4 l-2 1 l-1-6 l-5-3 l2-1 l4 2 l6-2 z" fill="#ff6b4a"/></svg>
+      <label class="dir2">Para<input class="iata" name="aeroporto" value="${esc(f.aeroporto)}" maxlength="3" aria-label="Aeroporto de chegada"></label></div>
       <label>Companhia aérea<select name="cia">${CIAS.map(([v, t]) => `<option value="${v}" ${f.cia === v ? "selected" : ""}>${t}</option>`).join("")}</select></label>
       <label>Adultos<input type="number" min="1" max="8" name="adultos" value="${f.adultos}"></label>
       <label>Ida a partir de<input type="date" name="janIni" value="${f.janIni}"></label>
@@ -381,7 +472,7 @@ function renderHoteis() {
       <label>Dias de viagem<input type="number" min="1" max="60" name="dias" value="${f.dias}"></label>
       <label>Testar a cada (dias)<input type="number" min="1" max="15" name="passo" value="${f.passo}"></label>
       <label>Escalas<select name="escalas">${[["", "qualquer"], ["0", "só direto"], ["1", "até 1 escala"], ["2", "até 2 escalas"]].map(([v, t]) => `<option value="${v}" ${String(f.escalas) === v ? "selected" : ""}>${t}</option>`).join("")}</select></label>
-      <div class="full"><button class="btn grande" id="bd">📅 Ver as datas mais baratas</button> <span id="extst" class="meta"></span><div class="meta" id="qtd"></div></div>
+      <div class="full"><button class="btn grande" id="bd">Ver as datas mais baratas</button> <span id="extst" class="meta"></span><div class="meta" id="qtd"></div></div>
     </div><div id="rd"></div>`;
     const lerD = () => { const x = lerForm("#fd"); x.origem = x.origem.toUpperCase(); x.aeroporto = x.aeroporto.toUpperCase(); return {...bx.f, ...x}; };
     const qtd = () => { const x = lerD(); const n = datasJanela(x).length; $("#qtd").innerHTML = `Vai consultar <b>${n}</b> datas no Google Voos (cerca de ${Math.ceil(n * 6 / 2 / 60)} min)${n > 40 ? " — aumente o intervalo para ficar mais rápido" : ""}.`; };
@@ -393,9 +484,10 @@ function renderHoteis() {
     return;
   }
   $("#lista").innerHTML = modos + `<div class="form busca-form" id="fb">
-    <label>Saindo de (aeroporto)<input name="origem" value="${esc(f.origem)}" maxlength="3" style="text-transform:uppercase"></label>
-    <label class="dois">Destino (cidade ou região)<input name="destino" value="${esc(f.destino)}" placeholder="ex.: Porto de Galinhas, Punta Cana, Lisboa"></label>
-    <label>Aeroporto destino<input name="aeroporto" value="${esc(f.aeroporto)}" maxlength="3" style="text-transform:uppercase"></label>
+    <div class="bilhete"><label>De<input class="iata" name="origem" value="${esc(f.origem)}" maxlength="3" aria-label="Aeroporto de saída"></label>
+      <svg viewBox="0 0 84 40" aria-hidden="true"><path d="M2 30 Q42 -6 82 30" fill="none" stroke="#00a3a3" stroke-width="2.5" stroke-dasharray="2 7" stroke-linecap="round"/><path d="M36 9 l12 4 l7-3 c2-1 4 0 3 2 l-5 4 l1 9 l-3 1 l-4-7 l-7 2 l-1 4 l-2 1 l-1-6 l-5-3 l2-1 l4 2 l6-2 z" fill="#ff6b4a"/></svg>
+      <label class="dir2">Para<input class="iata" name="aeroporto" value="${esc(f.aeroporto)}" maxlength="3" aria-label="Aeroporto de chegada"></label>
+      <label class="cidade">Hotel em<input name="destino" value="${esc(f.destino)}" placeholder="cidade, praia ou região — ex.: Porto de Galinhas, Punta Cana"></label></div>
     <label>Ida / check-in<input type="date" name="ida" value="${f.ida}"></label>
     <label>Volta / check-out<input type="date" name="volta" value="${f.volta}"></label>
     <label>Adultos<input type="number" min="1" max="8" name="adultos" value="${f.adultos}"></label>
@@ -406,10 +498,10 @@ function renderHoteis() {
     <label>Voo de no máximo (horas)<input type="number" min="1" max="60" name="durMax" value="${f.durMax || ""}" placeholder="qualquer"></label>
     <div class="full prefs"><b>Hotel:</b>${chk("ai", "All inclusive")}${chk("e4", "4★")}${chk("e5", "5★")}${chk("praia", "Beira-mar")}</div>
     <div class="full prefs"><b>Buscar em:</b>${fon("Google Voos")}${fon("Kayak")}${fon("Booking")}${fon("Hoteis.com")}</div>
-    <div class="full"><button class="btn grande" id="bb">🔎 Buscar em todos os sites</button> <span id="extst" class="meta"></span></div>
+    <div class="full"><button class="btn grande" id="bb">Buscar passagens e hotéis</button> <span id="extst" class="meta"></span></div>
   </div>
   <div id="fst"></div>
-  <div class="duas"><section><h2>✈️ Passagens <small id="qv"></small></h2><div id="rv"></div></section><section><h2>🏨 Hotéis <small id="qh"></small></h2><div id="rh"></div></section></div>
+  <div class="duas"><section><h2>Passagens <small id="qv"></small></h2><div id="rv"></div></section><section><h2>Hotéis <small id="qh"></small></h2><div id="rh"></div></section></div>
   <div id="maislinks"></div>`;
   const ler = () => {
     const x = lerForm("#fb"); x.origem = (x.origem || "").toUpperCase(); x.aeroporto = (x.aeroporto || "").toUpperCase();
@@ -467,13 +559,13 @@ function pintaDatas() {
   const dm = d => d.slice(8) + "/" + d.slice(5, 7);
   const sem3 = d => ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"][new Date(d + "T12:00:00").getDay()];
   const todas = [...dt.res].sort((a, b) => a.ida.localeCompare(b.ida));
-  const barras = todas.map(r => { if (!r.preco) return `<span class="bar sem" title="${dm(r.ida)}: sem voo"><span class="v">–</span><span class="col"><i style="height:4%"></i></span><span class="d">${dm(r.ida)}</span></span>`; const h = max > min ? 18 + 82 * (r.preco - min) / (max - min) : 60; const cls = r.preco <= min * 1.05 ? "b1" : r.preco <= min * 1.15 ? "b2" : "b3";
-    return `<a class="bar ${cls}" href="${esc(r.url)}" target="_blank" rel="noopener" title="${dm(r.ida)} a ${dm(r.volta)} · ${brl(r.preco)} · ${esc(r.cia)}"><span class="v">${String(Math.round(r.preco / 100) / 10).replace(".", ",")}k</span><span class="col"><i style="height:${h}%"></i></span><span class="d">${dm(r.ida)}</span></a>`; }).join("");
+  const barras = todas.map(r => { if (!r.preco) return `<span class="gbar sem" title="${dm(r.ida)}: sem voo"><span class="v">–</span><span class="col"><i style="height:4%"></i></span><span class="d">${dm(r.ida)}</span></span>`; const h = max > min ? 18 + 82 * (r.preco - min) / (max - min) : 60; const cls = r.preco <= min * 1.05 ? "b1" : r.preco <= min * 1.15 ? "b2" : "b3";
+    return `<a class="gbar ${cls}" href="${esc(r.url)}" target="_blank" rel="noopener" title="${dm(r.ida)} a ${dm(r.volta)} · ${brl(r.preco)} · ${esc(r.cia)}"><span class="v">${String(Math.round(r.preco / 100) / 10).replace(".", ",")}k</span><span class="col"><i style="height:${h}%"></i></span><span class="d">${dm(r.ida)}</span></a>`; }).join("");
   const top = [...ok].sort((a, b) => a.preco - b.preco).slice(0, 6);
-  el.innerHTML = `<h2>📅 ${esc(dt.f.origem)} → ${esc(dt.f.aeroporto)} · ${esc(ciaN)} <small>${dt.f.dias} dias de viagem · ida e volta, ${dt.f.adultos} adultos · ${dt.res.length} de ${dt.total} datas consultadas${dt.rodando ? " ⏳" : ""}</small></h2>
+  el.innerHTML = `<h2>${esc(dt.f.origem)} → ${esc(dt.f.aeroporto)} · ${esc(ciaN)} <small>${dt.f.dias} dias de viagem · ida e volta, ${dt.f.adultos} adultos · ${dt.res.length} de ${dt.total} datas consultadas${dt.rodando ? " ⏳" : ""}</small></h2>
     ${ok.length ? `<div class="kpi-l"><div class="kpi"><b>${brl(min)}</b><span>menor preço encontrado</span></div><div class="kpi"><b>${brl(Math.round(ok.reduce((s, r) => s + r.preco, 0) / ok.length))}</b><span>preço médio nas datas</span></div><div class="kpi"><b>${brl(max)}</b><span>mais caro</span></div></div>
     <div class="grafico">${barras}</div><p class="meta">Altura da barra = preço total ida e volta. Verde = até 5% acima do menor; amarelo = até 15%. Clique na barra para abrir no Google Voos.</p>
-    <h2>Melhores períodos</h2>${top.map((r, k) => `<div class="rc ${k ? "" : "melhor"}"><div><div class="rt">${sem3(r.ida)} ${dm(r.ida)} → ${sem3(r.volta)} ${dm(r.volta)}</div><div class="meta">${esc(r.cia)} · ${esc(r.dur || "")} · ${r.paradas === 0 ? "direto" : r.paradas ? r.paradas + (r.paradas > 1 ? " paradas" : " parada") : ""}</div></div><div class="rp"><b>${brl(r.preco)}</b><a href="${esc(r.url)}" target="_blank" rel="noopener">ver no Google ›</a></div></div>`).join("")}`
+    <h2>Melhores períodos</h2>${top.map((r, k) => `<div class="rc ${k ? "" : "melhor"}"><div><div class="horas">${dm(r.ida)}<i>✈</i>${dm(r.volta)}</div><div class="rt">${sem3(r.ida)} a ${sem3(r.volta)}</div><div class="meta">${esc(r.cia)} · ${esc(r.dur || "")} · ${r.paradas === 0 ? "direto" : r.paradas ? r.paradas + (r.paradas > 1 ? " paradas" : " parada") : ""}</div></div><div class="rp"><b>${brl(r.preco)}</b><a href="${esc(r.url)}" target="_blank" rel="noopener">ver no Google ›</a></div></div>`).join("")}`
     : `<div class="vazio">${dt.rodando ? "Consultando as datas…" : `Nenhum voo ${dt.f.cia ? "da " + esc(ciaN) + " " : ""}encontrado nessas datas. ${dt.f.cia ? "Essa companhia pode não voar nessa rota." : ""}`}</div>`}
     ${sem ? `<p class="meta">${sem} data(s) sem voo${dt.f.cia ? " dessa companhia" : ""}.</p>` : ""}`;
 }
@@ -523,7 +615,7 @@ function pintaRes() {
   const pv = x => x === 0 ? "direto" : x ? x + (x > 1 ? " paradas" : " parada") : "";
   $("#qv").textContent = totVoos ? `${voos.length}${voos.length < totVoos ? " de " + totVoos : ""} opções · ida e volta, ${ad} adultos, preço total · duração = ida` : "";
   $("#rv").innerHTML = voos.length ? voos.slice(0, 15).map((v, k) => `<div class="rc ${k ? "" : "melhor"}">
-      <div><div class="rt">${esc(v.cia || "Companhia")}</div><div class="meta">${esc(v.sai || "")}${v.chega ? " → " + esc(v.chega) : ""} · ${esc(v.dur || "")} · ${pv(v.paradas)}</div></div>
+      <div><div class="horas">${esc(v.sai || "")}<i>✈</i>${esc(v.chega || "")}</div><div class="rt">${esc(v.cia || "Companhia")}</div><div class="meta">${esc(v.dur || "")}${v.dur && pv(v.paradas) ? ", " : ""}${pv(v.paradas)}</div></div>
       <div class="rp"><b>${brl(v.preco)}</b><span class="src">${esc(v.fonte)}</span><a href="${esc((bx.fontes[v.fonte] || {}).url || "#")}" target="_blank" rel="noopener">ver ›</a></div></div>`).join("")
     : `<div class="vazio">${bx.id ? (bx.rodando ? "Buscando passagens…" : "Nenhuma passagem encontrada.") : "Preencha acima e clique em <b>Buscar</b>."}</div>`;
   // hoteis agrupados por nome
@@ -550,7 +642,7 @@ function pintaRes() {
       <div class="hm"><div class="rt">${esc(g.nome)} <span class="star">${"★".repeat(g.estrelas || 0)}</span></div>
         <div class="meta">${esc(g.local)}${o.oferta ? ` · <span class="desce">${esc(o.oferta)}</span>` : ""}</div>
         ${outras.length ? `<div class="meta">Também: ${outras.map(x => `<a href="${esc(x.link)}" target="_blank" rel="noopener">${esc(x.fonte)} ${brl(x.preco)}</a>`).join(" · ")}</div>` : ""}</div>
-      <div class="rp"><div class="notas">${g.nota != null ? `<span class="nb" title="nota ${esc(o.fonte)}">${g.nota.toFixed(1).replace(".", ",")}</span>` : ""}${g.g && g.g.notaG ? `<span class="ng" title="${esc(g.g.nome || "")} · ${esc(g.g.avG || "")} avaliações">G ${g.g.notaG.toFixed(1).replace(".", ",")}★</span>` : g.g && g.g.nada ? `<span class="ng off">G –</span>` : `<span class="ng off">G …</span>`}</div><b>${brl(o.preco)}</b><span class="meta">${brl(Math.round(o.preco / n))}/noite</span>${o.original && o.original > o.preco ? `<s class="meta">${brl(o.original)}</s>` : ""}
+      <div class="rp"><div class="notas">${g.nota != null ? `<span class="nb" title="nota ${esc(o.fonte)}">${g.nota.toFixed(1).replace(".", ",")}</span>` : ""}${g.g && g.g.notaG ? `<span class="ng" title="Google: ${esc(g.g.nome || "")}, ${esc(g.g.avG || "")} avaliações"><small>Google</small>${g.g.notaG.toFixed(1).replace(".", ",")}</span>` : g.g && g.g.nada ? `<span class="ng off"><small>Google</small>–</span>` : `<span class="ng off"><small>Google</small>…</span>`}</div><b>${brl(o.preco)}</b><span class="meta">${brl(Math.round(o.preco / n))}/noite</span>${o.original && o.original > o.preco ? `<s class="meta">${brl(o.original)}</s>` : ""}
         <span class="src">${esc(o.fonte)}</span><a class="go2" href="${esc(o.link)}" target="_blank" rel="noopener">Ver ›</a></div></div>`;
   }).join("") : `<div class="vazio">${bx.id ? (bx.rodando ? "Buscando hotéis…" : "Nenhum hotel com esses filtros.") : "Os hotéis aparecem aqui, com o preço de cada site lado a lado."}</div>`;
   const oh = $("#ordh"); if (oh) oh.onclick = e => { e.preventDefault(); bx.ordemH = bx.ordemH === "nota" ? "preco" : "nota"; pintaRes(); };
@@ -593,7 +685,7 @@ function renderViagens() {
       const nome = o => o.paradas ? o.paradas + (o.paradas > 1 ? " paradas" : " parada") : "direto";
       const op = (i.opcoes || []).slice(0, 4).map(o => `<div><span>${esc(o.cias.join(" + "))} · ${nome(o)}${o.duracao ? " · " + Math.floor(o.duracao / 60) + "h" + String(o.duracao % 60).padStart(2, "0") : ""}</span><b>${brl(o.preco)}</b></div>`).join("");
       const g = i.google ? `Google: <b>${{low: "preço baixo", typical: "preço típico", high: "preço alto"}[i.google.nivel] || i.google.nivel}</b>${i.google.faixa ? ` (faixa ${brl(i.google.faixa[0])}–${brl(i.google.faixa[1])})` : ""}` : "";
-      h += `<h2>✈️ ${esc(v.nome)}</h2><p class="sub">${esc(v.origem)} → ${esc(v.destino)} · ${dataBR(v.ida)} a ${dataBR(v.volta)} · ${v.adultos || 1} adultos, ida e volta${fonte}</p>
+      h += `<h2>${esc(v.nome)}</h2><p class="sub">${esc(v.origem)} → ${esc(v.destino)} · ${dataBR(v.ida)} a ${dataBR(v.volta)} · ${v.adultos || 1} adultos, ida e volta${fonte}</p>
         <div class="of voo"><div><div class="meta">Menor preço hoje</div><div class="preco">${brl(ultimo(i.hist))}</div><div class="meta">Menor já visto: <b>${brl(minimo(i.hist))}</b> ${varPct(primeiro(i.hist), ultimo(i.hist))}<br>${g}</div>${spark(i.hist)}
         <div class="links" style="margin-top:8px"><a target="_blank" rel="noopener" href="https://www.google.com/travel/flights?hl=pt-BR&curr=BRL&q=${encodeURIComponent(`Flights from ${v.origem} to ${v.destino} on ${v.ida} through ${v.volta} for ${v.adultos || 1} adults`)}">Google Voos</a><a target="_blank" rel="noopener" href="https://www.kayak.com.br/flights/${v.origem}-${v.destino}/${v.ida}/${v.volta}/${v.adultos || 1}adults?sort=price_a">Kayak</a><a target="_blank" rel="noopener" href="https://www.decolar.com/shop/flights/results/roundtrip/${v.origem}/${v.destino}/${v.ida}/${v.volta}/${v.adultos || 1}/0/0">Decolar</a></div></div>
         <div class="opc">${op || '<div class="meta">Aguardando a primeira busca do robô.</div>'}</div></div>`;
@@ -606,13 +698,13 @@ function renderViagens() {
       if (hst.adultos) hs = hs.filter(x => x.adulto);
       hs.sort(hst.ordem === "nota" ? (a, b) => ((b.nota_booking || b.nota_google * 2 || 0) - (a.nota_booking || a.nota_google * 2 || 0)) || a.hoje - b.hoje : (a, b) => a.hoje - b.hoje);
       const f = {destino: v.q.replace(/^(resorts |hotéis )?(all inclusive )?/i, ""), checkin: v.checkin, checkout: v.checkout, adultos: v.adultos || 2, estrelas: v.estrelas, nota: String(v.nota_min || ""), ai: v.all_inclusive, praia: v.beira_mar};
-      h += `<h2>🏝️ ${esc(v.nome)}</h2><p class="sub">${dataBR(v.checkin)} a ${dataBR(v.checkout)} · ${n} noites · ${v.adultos || 2} adultos · preço total da estadia com impostos · ${hs.length} de ${total} hotéis${fonte}</p>
+      h += `<h2>${esc(v.nome)}</h2><p class="sub">${dataBR(v.checkin)} a ${dataBR(v.checkout)} · ${n} noites · ${v.adultos || 2} adultos · preço total da estadia com impostos · ${hs.length} de ${total} hotéis${fonte}</p>
         <div class="chips" data-v="${esc(v.id)}"><button data-k="teto" class="${hst.teto ? "on" : ""}">Até R$ 14 mil</button><button data-k="so5" class="${hst.so5 ? "on" : ""}">Só 5 estrelas</button><button data-k="adultos" class="${hst.adultos ? "on" : ""}">Só adultos</button><button data-k="ordem" class="${hst.ordem === "nota" ? "on" : ""}">${hst.ordem === "nota" ? "Ordenado por nota" : "Ordenado por preço"}</button></div>`;
       h += hs.length ? `<div class="lh">${hs.map(x => cardHotel(x, n)).join("")}</div>` : `<div class="vazio">${total ? "Nenhum hotel com esses filtros." : "Aguardando a primeira busca do robô."}</div>`;
       h += `<div class="links" style="margin-top:12px">${linksHotel(f)}</div>`;
     }
   }
-  h += `<h2>➕ Monitorar outro voo</h2><p class="sub">Para hotéis, use a aba <b>Buscar viagem</b>.</p><div class="form" id="fv">
+  h += `<h2>Monitorar outro voo</h2><p class="sub">Para hotéis, use a aba <b>Buscar viagem</b>.</p><div class="form" id="fv">
     <label>Origem (código)<input name="origem" value="CNF"></label><label>Destino (código)<input name="destino" placeholder="ex.: CUN, REC, LIS"></label>
     <label>Ida<input type="date" name="ida"></label><label>Volta<input type="date" name="volta"></label><label>Adultos<input type="number" min="1" max="8" name="adultos" value="2"></label>
     <div class="full"><a class="btn" id="mv" target="_blank" rel="noopener">🔔 Monitorar este voo</a></div></div>`;
@@ -632,6 +724,22 @@ function opcoes() {
   $("#lista-cidades").innerHTML = [...nomes].sort((a, b) => a.localeCompare(b, "pt-BR")).map(n => `<option value="${esc(n)}">`).join("");
 }
 
+const CIDADE = {CNF: "Belo Horizonte", CUN: "Cancún", GRU: "São Paulo", GIG: "Rio de Janeiro", REC: "Recife", SSA: "Salvador", PUJ: "Punta Cana", LIS: "Lisboa", MCO: "Orlando", MIA: "Miami", FOR: "Fortaleza", MCZ: "Maceió", NAT: "Natal", FLN: "Florianópolis"};
+function pintaTopo() {
+  const hero = $("#hero"), el = $("#rotaTopo"); if (!el) return;
+  const vs = ((typeof V !== "undefined" && V && V.viagens) || []).filter(v => v.ativo !== false);
+  const voo = vs.find(v => v.tipo === "voo");
+  if (st.visao !== "viagens" || !voo) { hero.classList.add("curto"); el.innerHTML = ""; return; }
+  hero.classList.remove("curto");
+  const it = (V.itens || {});
+  const pv = ultimo((it[voo.id] || {}).hist || {});
+  let ph = null; vs.filter(v => v.tipo === "hotel").forEach(v => Object.values((it[v.id] || {}).hoteis || {}).forEach(x => { const p = ultimo(x.hist); if (p && (!ph || p < ph)) ph = p; }));
+  const dias = Math.max(0, Math.ceil((new Date(voo.ida + "T12:00:00") - new Date()) / 864e5));
+  el.innerHTML = `<div class="rota"><div class="cod">${esc(voo.origem)}<small>${esc(CIDADE[voo.origem] || "")}</small></div>
+    <svg viewBox="0 0 400 110" preserveAspectRatio="none" aria-hidden="true"><path class="arco" d="M6 104 Q200 -40 394 104"/><g transform="translate(262 22) rotate(28)"><path class="aviao" d="M-14 -2 l10 0 l8 -12 l5 0 l-4 12 l9 0 l4 -5 l3 0 l-2 7 l2 7 l-3 0 l-4 -5 l-9 0 l4 12 l-5 0 l-8 -12 l-10 0 z"/></g></svg>
+    <div class="cod dir">${esc(voo.destino)}<small>${esc(CIDADE[voo.destino] || "")}</small></div></div>
+    <div class="conta"><b>faltam ${dias} dias</b><span>${dataBR(voo.ida)} a ${dataBR(voo.volta)}${pv && ph ? `, voo + hotel a partir de <b style="display:inline;font:inherit;font-weight:700">${brl(pv + ph)}</b>` : ""}</span></div>`;
+}
 function render() {
   const anac = st.visao === "anac", extra = st.visao === "viagens" || st.visao === "hoteis";
   opcoes();
@@ -639,6 +747,7 @@ function render() {
   $("#regiao").style.display = extra || (!anac && st.tipo === "int") ? "none" : "";
   $("#barra").style.display = extra ? "none" : "";
   try { history.replaceState(null, "", "#" + st.visao); } catch (e) {}
+  pintaTopo();
   if (st.visao === "viagens") return renderViagens();
   if (st.visao === "hoteis") return renderHoteis();
   if (anac) return renderAnac();
