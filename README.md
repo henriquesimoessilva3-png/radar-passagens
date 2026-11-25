@@ -46,6 +46,8 @@ Os dois abrem uma issue já preenchida ("Monitorar: …"). Ao criar a issue, a A
 
 A partir da versão 2, a extensão também faz a aba **Buscar viagem** do painel funcionar: ao clicar em *Buscar em todos os sites*, ela abre o Google Voos, o Kayak, o Booking e o Hoteis.com em abas de fundo, lê os resultados, fecha as abas e mostra tudo no painel (passagens de um lado, hotéis do outro, com o preço de cada site lado a lado). Os sites das companhias aéreas por enquanto abrem direto, já com rota e datas.
 
+Versão 2.1: nota do Google em cada hotel (filtro de nota mínima), filtros de escalas e duração do voo, e o modo **Melhores datas do voo** (rota + companhia + janela de datas + dias de viagem: a extensão consulta o Google Voos data por data e mostra o gráfico de preços).
+
 ### Orçamento de buscas (plano grátis da SerpApi = 250/mês)
 
 6 buscas/dia de passagens + 2 de viagens monitoradas = 8/dia (`limite_mensal` 245 para no limite). Para monitorar muitas viagens, aumente o plano da SerpApi e o `orcamento_viagens`.

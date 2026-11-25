@@ -123,6 +123,17 @@ footer{margin-top:36px;color:var(--mut);font-size:12px}
 .fst{margin-top:12px}.fch{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:6px 12px;background:#fff}
 .fch.ok{border-color:var(--otimo)}.fch.erro,.fch.vazio{border-color:#e0a100}
 @media (max-width:860px){.duas{grid-template-columns:1fr}.busca-form{grid-template-columns:1fr 1fr}}
+.modo{margin:0 0 12px;width:max-content;max-width:100%}
+.ng{display:inline-block;font-weight:700;font-size:13px;color:#fff;background:#1a73e8;border-radius:6px;padding:3px 6px;margin-left:4px}
+.ng.off{background:#e7e7e7;color:#595959}
+.notas{display:flex;justify-content:flex-end;gap:2px}
+.kpi-l{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:8px 0 14px}
+.grafico{display:flex;align-items:flex-end;gap:4px;height:210px;overflow-x:auto;padding:6px 2px;border-bottom:1px solid var(--line)}
+.bar{flex:1 0 34px;display:flex;flex-direction:column;align-items:center;height:100%;text-decoration:none;color:var(--mut)}
+.bar .col{flex:1;width:100%;display:flex;align-items:flex-end}.bar.sem i{background:#e7e7e7}
+.bar i{display:block;width:100%;border-radius:4px 4px 0 0;background:#f2b8a8}
+.bar.b1 i{background:#12a150}.bar.b2 i{background:#ffc93c}.bar:hover i{opacity:.8}
+.bar .v{font-size:10px;font-weight:700;color:var(--ink)}.bar .d{font-size:10px;margin-top:3px;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -301,15 +312,27 @@ const IATA = {"cancun": "CUN", "cancún": "CUN", "zona hotelera": "CUN", "costa 
   "florianopolis": "FLN", "florianópolis": "FLN", "rio de janeiro": "GIG", "sao paulo": "GRU", "são paulo": "GRU", "joao pessoa": "JPA", "joão pessoa": "JPA", "aracaju": "AJU", "foz do iguacu": "IGU",
   "lisboa": "LIS", "porto": "OPO", "madri": "MAD", "madrid": "MAD", "paris": "CDG", "roma": "FCO", "orlando": "MCO", "miami": "MIA", "nova york": "JFK", "santiago": "SCL", "buenos aires": "EZE", "aruba": "AUA", "curacao": "CUR", "san andres": "ADZ", "cartagena": "CTG"};
 const acharIata = d => { const n = norm(d); for (const k in IATA) if (n.includes(norm(k))) return IATA[k]; return ""; };
-const PADRAO_BUSCA = {origem: "CNF", destino: "Zona Hotelera, Cancún", aeroporto: "CUN", ida: "2027-04-23", volta: "2027-04-30", adultos: 2, ai: true, e4: true, e5: true, praia: true, nota: "8", teto: "", fontes: ["Google Voos", "Kayak", "Booking", "Hoteis.com"]};
-const bx = {ext: null, id: null, fontes: {}, res: {}, f: null, ordemH: "preco"};
+const PADRAO_BUSCA = {origem: "CNF", destino: "Zona Hotelera, Cancún", aeroporto: "CUN", ida: "2027-04-23", volta: "2027-04-30", adultos: 2, ai: true, e4: true, e5: true, praia: true, nota: "8", notaG: "", escalas: "", durMax: "", teto: "", cia: "", janIni: "2027-03-01", janFim: "2027-05-31", dias: 7, passo: 3, fontes: ["Google Voos", "Kayak", "Booking", "Hoteis.com"]};
+const bx = {ext: null, id: null, fontes: {}, res: {}, f: null, ordemH: "preco", notasG: {}, modo: "viagem", dt: null};
 window.addEventListener("message", e => {
   const m = e.data; if (!m || !m.radarExt) return;
-  if (m.radarExt === "ok") { bx.ext = m.versao; if (st.visao === "hoteis") pintaExt(); return; }
+  if (m.radarExt === "ok") { const nova = !bx.ext; bx.ext = m.versao; if (st.visao === "hoteis") pintaExt(); return; }
+  if (m.radarExt === "notaG" && m.id === bx.id) {
+    if (m.fim) bx.notasPend = false; else bx.notasG[chaveH(m.consulta)] = m.achado ? m.achado : {nada: true};
+    return pintaRes();
+  }
+  if (m.radarExt === "data" && bx.dt && m.id === bx.dt.id) {
+    if (m.fim) bx.dt.rodando = false; else bx.dt.res.push(m);
+    return pintaDatas();
+  }
   if (m.radarExt !== "res" || m.id !== bx.id) return;
   if (m.status === "inicio") { m.fontes.forEach(f => bx.fontes[f.nome] = {...f, status: "na fila"}); }
-  else if (m.status === "fim") { bx.rodando = false; }
-  else { bx.fontes[m.fonte] = {...bx.fontes[m.fonte], ...m}; if (m.itens) bx.res[m.fonte] = m.itens; }
+  else if (m.status === "fim") { bx.rodando = false; pedirNotas(); }
+  else {
+    bx.fontes[m.fonte] = {...bx.fontes[m.fonte], ...m};
+    if (m.tipo === "nota") (m.itens || []).forEach(x => bx.notasG[chaveH(x.nome)] = x);
+    else if (m.itens) bx.res[m.fonte] = m.itens;
+  }
   pintaRes();
 });
 const lerPref = () => { try { return {...PADRAO_BUSCA, ...JSON.parse(localStorage.getItem("radar-busca") || "{}")}; } catch (e) { return {...PADRAO_BUSCA}; } };
@@ -345,7 +368,31 @@ function renderHoteis() {
   const f = bx.f = bx.f || lerPref();
   const chk = (n, t) => `<label class="chk"><input type="checkbox" name="${n}" ${f[n] ? "checked" : ""}>${t}</label>`;
   const fon = n => `<label class="chk"><input type="checkbox" name="fonte" value="${n}" ${f.fontes.includes(n) ? "checked" : ""}>${n}</label>`;
-  $("#lista").innerHTML = `<div class="form busca-form" id="fb">
+  const CIAS = [["", "Todas"], ["AD", "Azul"], ["LA", "LATAM"], ["G3", "GOL"], ["CM", "Copa"], ["AV", "Avianca"], ["AA", "American"], ["UA", "United"], ["DL", "Delta"], ["TP", "TAP"], ["IB", "Iberia"], ["AF", "Air France"], ["KL", "KLM"], ["AR", "Aerolíneas Arg."], ["JA", "JetSMART"]];
+  const modos = `<div class="seg modo" id="modo"><button data-m="viagem" class="${bx.modo === "viagem" ? "on" : ""}">✈️🏨 Voo + hotel</button><button data-m="datas" class="${bx.modo === "datas" ? "on" : ""}">📅 Melhores datas do voo</button></div>`;
+  if (bx.modo === "datas") {
+    $("#lista").innerHTML = modos + `<div class="form busca-form" id="fd">
+      <label>Saindo de (aeroporto)<input name="origem" value="${esc(f.origem)}" maxlength="3" style="text-transform:uppercase"></label>
+      <label>Indo para (aeroporto)<input name="aeroporto" value="${esc(f.aeroporto)}" maxlength="3" style="text-transform:uppercase"></label>
+      <label>Companhia aérea<select name="cia">${CIAS.map(([v, t]) => `<option value="${v}" ${f.cia === v ? "selected" : ""}>${t}</option>`).join("")}</select></label>
+      <label>Adultos<input type="number" min="1" max="8" name="adultos" value="${f.adultos}"></label>
+      <label>Ida a partir de<input type="date" name="janIni" value="${f.janIni}"></label>
+      <label>Ida até<input type="date" name="janFim" value="${f.janFim}"></label>
+      <label>Dias de viagem<input type="number" min="1" max="60" name="dias" value="${f.dias}"></label>
+      <label>Testar a cada (dias)<input type="number" min="1" max="15" name="passo" value="${f.passo}"></label>
+      <label>Escalas<select name="escalas">${[["", "qualquer"], ["0", "só direto"], ["1", "até 1 escala"], ["2", "até 2 escalas"]].map(([v, t]) => `<option value="${v}" ${String(f.escalas) === v ? "selected" : ""}>${t}</option>`).join("")}</select></label>
+      <div class="full"><button class="btn grande" id="bd">📅 Ver as datas mais baratas</button> <span id="extst" class="meta"></span><div class="meta" id="qtd"></div></div>
+    </div><div id="rd"></div>`;
+    const lerD = () => { const x = lerForm("#fd"); x.origem = x.origem.toUpperCase(); x.aeroporto = x.aeroporto.toUpperCase(); return {...bx.f, ...x}; };
+    const qtd = () => { const x = lerD(); const n = datasJanela(x).length; $("#qtd").innerHTML = `Vai consultar <b>${n}</b> datas no Google Voos (cerca de ${Math.ceil(n * 6 / 2 / 60)} min)${n > 40 ? " — aumente o intervalo para ficar mais rápido" : ""}.`; };
+    $("#fd").addEventListener("input", () => { bx.f = lerD(); salvaPref(bx.f); qtd(); });
+    $("#bd").addEventListener("click", () => buscarDatas(lerD()));
+    $("#modo").onclick = e => { const b = e.target.closest("button"); if (b) { bx.modo = b.dataset.m; renderHoteis(); } };
+    qtd(); pintaExt(); pintaDatas();
+    try { window.postMessage({radar: "ping"}, "*"); } catch (e) {}
+    return;
+  }
+  $("#lista").innerHTML = modos + `<div class="form busca-form" id="fb">
     <label>Saindo de (aeroporto)<input name="origem" value="${esc(f.origem)}" maxlength="3" style="text-transform:uppercase"></label>
     <label class="dois">Destino (cidade ou região)<input name="destino" value="${esc(f.destino)}" placeholder="ex.: Porto de Galinhas, Punta Cana, Lisboa"></label>
     <label>Aeroporto destino<input name="aeroporto" value="${esc(f.aeroporto)}" maxlength="3" style="text-transform:uppercase"></label>
@@ -354,6 +401,9 @@ function renderHoteis() {
     <label>Adultos<input type="number" min="1" max="8" name="adultos" value="${f.adultos}"></label>
     <label>Nota mínima<select name="nota"><option value="">qualquer</option>${[7, 8, 9].map(n => `<option value="${n}" ${String(f.nota) === String(n) ? "selected" : ""}>${n},0+</option>`).join("")}</select></label>
     <label>Hotel até (total, R$)<input type="number" step="500" name="teto" value="${f.teto || ""}" placeholder="sem limite"></label>
+    <label>Nota Google mínima<select name="notaG"><option value="">qualquer</option>${["4.0", "4.3", "4.5", "4.7"].map(n => `<option value="${n}" ${f.notaG === n ? "selected" : ""}>${n.replace(".", ",")}+</option>`).join("")}</select></label>
+    <label>Escalas do voo<select name="escalas">${[["", "qualquer"], ["0", "só direto"], ["1", "até 1 escala"], ["2", "até 2 escalas"]].map(([v, t]) => `<option value="${v}" ${String(f.escalas) === v ? "selected" : ""}>${t}</option>`).join("")}</select></label>
+    <label>Voo de no máximo (horas)<input type="number" min="1" max="60" name="durMax" value="${f.durMax || ""}" placeholder="qualquer"></label>
     <div class="full prefs"><b>Hotel:</b>${chk("ai", "All inclusive")}${chk("e4", "4★")}${chk("e5", "5★")}${chk("praia", "Beira-mar")}</div>
     <div class="full prefs"><b>Buscar em:</b>${fon("Google Voos")}${fon("Kayak")}${fon("Booking")}${fon("Hoteis.com")}</div>
     <div class="full"><button class="btn grande" id="bb">🔎 Buscar em todos os sites</button> <span id="extst" class="meta"></span></div>
@@ -368,16 +418,70 @@ function renderHoteis() {
   };
   $("#fb").addEventListener("input", e => {
     if (e.target.name === "destino") { const c = acharIata(e.target.value); if (c) $('#fb [name="aeroporto"]').value = c; }
-    bx.f = ler(); salvaPref(bx.f); pintaLinks();
+    bx.f = {...bx.f, ...ler()}; salvaPref(bx.f); pintaLinks(); pintaRes();
   });
-  $("#bb").addEventListener("click", () => buscarAgora(ler()));
+  $("#modo").onclick = e => { const b = e.target.closest("button"); if (b) { bx.modo = b.dataset.m; renderHoteis(); } };
+  $("#bb").addEventListener("click", () => buscarAgora({...bx.f, ...ler()}));
   pintaExt(); pintaLinks(); pintaRes();
   try { window.postMessage({radar: "ping"}, "*"); } catch (e) {}
 }
 
+function notaGoogle(g) {
+  const k = g.k; if (!k) return null;
+  if (bx.notasG[k]) return bx.notasG[k];
+  for (const [kk, v] of Object.entries(bx.notasG)) if (kk && (kk.includes(k) || k.includes(kk)) && Math.min(kk.length, k.length) >= 4) return v;
+  return null;
+}
+function pedirNotas() {
+  if (!bx.ext || !bx.grupos) return;
+  const faltam = bx.grupos.filter(g => !notaGoogle(g)).sort((a, b) => a.min - b.min).slice(0, 24).map(g => g.nome);
+  if (!faltam.length) return pintaRes();
+  bx.notasPend = true;
+  window.postMessage({radar: "notas", id: bx.id, nomes: faltam, destino: (bx.f.destino || "").split(",").pop().trim()}, "*");
+  pintaRes();
+}
+function datasJanela(f) {
+  const out = [], d0 = new Date(f.janIni + "T12:00:00"), d1 = new Date(f.janFim + "T12:00:00"), passo = Math.max(1, +f.passo || 1), dias = Math.max(1, +f.dias || 7);
+  for (let d = new Date(d0); d <= d1 && out.length < 80; d.setDate(d.getDate() + passo)) {
+    const v = new Date(d); v.setDate(v.getDate() + dias);
+    out.push({ida: d.toISOString().slice(0, 10), volta: v.toISOString().slice(0, 10)});
+  }
+  return out;
+}
+function buscarDatas(f) {
+  bx.f = f; salvaPref(f);
+  if (!bx.ext) { pintaExt(); return; }
+  if (bx.dt && bx.dt.rodando) window.postMessage({radar: "cancelar", id: bx.dt.id}, "*");
+  const datas = datasJanela(f);
+  bx.dt = {id: "d" + Date.now(), res: [], total: datas.length, rodando: true, f};
+  window.postMessage({radar: "datas", id: bx.dt.id, datas, p: {origem: f.origem, aeroporto: f.aeroporto, adultos: +f.adultos || 1, cias: f.cia ? [f.cia] : [], paradas: f.escalas}}, "*");
+  pintaDatas();
+}
+function pintaDatas() {
+  const el = $("#rd"); if (!el) return;
+  const dt = bx.dt; if (!dt) { el.innerHTML = `<div class="vazio" style="margin-top:14px">Escolha a rota, a companhia e a janela de datas. A extensão consulta o Google Voos data por data e mostra aqui os períodos mais baratos.</div>`; return; }
+  const ok = dt.res.filter(r => r.preco).sort((a, b) => a.ida.localeCompare(b.ida));
+  const sem = dt.res.filter(r => !r.preco).length;
+  const ciaN = ({AD: "Azul", LA: "LATAM", G3: "GOL", CM: "Copa", AV: "Avianca", AA: "American", TP: "TAP"})[dt.f.cia] || dt.f.cia || "todas as companhias";
+  const min = ok.length ? Math.min(...ok.map(r => r.preco)) : 0, max = ok.length ? Math.max(...ok.map(r => r.preco)) : 0;
+  const dm = d => d.slice(8) + "/" + d.slice(5, 7);
+  const sem3 = d => ["dom", "seg", "ter", "qua", "qui", "sex", "sáb"][new Date(d + "T12:00:00").getDay()];
+  const todas = [...dt.res].sort((a, b) => a.ida.localeCompare(b.ida));
+  const barras = todas.map(r => { if (!r.preco) return `<span class="bar sem" title="${dm(r.ida)}: sem voo"><span class="v">–</span><span class="col"><i style="height:4%"></i></span><span class="d">${dm(r.ida)}</span></span>`; const h = max > min ? 18 + 82 * (r.preco - min) / (max - min) : 60; const cls = r.preco <= min * 1.05 ? "b1" : r.preco <= min * 1.15 ? "b2" : "b3";
+    return `<a class="bar ${cls}" href="${esc(r.url)}" target="_blank" rel="noopener" title="${dm(r.ida)} a ${dm(r.volta)} · ${brl(r.preco)} · ${esc(r.cia)}"><span class="v">${String(Math.round(r.preco / 100) / 10).replace(".", ",")}k</span><span class="col"><i style="height:${h}%"></i></span><span class="d">${dm(r.ida)}</span></a>`; }).join("");
+  const top = [...ok].sort((a, b) => a.preco - b.preco).slice(0, 6);
+  el.innerHTML = `<h2>📅 ${esc(dt.f.origem)} → ${esc(dt.f.aeroporto)} · ${esc(ciaN)} <small>${dt.f.dias} dias de viagem · ida e volta, ${dt.f.adultos} adultos · ${dt.res.length} de ${dt.total} datas consultadas${dt.rodando ? " ⏳" : ""}</small></h2>
+    ${ok.length ? `<div class="kpi-l"><div class="kpi"><b>${brl(min)}</b><span>menor preço encontrado</span></div><div class="kpi"><b>${brl(Math.round(ok.reduce((s, r) => s + r.preco, 0) / ok.length))}</b><span>preço médio nas datas</span></div><div class="kpi"><b>${brl(max)}</b><span>mais caro</span></div></div>
+    <div class="grafico">${barras}</div><p class="meta">Altura da barra = preço total ida e volta. Verde = até 5% acima do menor; amarelo = até 15%. Clique na barra para abrir no Google Voos.</p>
+    <h2>Melhores períodos</h2>${top.map((r, k) => `<div class="rc ${k ? "" : "melhor"}"><div><div class="rt">${sem3(r.ida)} ${dm(r.ida)} → ${sem3(r.volta)} ${dm(r.volta)}</div><div class="meta">${esc(r.cia)} · ${esc(r.dur || "")} · ${r.paradas === 0 ? "direto" : r.paradas ? r.paradas + (r.paradas > 1 ? " paradas" : " parada") : ""}</div></div><div class="rp"><b>${brl(r.preco)}</b><a href="${esc(r.url)}" target="_blank" rel="noopener">ver no Google ›</a></div></div>`).join("")}`
+    : `<div class="vazio">${dt.rodando ? "Consultando as datas…" : `Nenhum voo ${dt.f.cia ? "da " + esc(ciaN) + " " : ""}encontrado nessas datas. ${dt.f.cia ? "Essa companhia pode não voar nessa rota." : ""}`}</div>`}
+    ${sem ? `<p class="meta">${sem} data(s) sem voo${dt.f.cia ? " dessa companhia" : ""}.</p>` : ""}`;
+}
+
 function pintaExt() {
   const el = $("#extst"); if (!el) return;
-  el.innerHTML = bx.ext ? `Extensão ${esc(bx.ext)} conectada · as buscas abrem em abas de fundo e fecham sozinhas`
+  const velha = bx.ext && bx.ext < "2.1";
+  el.innerHTML = velha ? `<b style="color:#c2410c">Extensão ${esc(bx.ext)} desatualizada:</b> baixe o ZIP de novo e, em chrome://extensions, remova e carregue a pasta extensao (versão 2.1) para usar nota do Google e melhores datas.` : bx.ext ? `Extensão ${esc(bx.ext)} conectada · as buscas abrem em abas de fundo e fecham sozinhas`
     : (bx.ext === null ? "" : "") + `<b style="color:#c2410c">Extensão não encontrada.</b> Instale a versão 2 (pasta <code>extensao</code> do repositório) para buscar aqui dentro. Sem ela, use os links abaixo.`;
 }
 
@@ -385,7 +489,7 @@ function buscarAgora(f) {
   bx.f = f; salvaPref(f);
   if (!bx.ext) { pintaExt(); $("#extst").scrollIntoView({behavior: "smooth", block: "center"}); return; }
   if (bx.id) window.postMessage({radar: "cancelar", id: bx.id}, "*");
-  bx.id = "b" + Date.now(); bx.fontes = {}; bx.res = {}; bx.rodando = true;
+  bx.id = "b" + Date.now(); bx.fontes = {}; bx.res = {}; bx.rodando = true; bx.notasG = {}; bx.notasPend = false;
   const p = {origem: f.origem, aeroporto: f.aeroporto, destino: f.destino, ida: f.ida, volta: f.volta, adultos: +f.adultos || 2,
     ai: f.ai, praia: f.praia, estrelas: [f.e4 && 4, f.e5 && 5].filter(Boolean), nota: f.nota ? +f.nota : null, fontes: f.fontes};
   window.postMessage({radar: "buscar", id: bx.id, p}, "*");
@@ -411,9 +515,13 @@ function pintaRes() {
   // passagens
   let voos = [];
   for (const [fonte, it] of Object.entries(bx.res)) if ((bx.fontes[fonte] || {}).tipo === "voo") it.forEach(v => voos.push({...v, fonte}));
+  const minutos = d => { const m = String(d || "").match(/(\d+)\s*h\s*(\d+)?/); return m ? +m[1] * 60 + (+m[2] || 0) : null; };
+  const totVoos = voos.length;
+  if (f.escalas !== "" && f.escalas != null) voos = voos.filter(v => v.paradas == null || v.paradas <= +f.escalas);
+  if (+f.durMax) voos = voos.filter(v => minutos(v.dur) == null || minutos(v.dur) <= f.durMax * 60);
   voos.sort((a, b) => a.preco - b.preco);
   const pv = x => x === 0 ? "direto" : x ? x + (x > 1 ? " paradas" : " parada") : "";
-  $("#qv").textContent = voos.length ? `${voos.length} opções · ida e volta, ${ad} adultos, preço total` : "";
+  $("#qv").textContent = totVoos ? `${voos.length}${voos.length < totVoos ? " de " + totVoos : ""} opções · ida e volta, ${ad} adultos, preço total · duração = ida` : "";
   $("#rv").innerHTML = voos.length ? voos.slice(0, 15).map((v, k) => `<div class="rc ${k ? "" : "melhor"}">
       <div><div class="rt">${esc(v.cia || "Companhia")}</div><div class="meta">${esc(v.sai || "")}${v.chega ? " → " + esc(v.chega) : ""} · ${esc(v.dur || "")} · ${pv(v.paradas)}</div></div>
       <div class="rp"><b>${brl(v.preco)}</b><span class="src">${esc(v.fonte)}</span><a href="${esc((bx.fontes[v.fonte] || {}).url || "#")}" target="_blank" rel="noopener">ver ›</a></div></div>`).join("")
@@ -426,11 +534,15 @@ function pintaRes() {
     g.ofertas.push({...h, fonte}); g.foto = g.foto || h.foto; g.nota = g.nota ?? h.nota; g.estrelas = g.estrelas || h.estrelas; g.local = g.local || h.local; g.ai = g.ai || h.ai;
     if (fonte === "Booking") g.nome = h.nome;
   });
-  let hs = grupos.map(g => { g.ofertas.sort((a, b) => a.preco - b.preco); g.min = g.ofertas[0].preco; return g; });
-  const nmin = f.nota ? +f.nota : 0, teto = +f.teto || 0;
+  let hs = grupos.map(g => { g.ofertas.sort((a, b) => a.preco - b.preco); g.min = g.ofertas[0].preco; g.g = notaGoogle(g); return g; });
+  bx.grupos = hs;
+  const nmin = f.nota ? +f.nota : 0, teto = +f.teto || 0, gmin = f.notaG ? +f.notaG : 0;
+  const totH = hs.length;
   hs = hs.filter(g => (!nmin || g.nota == null || g.nota >= nmin) && (!teto || g.min <= teto) && (!f.ai || g.ai));
+  const semG = gmin ? hs.filter(g => !g.g || g.g.nada).length : 0;
+  if (gmin) hs = hs.filter(g => !(g.g && g.g.notaG != null && g.g.notaG < gmin) && !(g.g && g.g.nada) && !(g.g == null && !bx.notasPend && !bx.rodando));
   hs.sort(bx.ordemH === "nota" ? (a, b) => (b.nota || 0) - (a.nota || 0) || a.min - b.min : (a, b) => a.min - b.min);
-  $("#qh").innerHTML = hs.length ? `${hs.length} hotéis · ${n} noites, ${ad} adultos · <a href="#" id="ordh">${bx.ordemH === "nota" ? "ordenar por preço" : "ordenar por nota"}</a>` : "";
+  $("#qh").innerHTML = totH ? `${hs.length}${hs.length < totH ? " de " + totH : ""} hotéis · ${n} noites, ${ad} adultos${bx.notasPend ? " · ⏳ buscando notas do Google" : ""}${gmin && semG && !bx.notasPend ? ` · ${semG} sem nota do Google ocultos` : ""} · <a href="#" id="ordh">${bx.ordemH === "nota" ? "ordenar por preço" : "ordenar por nota"}</a>` : "";
   $("#rh").innerHTML = hs.length ? hs.slice(0, 30).map((g, k) => {
     const o = g.ofertas[0];
     const outras = g.ofertas.slice(1).filter((x, i, a) => a.findIndex(y => y.fonte === x.fonte) === i);
@@ -438,7 +550,7 @@ function pintaRes() {
       <div class="hm"><div class="rt">${esc(g.nome)} <span class="star">${"★".repeat(g.estrelas || 0)}</span></div>
         <div class="meta">${esc(g.local)}${o.oferta ? ` · <span class="desce">${esc(o.oferta)}</span>` : ""}</div>
         ${outras.length ? `<div class="meta">Também: ${outras.map(x => `<a href="${esc(x.link)}" target="_blank" rel="noopener">${esc(x.fonte)} ${brl(x.preco)}</a>`).join(" · ")}</div>` : ""}</div>
-      <div class="rp">${g.nota != null ? `<span class="nb">${g.nota.toFixed(1).replace(".", ",")}</span>` : ""}<b>${brl(o.preco)}</b><span class="meta">${brl(Math.round(o.preco / n))}/noite</span>${o.original && o.original > o.preco ? `<s class="meta">${brl(o.original)}</s>` : ""}
+      <div class="rp"><div class="notas">${g.nota != null ? `<span class="nb" title="nota ${esc(o.fonte)}">${g.nota.toFixed(1).replace(".", ",")}</span>` : ""}${g.g && g.g.notaG ? `<span class="ng" title="${esc(g.g.nome || "")} · ${esc(g.g.avG || "")} avaliações">G ${g.g.notaG.toFixed(1).replace(".", ",")}★</span>` : g.g && g.g.nada ? `<span class="ng off">G –</span>` : `<span class="ng off">G …</span>`}</div><b>${brl(o.preco)}</b><span class="meta">${brl(Math.round(o.preco / n))}/noite</span>${o.original && o.original > o.preco ? `<s class="meta">${brl(o.original)}</s>` : ""}
         <span class="src">${esc(o.fonte)}</span><a class="go2" href="${esc(o.link)}" target="_blank" rel="noopener">Ver ›</a></div></div>`;
   }).join("") : `<div class="vazio">${bx.id ? (bx.rodando ? "Buscando hotéis…" : "Nenhum hotel com esses filtros.") : "Os hotéis aparecem aqui, com o preço de cada site lado a lado."}</div>`;
   const oh = $("#ordh"); if (oh) oh.onclick = e => { e.preventDefault(); bx.ordemH = bx.ordemH === "nota" ? "preco" : "nota"; pintaRes(); };

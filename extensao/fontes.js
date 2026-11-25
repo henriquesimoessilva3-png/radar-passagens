@@ -5,7 +5,8 @@ function tfsGoogle(p) {
   const ld = (f, b) => [...vi(f << 3 | 2), ...vi(b.length), ...b];
   const vr = (f, n) => [...vi(f << 3), ...vi(n)];
   const s = t => [...new TextEncoder().encode(t)];
-  const leg = (d, a, b) => [...ld(2, s(d)), ...ld(13, ld(2, s(a))), ...ld(14, ld(2, s(b)))];
+  const cias = (p.cias || []).flatMap(c => ld(6, s(c)));
+  const leg = (d, a, b) => [...ld(2, s(d)), ...(p.paradas != null && p.paradas !== "" ? vr(5, +p.paradas) : []), ...cias, ...ld(13, ld(2, s(a))), ...ld(14, ld(2, s(b)))];
   let m = [...ld(3, leg(p.ida, p.origem, p.aeroporto))];
   if (p.volta) m = m.concat(ld(3, leg(p.volta, p.aeroporto, p.origem)));
   for (let i = 0; i < (+p.adultos || 1); i++) m = m.concat(vr(8, 1));
@@ -35,10 +36,35 @@ function montarFontes(p) {
     if (quer("Hoteis.com")) F.push({nome: "Hoteis.com", tipo: "hotel", leitor: "hoteiscom",
       url: `https://www.hoteis.com/Hotel-Search?destination=${d}&startDate=${p.ida}&endDate=${p.volta}&adults=${ad}&rooms=1${p.ai ? "&mealPlan=ALL_INCLUSIVE" : ""}${est}${gr}&sort=PRICE_LOW_TO_HIGH`});
   }
+  if (p.destino && quer("Booking") || quer("Hoteis.com")) F.push({nome: "Google Hotéis", tipo: "nota", leitor: "googleNotas", limite: 20000,
+    url: `https://www.google.com/travel/search?q=${encodeURIComponent((p.ai ? "resorts all inclusive " : "hotéis ") + p.destino)}&hl=pt-BR&curr=BRL&gl=br`});
   return F;
 }
 
+const urlGoogleHotel = (nome, destino) => `https://www.google.com/travel/search?q=${encodeURIComponent(nome + " " + (destino || ""))}&hl=pt-BR&curr=BRL&gl=br`;
+
 const LEITORES = {
+  googleNotas: function () {
+    window.scrollBy(0, 2000);
+    const num = t => +String(t || "").replace(/[^\d]/g, "");
+    const vistos = {}, itens = [];
+    document.querySelectorAll("[aria-label]").forEach(e => {
+      const m = e.getAttribute("aria-label").match(/^(\d,\d) de 5 estrelas em ([\d.]+) avaliaç\S*, (.+)$/);
+      if (!m || vistos[m[3]]) return; vistos[m[3]] = 1;
+      itens.push({nome: m[3].trim(), notaG: +m[1].replace(",", "."), avG: num(m[2])});
+    });
+    return {itens};
+  },
+  googleUm: function () {
+    const t = document.body.innerText, i = t.indexOf("Voltar para a lista");
+    if (i < 0) return {itens: []};
+    const L = t.slice(i, i + 800).split("\n").map(x => x.trim());
+    const k = L.findIndex(x => /^\d,\d$/.test(x));
+    if (k < 0) return {itens: []};
+    const av = (L[k + 1] || "").replace(/[()]/g, "");
+    const est = (t.slice(i, i + 800).match(/Hotel (\d) estrelas/) || [])[1];
+    return {itens: [{nome: document.title.split(":")[0].trim(), notaG: +L[k].replace(",", "."), avG: av, estrelas: est ? +est : null}]};
+  },
   googleVoos: function () {
     const num = t => +String(t).replace(/[^\d]/g, "");
     const vistos = new Set(), itens = [];

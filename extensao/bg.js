@@ -40,6 +40,57 @@ chrome.runtime.onMessage.addListener((m, sender) => {
     ativos[m.id].abas.forEach(t => chrome.tabs.remove(t).catch(() => {}));
     return;
   }
+  if (m.tipo === "notas") {
+    const envia = d => chrome.tabs.sendMessage(tabPainel, {radarExt: "notaG", id: m.id, ...d}).catch(() => {});
+    const fila = [...m.nomes];
+    const trab = async () => {
+      let tab;
+      try {
+        while (fila.length) {
+          const nome = fila.shift(), url = urlGoogleHotel(nome, m.destino);
+          if (!tab) tab = await chrome.tabs.create({url, active: false}); else await chrome.tabs.update(tab.id, {url});
+          await espera(2500);
+          let r = null;
+          for (let i = 0; i < 6 && !(r && r.itens && r.itens.length); i++) {
+            try { [{result: r}] = await chrome.scripting.executeScript({target: {tabId: tab.id}, func: LEITORES.googleUm}); } catch (e) { r = null; }
+            if (!(r && r.itens && r.itens.length)) await espera(1200);
+          }
+          envia({consulta: nome, achado: r && r.itens && r.itens[0] || null});
+        }
+      } finally { if (tab) chrome.tabs.remove(tab.id).catch(() => {}); }
+    };
+    Promise.all([trab(), trab()]).then(() => envia({fim: true}));
+    return;
+  }
+  if (m.tipo === "datas") {
+    const busca = ativos[m.id] = {cancelada: false, abas: []};
+    const envia = d => chrome.tabs.sendMessage(tabPainel, {radarExt: "data", id: m.id, ...d}).catch(() => {});
+    const fila = m.datas.map(d => ({...m.p, ...d}));
+    const trab = async () => {
+      let tab;
+      try {
+        while (fila.length && !busca.cancelada) {
+          const q = fila.shift();
+          const url = `https://www.google.com/travel/flights/search?tfs=${tfsGoogle(q)}&hl=pt-BR&curr=BRL`;
+          if (!tab) { tab = await chrome.tabs.create({url, active: false}); busca.abas.push(tab.id); } else await chrome.tabs.update(tab.id, {url});
+          await espera(3000);
+          let r = null, ult = -1;
+          for (let i = 0; i < 8; i++) {
+            try { [{result: r}] = await chrome.scripting.executeScript({target: {tabId: tab.id}, func: LEITORES.googleVoos}); } catch (e) { r = null; }
+            const n = r && r.itens ? r.itens.length : 0;
+            const vazio = await chrome.scripting.executeScript({target: {tabId: tab.id}, func: () => /Nenhum voo|No flights|Não encontramos/i.test(document.body.innerText)}).then(x => x[0].result).catch(() => false);
+            if (vazio && !n) break;
+            if (n && n === ult) break;
+            ult = n; await espera(1500);
+          }
+          const it = r && r.itens || [];
+          envia({ida: q.ida, volta: q.volta, url, preco: it.length ? it[0].preco : null, cia: it.length ? it[0].cia : "", paradas: it.length ? it[0].paradas : null, dur: it.length ? it[0].dur : "", n: it.length});
+        }
+      } finally { if (tab) chrome.tabs.remove(tab.id).catch(() => {}); }
+    };
+    Promise.all([trab(), trab()]).then(() => { envia({fim: true}); delete ativos[m.id]; });
+    return;
+  }
   if (m.tipo !== "buscar") return;
   const busca = ativos[m.id] = {cancelada: false, abas: []};
   const envia = d => chrome.tabs.sendMessage(tabPainel, {radarExt: "res", id: m.id, ...d}).catch(() => {});

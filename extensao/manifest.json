@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Radar de Viagens",
-  "version": "2.0",
+  "version": "2.1",
   "description": "Busca passagens e hotéis no Google Voos, Kayak, Booking e Hoteis.com e mostra tudo no painel do Radar. Também manda a página aberta para o monitoramento.",
   "action": { "default_popup": "popup.html", "default_title": "Radar de Viagens" },
   "permissions": ["activeTab", "storage", "tabs", "scripting"],
