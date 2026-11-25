@@ -42,6 +42,9 @@ Os dois abrem uma issue já preenchida ("Monitorar: …"). Ao criar a issue, a A
 
 1. Chrome → `chrome://extensions` → ligue o **Modo do desenvolvedor**.
 2. **Carregar sem compactação** → escolha a pasta `extensao` deste repositório (baixe o repositório como ZIP e descompacte).
+3. Para atualizar: baixe o ZIP de novo, substitua a pasta e clique no ícone de recarregar da extensão em `chrome://extensions`.
+
+A partir da versão 2, a extensão também faz a aba **Buscar viagem** do painel funcionar: ao clicar em *Buscar em todos os sites*, ela abre o Google Voos, o Kayak, o Booking e o Hoteis.com em abas de fundo, lê os resultados, fecha as abas e mostra tudo no painel (passagens de um lado, hotéis do outro, com o preço de cada site lado a lado). Os sites das companhias aéreas por enquanto abrem direto, já com rota e datas.
 
 ### Orçamento de buscas (plano grátis da SerpApi = 250/mês)
 

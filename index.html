@@ -104,13 +104,32 @@ footer{margin-top:36px;color:var(--mut);font-size:12px}
 @media (max-width:640px){.voo{grid-template-columns:1fr}.hero h1{font-size:24px}.nav button{padding:9px 12px;font-size:14px}}
 .opc{display:grid;gap:6px}.opc div{display:flex;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13.5px}
 .opc div b{font-size:16px}
+.busca-form{grid-template-columns:repeat(4,minmax(0,1fr))}
+.busca-form .dois{grid-column:span 2}
+.prefs{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:13px}
+.btn.grande{font-size:16px;padding:13px 22px}
+.duas{display:grid;grid-template-columns:1fr 1.35fr;gap:22px;align-items:start}
+.duas h2{margin-top:10px}
+.rc{display:flex;gap:12px;justify-content:space-between;align-items:center;background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px;margin-bottom:8px;box-shadow:0 1px 4px rgba(26,26,26,.05)}
+.rc.melhor{border:2px solid var(--otimo)}
+.rc .rt{font-weight:700;font-size:15px}
+.rc .rp{display:flex;flex-direction:column;align-items:flex-end;gap:2px;text-align:right;min-width:110px}
+.rc .rp b{font-size:21px;font-variant-numeric:tabular-nums}
+.rc .rp a{font-size:12.5px;font-weight:700}
+.src{font-size:11px;font-weight:700;background:var(--chip);color:#0b6f86;border-radius:4px;padding:2px 6px}
+.rc.hotel{align-items:stretch}.rc .ft{width:96px;min-height:84px;flex:none;border-radius:6px;background:linear-gradient(160deg,#bff1f0 0%,#38c6d9 55%,#f6dcae 56%,#fbe8c6 100%);background-size:cover;background-position:center}
+.rc .hm{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.go2{background:var(--coral);color:#fff!important;text-decoration:none;border-radius:4px;padding:5px 12px;margin-top:3px}
+.fst{margin-top:12px}.fch{font-size:13px;text-decoration:none;color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:6px 12px;background:#fff}
+.fch.ok{border-color:var(--otimo)}.fch.erro,.fch.vazio{border-color:#e0a100}
+@media (max-width:860px){.duas{grid-template-columns:1fr}.busca-form{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 <header class="hero"><div class="in">
   <h1>Radar de Viagens</h1>
   <p id="sub">Carregando…</p>
-  <nav class="nav" id="visao"><button data-v="viagens" class="on">Minhas viagens</button><button data-v="hoteis">Buscar hotéis</button><button data-v="ofertas">Passagens em promoção</button><button data-v="anac">Quando comprar</button></nav>
+  <nav class="nav" id="visao"><button data-v="viagens" class="on">Minhas viagens</button><button data-v="hoteis">🔎 Buscar viagem</button><button data-v="ofertas">Passagens em promoção</button><button data-v="anac">Quando comprar</button></nav>
 </div></header>
 <div class="wrap">
 <div class="bar" id="barra">
@@ -277,30 +296,152 @@ function lerForm(id) {
 const hst = {teto: false, ordem: "preco", so5: false, adultos: false};
 const noites = v => Math.round((new Date(v.checkout) - new Date(v.checkin)) / 864e5) || 1;
 
+const IATA = {"cancun": "CUN", "cancún": "CUN", "zona hotelera": "CUN", "costa mujeres": "CUN", "isla mujeres": "CUN", "playa del carmen": "CUN", "tulum": "CUN", "punta cana": "PUJ",
+  "recife": "REC", "porto de galinhas": "REC", "maceio": "MCZ", "maceió": "MCZ", "maragogi": "MCZ", "salvador": "SSA", "natal": "NAT", "fortaleza": "FOR", "porto seguro": "BPS", "trancoso": "BPS",
+  "florianopolis": "FLN", "florianópolis": "FLN", "rio de janeiro": "GIG", "sao paulo": "GRU", "são paulo": "GRU", "joao pessoa": "JPA", "joão pessoa": "JPA", "aracaju": "AJU", "foz do iguacu": "IGU",
+  "lisboa": "LIS", "porto": "OPO", "madri": "MAD", "madrid": "MAD", "paris": "CDG", "roma": "FCO", "orlando": "MCO", "miami": "MIA", "nova york": "JFK", "santiago": "SCL", "buenos aires": "EZE", "aruba": "AUA", "curacao": "CUR", "san andres": "ADZ", "cartagena": "CTG"};
+const acharIata = d => { const n = norm(d); for (const k in IATA) if (n.includes(norm(k))) return IATA[k]; return ""; };
+const PADRAO_BUSCA = {origem: "CNF", destino: "Zona Hotelera, Cancún", aeroporto: "CUN", ida: "2027-04-23", volta: "2027-04-30", adultos: 2, ai: true, e4: true, e5: true, praia: true, nota: "8", teto: "", fontes: ["Google Voos", "Kayak", "Booking", "Hoteis.com"]};
+const bx = {ext: null, id: null, fontes: {}, res: {}, f: null, ordemH: "preco"};
+window.addEventListener("message", e => {
+  const m = e.data; if (!m || !m.radarExt) return;
+  if (m.radarExt === "ok") { bx.ext = m.versao; if (st.visao === "hoteis") pintaExt(); return; }
+  if (m.radarExt !== "res" || m.id !== bx.id) return;
+  if (m.status === "inicio") { m.fontes.forEach(f => bx.fontes[f.nome] = {...f, status: "na fila"}); }
+  else if (m.status === "fim") { bx.rodando = false; }
+  else { bx.fontes[m.fonte] = {...bx.fontes[m.fonte], ...m}; if (m.itens) bx.res[m.fonte] = m.itens; }
+  pintaRes();
+});
+const lerPref = () => { try { return {...PADRAO_BUSCA, ...JSON.parse(localStorage.getItem("radar-busca") || "{}")}; } catch (e) { return {...PADRAO_BUSCA}; } };
+const salvaPref = f => { try { localStorage.setItem("radar-busca", JSON.stringify(f)); } catch (e) {} };
+
+function tfsGoogle(p) {
+  const vi = n => { const o = []; while (n > 127) { o.push((n & 127) | 128); n >>>= 7; } o.push(n); return o; };
+  const ld = (f, b) => [...vi(f << 3 | 2), ...vi(b.length), ...b], vr = (f, n) => [...vi(f << 3), ...vi(n)], s = t => [...new TextEncoder().encode(t)];
+  const leg = (d, a, b) => [...ld(2, s(d)), ...ld(13, ld(2, s(a))), ...ld(14, ld(2, s(b)))];
+  let m = ld(3, leg(p.ida, p.origem, p.aeroporto)); if (p.volta) m = m.concat(ld(3, leg(p.volta, p.aeroporto, p.origem)));
+  for (let i = 0; i < (+p.adultos || 1); i++) m = m.concat(vr(8, 1));
+  m = m.concat(vr(9, 1), vr(19, p.volta ? 1 : 2));
+  return btoa(String.fromCharCode(...m)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+}
+function linksVoo(f) {
+  const o = f.origem, a = f.aeroporto, i = f.ida, v = f.volta, ad = +f.adultos || 1, br = x => x.split("-").reverse().join("-"), us = x => x.slice(5, 7) + "/" + x.slice(8) + "/" + x.slice(0, 4);
+  return {
+    sites: [["Google Voos", `https://www.google.com/travel/flights/search?tfs=${tfsGoogle(f)}&hl=pt-BR&curr=BRL`], ["Kayak", `https://www.kayak.com.br/flights/${o}-${a}/${i}/${v}/${ad}adults?sort=price_a`],
+      ["Decolar", `https://www.decolar.com/shop/flights/results/roundtrip/${o}/${a}/${i}/${v}/${ad}/0/0`], ["Skyscanner", `https://www.skyscanner.com.br/transporte/passagens-aereas/${o.toLowerCase()}/${a.toLowerCase()}/${i.slice(2).replace(/-/g, "")}/${v.slice(2).replace(/-/g, "")}/?adultsv2=${ad}`]],
+    cias: [["LATAM", `https://www.latamairlines.com/br/pt/oferta-voos?origin=${o}&outbound=${i}T12%3A00%3A00.000Z&destination=${a}&inbound=${v}T12%3A00%3A00.000Z&adt=${ad}&chd=0&inf=0&trip=RT&cabin=Economy&redemption=false&sort=RECOMMENDED`],
+      ["GOL", `https://b2c.voegol.com.br/compra/busca-parceiros?pv=br&tipo=RT&de=${o}&para=${a}&ida=${br(i)}&volta=${br(v)}&ADT=${ad}&CHD=0&INF=0`],
+      ["Azul", `https://www.voeazul.com.br/br/pt/home/selecao-voo?c[0].ds=${o}&c[0].std=${us(i)}&c[0].as=${a}&c[1].ds=${a}&c[1].std=${us(v)}&c[1].as=${o}&p[0].t=ADT&p[0].c=${ad}&p[0].cp=false&f.dl=3&f.dr=3&cc=BRL`],
+      ["Copa", `https://shopping.copaair.com/?roundtrip=true&adults=${ad}&children=0&infants=0&date1=${i}&date2=${v}&area1=${o}&area2=${a}&flexible_dates_v2=false&language=pt`],
+      ["Avianca", `https://www.avianca.com/pt/`], ["American", `https://www.aa.com/booking/find-flights?locale=pt_BR`]]
+  };
+}
+const aLinks = arr => arr.map(([n, u]) => `<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join("");
+const pRUIDO = new Set("all inclusive resort resorts hotel spa the by only adults and a de do da & - cancun cancún".split(" "));
+const chaveH = n => norm(n).replace(/[-,()|]/g, " ").split(/\s+/).filter(w => w && !pRUIDO.has(w)).join(" ");
+
 function renderHoteis() {
   $("#resumo").innerHTML = "";
-  const hoje = new Date(), d1 = new Date(hoje.getTime() + 30 * 864e5), d2 = new Date(d1.getTime() + 7 * 864e5), iso = x => x.toISOString().slice(0, 10);
-  $("#lista").innerHTML = `<h2>Buscar hotéis <small>no Brasil ou fora</small></h2><p class="sub">Preencha uma vez e abra a mesma busca, com os mesmos filtros, em vários sites. Para o robô acompanhar o preço todo dia, clique em <b>Monitorar esta busca</b>.</p>
-  <div class="form" id="fh">
-    <label class="full">Destino<input name="destino" value="Zona Hotelera, Cancún" placeholder="Cidade, bairro ou região (ex.: Porto de Galinhas, Maragogi, Punta Cana)"></label>
-    <label>Check-in<input type="date" name="checkin" value="${iso(d1)}"></label>
-    <label>Check-out<input type="date" name="checkout" value="${iso(d2)}"></label>
-    <label>Adultos<input type="number" min="1" max="8" name="adultos" value="2"></label>
-    <label>Nota mínima<select name="nota"><option value="4">Booking 7+ (Google 4,0+)</option><option value="4.3" selected>Booking 8+ (Google 4,3+)</option><option value="4.5">Booking 9+ (Google 4,5+)</option></select></label>
-    <label class="chk"><input type="checkbox" name="e4" checked>4 estrelas</label>
-    <label class="chk"><input type="checkbox" name="e5" checked>5 estrelas</label>
-    <label class="chk"><input type="checkbox" name="ai" checked>All inclusive</label>
-    <label class="chk"><input type="checkbox" name="praia" checked>Beira-mar</label>
-    <div class="full links" id="lh"></div>
-    <div class="full"><a class="btn" id="mh" target="_blank" rel="noopener">🔔 Monitorar esta busca</a></div>
-  </div>`;
-  const upd = () => {
-    const f = lerForm("#fh"); f.estrelas = [f.e4 && 4, f.e5 && 5].filter(Boolean);
-    $("#lh").innerHTML = linksHotel(f);
-    $("#mh").href = issueLink(f.destino + " " + f.checkin, {tipo: "hotel", nome: `${f.destino} (${dataBR(f.checkin)}–${dataBR(f.checkout)})`, q: (f.ai ? "resorts all inclusive " : "hotéis ") + f.destino,
-      checkin: f.checkin, checkout: f.checkout, adultos: +f.adultos, estrelas: f.estrelas, nota_min: +f.nota, all_inclusive: f.ai, beira_mar: f.praia, queda_alerta: 0.05});
+  const f = bx.f = bx.f || lerPref();
+  const chk = (n, t) => `<label class="chk"><input type="checkbox" name="${n}" ${f[n] ? "checked" : ""}>${t}</label>`;
+  const fon = n => `<label class="chk"><input type="checkbox" name="fonte" value="${n}" ${f.fontes.includes(n) ? "checked" : ""}>${n}</label>`;
+  $("#lista").innerHTML = `<div class="form busca-form" id="fb">
+    <label>Saindo de (aeroporto)<input name="origem" value="${esc(f.origem)}" maxlength="3" style="text-transform:uppercase"></label>
+    <label class="dois">Destino (cidade ou região)<input name="destino" value="${esc(f.destino)}" placeholder="ex.: Porto de Galinhas, Punta Cana, Lisboa"></label>
+    <label>Aeroporto destino<input name="aeroporto" value="${esc(f.aeroporto)}" maxlength="3" style="text-transform:uppercase"></label>
+    <label>Ida / check-in<input type="date" name="ida" value="${f.ida}"></label>
+    <label>Volta / check-out<input type="date" name="volta" value="${f.volta}"></label>
+    <label>Adultos<input type="number" min="1" max="8" name="adultos" value="${f.adultos}"></label>
+    <label>Nota mínima<select name="nota"><option value="">qualquer</option>${[7, 8, 9].map(n => `<option value="${n}" ${String(f.nota) === String(n) ? "selected" : ""}>${n},0+</option>`).join("")}</select></label>
+    <label>Hotel até (total, R$)<input type="number" step="500" name="teto" value="${f.teto || ""}" placeholder="sem limite"></label>
+    <div class="full prefs"><b>Hotel:</b>${chk("ai", "All inclusive")}${chk("e4", "4★")}${chk("e5", "5★")}${chk("praia", "Beira-mar")}</div>
+    <div class="full prefs"><b>Buscar em:</b>${fon("Google Voos")}${fon("Kayak")}${fon("Booking")}${fon("Hoteis.com")}</div>
+    <div class="full"><button class="btn grande" id="bb">🔎 Buscar em todos os sites</button> <span id="extst" class="meta"></span></div>
+  </div>
+  <div id="fst"></div>
+  <div class="duas"><section><h2>✈️ Passagens <small id="qv"></small></h2><div id="rv"></div></section><section><h2>🏨 Hotéis <small id="qh"></small></h2><div id="rh"></div></section></div>
+  <div id="maislinks"></div>`;
+  const ler = () => {
+    const x = lerForm("#fb"); x.origem = (x.origem || "").toUpperCase(); x.aeroporto = (x.aeroporto || "").toUpperCase();
+    x.fontes = [...document.querySelectorAll('#fb [name="fonte"]:checked')].map(e => e.value);
+    delete x.fonte; return x;
   };
-  $("#fh").addEventListener("input", upd); upd();
+  $("#fb").addEventListener("input", e => {
+    if (e.target.name === "destino") { const c = acharIata(e.target.value); if (c) $('#fb [name="aeroporto"]').value = c; }
+    bx.f = ler(); salvaPref(bx.f); pintaLinks();
+  });
+  $("#bb").addEventListener("click", () => buscarAgora(ler()));
+  pintaExt(); pintaLinks(); pintaRes();
+  try { window.postMessage({radar: "ping"}, "*"); } catch (e) {}
+}
+
+function pintaExt() {
+  const el = $("#extst"); if (!el) return;
+  el.innerHTML = bx.ext ? `Extensão ${esc(bx.ext)} conectada · as buscas abrem em abas de fundo e fecham sozinhas`
+    : (bx.ext === null ? "" : "") + `<b style="color:#c2410c">Extensão não encontrada.</b> Instale a versão 2 (pasta <code>extensao</code> do repositório) para buscar aqui dentro. Sem ela, use os links abaixo.`;
+}
+
+function buscarAgora(f) {
+  bx.f = f; salvaPref(f);
+  if (!bx.ext) { pintaExt(); $("#extst").scrollIntoView({behavior: "smooth", block: "center"}); return; }
+  if (bx.id) window.postMessage({radar: "cancelar", id: bx.id}, "*");
+  bx.id = "b" + Date.now(); bx.fontes = {}; bx.res = {}; bx.rodando = true;
+  const p = {origem: f.origem, aeroporto: f.aeroporto, destino: f.destino, ida: f.ida, volta: f.volta, adultos: +f.adultos || 2,
+    ai: f.ai, praia: f.praia, estrelas: [f.e4 && 4, f.e5 && 5].filter(Boolean), nota: f.nota ? +f.nota : null, fontes: f.fontes};
+  window.postMessage({radar: "buscar", id: bx.id, p}, "*");
+  pintaRes();
+}
+
+function pintaLinks() {
+  const f = bx.f, el = $("#maislinks"); if (!el || !f) return;
+  const lv = f.origem && f.aeroporto && f.ida && f.volta ? linksVoo(f) : null;
+  const lh = linksHotel({destino: f.destino, checkin: f.ida, checkout: f.volta, adultos: f.adultos, ai: f.ai, praia: f.praia, estrelas: [f.e4 && 4, f.e5 && 5].filter(Boolean), nota: {7: "4", 8: "4.3", 9: "4.5"}[f.nota] || ""});
+  el.innerHTML = `<h2>Abrir a mesma busca direto nos sites</h2><div class="of"><div class="meta"><b>Passagens</b></div><div class="links">${lv ? aLinks(lv.sites) : ""}</div>
+    <div class="meta"><b>Direto nas companhias aéreas</b> (abrem já com a rota e as datas; Avianca e American abrem na página inicial)</div><div class="links">${lv ? aLinks(lv.cias) : ""}</div>
+    <div class="meta"><b>Hotéis</b></div><div class="links">${lh}</div></div>`;
+}
+
+function pintaRes() {
+  if (!$("#rv")) return;
+  const f = bx.f || {}, ad = +f.adultos || 2;
+  const n = Math.max(1, Math.round((new Date(f.volta) - new Date(f.ida)) / 864e5) || 1);
+  const ico = {"buscando": "⏳", "parcial": "⏳", "na fila": "🕓", "ok": "✅", "vazio": "⚠️", "erro": "❌"};
+  const fs = Object.values(bx.fontes);
+  $("#fst").innerHTML = fs.length ? `<div class="chips fst">${fs.map(x => `<a class="fch ${x.status}" href="${esc(x.url || "#")}" target="_blank" rel="noopener" title="${esc(x.erro || "")}">${ico[x.status] || ""} ${esc(x.nome || x.fonte)} ${x.itens ? `<b>${x.itens.length}</b>` : ""}${x.status === "vazio" ? " sem resultado" : ""}${x.status === "erro" ? " falhou" : ""}</a>`).join("")}${bx.rodando ? '<span class="meta">buscando…</span>' : ""}</div>` : "";
+  // passagens
+  let voos = [];
+  for (const [fonte, it] of Object.entries(bx.res)) if ((bx.fontes[fonte] || {}).tipo === "voo") it.forEach(v => voos.push({...v, fonte}));
+  voos.sort((a, b) => a.preco - b.preco);
+  const pv = x => x === 0 ? "direto" : x ? x + (x > 1 ? " paradas" : " parada") : "";
+  $("#qv").textContent = voos.length ? `${voos.length} opções · ida e volta, ${ad} adultos, preço total` : "";
+  $("#rv").innerHTML = voos.length ? voos.slice(0, 15).map((v, k) => `<div class="rc ${k ? "" : "melhor"}">
+      <div><div class="rt">${esc(v.cia || "Companhia")}</div><div class="meta">${esc(v.sai || "")}${v.chega ? " → " + esc(v.chega) : ""} · ${esc(v.dur || "")} · ${pv(v.paradas)}</div></div>
+      <div class="rp"><b>${brl(v.preco)}</b><span class="src">${esc(v.fonte)}</span><a href="${esc((bx.fontes[v.fonte] || {}).url || "#")}" target="_blank" rel="noopener">ver ›</a></div></div>`).join("")
+    : `<div class="vazio">${bx.id ? (bx.rodando ? "Buscando passagens…" : "Nenhuma passagem encontrada.") : "Preencha acima e clique em <b>Buscar</b>."}</div>`;
+  // hoteis agrupados por nome
+  const grupos = [];
+  for (const [fonte, it] of Object.entries(bx.res)) if ((bx.fontes[fonte] || {}).tipo === "hotel") it.forEach(h => {
+    const k = chaveH(h.nome); let g = grupos.find(g => g.k && k && (g.k.includes(k) || k.includes(g.k)));
+    if (!g) grupos.push(g = {k, nome: h.nome, ofertas: [], foto: "", nota: null, estrelas: null, local: "", ai: false});
+    g.ofertas.push({...h, fonte}); g.foto = g.foto || h.foto; g.nota = g.nota ?? h.nota; g.estrelas = g.estrelas || h.estrelas; g.local = g.local || h.local; g.ai = g.ai || h.ai;
+    if (fonte === "Booking") g.nome = h.nome;
+  });
+  let hs = grupos.map(g => { g.ofertas.sort((a, b) => a.preco - b.preco); g.min = g.ofertas[0].preco; return g; });
+  const nmin = f.nota ? +f.nota : 0, teto = +f.teto || 0;
+  hs = hs.filter(g => (!nmin || g.nota == null || g.nota >= nmin) && (!teto || g.min <= teto) && (!f.ai || g.ai));
+  hs.sort(bx.ordemH === "nota" ? (a, b) => (b.nota || 0) - (a.nota || 0) || a.min - b.min : (a, b) => a.min - b.min);
+  $("#qh").innerHTML = hs.length ? `${hs.length} hotéis · ${n} noites, ${ad} adultos · <a href="#" id="ordh">${bx.ordemH === "nota" ? "ordenar por preço" : "ordenar por nota"}</a>` : "";
+  $("#rh").innerHTML = hs.length ? hs.slice(0, 30).map((g, k) => {
+    const o = g.ofertas[0];
+    const outras = g.ofertas.slice(1).filter((x, i, a) => a.findIndex(y => y.fonte === x.fonte) === i);
+    return `<div class="rc hotel ${k ? "" : "melhor"}"><div class="ft" ${g.foto ? `style="background-image:url('${esc(g.foto)}')"` : ""}></div>
+      <div class="hm"><div class="rt">${esc(g.nome)} <span class="star">${"★".repeat(g.estrelas || 0)}</span></div>
+        <div class="meta">${esc(g.local)}${o.oferta ? ` · <span class="desce">${esc(o.oferta)}</span>` : ""}</div>
+        ${outras.length ? `<div class="meta">Também: ${outras.map(x => `<a href="${esc(x.link)}" target="_blank" rel="noopener">${esc(x.fonte)} ${brl(x.preco)}</a>`).join(" · ")}</div>` : ""}</div>
+      <div class="rp">${g.nota != null ? `<span class="nb">${g.nota.toFixed(1).replace(".", ",")}</span>` : ""}<b>${brl(o.preco)}</b><span class="meta">${brl(Math.round(o.preco / n))}/noite</span>${o.original && o.original > o.preco ? `<s class="meta">${brl(o.original)}</s>` : ""}
+        <span class="src">${esc(o.fonte)}</span><a class="go2" href="${esc(o.link)}" target="_blank" rel="noopener">Ver ›</a></div></div>`;
+  }).join("") : `<div class="vazio">${bx.id ? (bx.rodando ? "Buscando hotéis…" : "Nenhum hotel com esses filtros.") : "Os hotéis aparecem aqui, com o preço de cada site lado a lado."}</div>`;
+  const oh = $("#ordh"); if (oh) oh.onclick = e => { e.preventDefault(); bx.ordemH = bx.ordemH === "nota" ? "preco" : "nota"; pintaRes(); };
 }
 
 function cardHotel(x, n) {
@@ -332,7 +473,7 @@ function renderViagens() {
     <div class="kpi"><b>${menorVoo && menorHotel ? brl(menorVoo + menorHotel) : "–"}</b><span>viagem completa (voo + hotel)</span></div>
     <div class="kpi"><b>${al.length}</b><span>alertas de queda nos últimos 30 dias</span></div>`;
   let h = al.slice(0, 6).map(a => `<div class="alerta">🔔 <b>${esc(a.item)}</b> ${esc(a.extra || "")} · ${esc(a.viagem)}: ${brl(a.de)} → <b>${brl(a.para)}</b> <b class="q">−${Math.round(a.queda * 100)}%</b> <span class="meta">(${dataBR(a.dia)})</span></div>`).join("");
-  if (!vs.length) h += `<div class="vazio">Nenhuma viagem monitorada ainda. Use a aba <b>Buscar hotéis</b> ou o formulário no fim desta página.</div>`;
+  if (!vs.length) h += `<div class="vazio">Nenhuma viagem monitorada ainda. Use a aba <b>Buscar viagem</b> ou o formulário no fim desta página.</div>`;
   for (const v of vs) {
     const i = it[v.id] || {};
     const fonte = i.fonte ? ` · fonte: ${esc(i.fonte)}` : i.atualizado ? ` · atualizado em ${dataBR(i.atualizado)}` : "";
@@ -359,7 +500,7 @@ function renderViagens() {
       h += `<div class="links" style="margin-top:12px">${linksHotel(f)}</div>`;
     }
   }
-  h += `<h2>➕ Monitorar outro voo</h2><p class="sub">Para hotéis, use a aba <b>Buscar hotéis</b>.</p><div class="form" id="fv">
+  h += `<h2>➕ Monitorar outro voo</h2><p class="sub">Para hotéis, use a aba <b>Buscar viagem</b>.</p><div class="form" id="fv">
     <label>Origem (código)<input name="origem" value="CNF"></label><label>Destino (código)<input name="destino" placeholder="ex.: CUN, REC, LIS"></label>
     <label>Ida<input type="date" name="ida"></label><label>Volta<input type="date" name="volta"></label><label>Adultos<input type="number" min="1" max="8" name="adultos" value="2"></label>
     <div class="full"><a class="btn" id="mv" target="_blank" rel="noopener">🔔 Monitorar este voo</a></div></div>`;

@@ -1,8 +1,18 @@
 {
   "manifest_version": 3,
   "name": "Radar de Viagens",
-  "version": "1.0",
-  "description": "Manda o voo ou hotel da página aberta (Booking, Google Voos/Hotéis, Hoteis.com, Expedia, Decolar, Kayak) para o monitoramento do Radar.",
-  "action": { "default_popup": "popup.html", "default_title": "Monitorar no Radar" },
-  "permissions": ["activeTab", "storage"]
+  "version": "2.0",
+  "description": "Busca passagens e hotéis no Google Voos, Kayak, Booking e Hoteis.com e mostra tudo no painel do Radar. Também manda a página aberta para o monitoramento.",
+  "action": { "default_popup": "popup.html", "default_title": "Radar de Viagens" },
+  "permissions": ["activeTab", "storage", "tabs", "scripting"],
+  "host_permissions": [
+    "https://www.booking.com/*", "https://www.hoteis.com/*", "https://www.hotels.com/*",
+    "https://www.google.com/*", "https://www.kayak.com.br/*",
+    "https://henriquesimoessilva3-png.github.io/*", "http://localhost/*"
+  ],
+  "background": { "service_worker": "bg.js" },
+  "content_scripts": [{
+    "matches": ["https://henriquesimoessilva3-png.github.io/radar-passagens/*", "http://localhost/*"],
+    "js": ["ponte.js"], "run_at": "document_start"
+  }]
 }
