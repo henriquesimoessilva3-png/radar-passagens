@@ -1,6 +1,6 @@
 {
  "alertas": [],
- "atualizado": "2026-11-25 08:50",
+ "atualizado": "2026-11-25 16:21",
  "itens": {
   "cancun-hotel": {
    "atualizado": "2026-11-25",
@@ -30,6 +30,24 @@
      "regiao": "Punta Cancún",
      "visto": "2026-11-25"
     },
+    "Fiesta Americana Villas Cancún": {
+     "avaliacoes": 5503,
+     "destaque": false,
+     "estrelas": 4,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLerlZkBrdeEm3OeLt5a4ILdl0tsafC9MmS3sdTRxBWsWPmNoBUdiVHHJTDe9OLnLyeEYwlY9SsQVgoxg5wG2imVCRKkuyixjJtSIjQCRmPePVTe3VoKUO81C0_4IeTWiYeJ9ZQnWw=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.139466,
+      "longitude": -86.75128
+     },
+     "hist": {
+      "2026-11-25": 4992
+     },
+     "link": "https://www.fiestamericana.com/hoteles-y-resorts/fiesta-americana-cancun-villas",
+     "nota_google": 4.5,
+     "oferta": "Deal",
+     "token": "ChcIiqSJq-DOraUlGgsvZy8xdGhtbTE1eBAB",
+     "visto": "2026-11-25"
+    },
     "Grand Fiesta Americana Coral Beach": {
      "destaque": true,
      "estrelas": 5,
@@ -43,39 +61,117 @@
      "visto": "2026-11-25"
     },
     "Grand Park Royal Cancun": {
+     "avaliacoes": 24280,
      "destaque": true,
-     "estrelas": 5,
-     "hist": {
-      "2026-11-25": 12394
+     "estrelas": 4,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLd98Dr6GxNV0iBXVAXrRp-FstebM1iIzT-onxgAicjm8BkwyuDz_kmtsl278T-38JhhJf0wHaRhSBnRAUTQolIb1U4dMxuosG-LLOUUVGDX-UNcbxJKBjr49__SIT9GG8bR6p0=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.1236543,
+      "longitude": -86.75419649999999
      },
-     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Grand+Park+Royal+Cancun&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "hist": {
+      "2026-11-25": 11658
+     },
+     "link": "https://www.park-royalhotels.com/grand-park-royal-cancun.html?utm_medium=organic&utm_source=google&utm_campaign=google-my-business&utm_term=google-local&utm_id=parkroyal-grancancun",
      "nota_booking": 8.0,
+     "nota_google": 4.7,
      "oferta": "",
      "regiao": "km 10,5",
+     "token": "ChkI7dG6rMuX0L4JGg0vZy8xMWJ0bXF3Y3RnEAE",
      "visto": "2026-11-25"
     },
     "Hilton Cancun Mar Caribe": {
+     "avaliacoes": 4226,
      "destaque": true,
-     "estrelas": 5,
-     "hist": {
-      "2026-11-25": 18768
+     "estrelas": 4,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLcOW6toSgAD3UPKAlrbh-76cWeV8Fzr8htGSdFw6s4YDUSnhzvAK3hFpCO5-PuJ9dRTn6Aoy_pcEmj3nywtjoUu1-vk-PvEYVZ7GtJyBuHdMSuAuRwHEf1M4U66Olc4HbO2Otvv=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.071960999999998,
+      "longitude": -86.77672129999999
      },
-     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Hilton+Cancun+Mar+Caribe&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "hist": {
+      "2026-11-25": 15069
+     },
+     "link": "https://www.hilton.com/en/hotels/cunmchh-hilton-cancun-mar-caribe-all-inclusive-resort/?SEO_id=GMB-AMER-HH-CUNMCHH",
      "nota_booking": 8.2,
+     "nota_google": 4.6,
      "oferta": "",
      "regiao": "",
+     "token": "ChkI1d-OjND_gpNgGg0vZy8xMXZidGY2OTlyEAE",
+     "visto": "2026-11-25"
+    },
+    "Hotel Emporio Cancún optional All-Inclusive": {
+     "avaliacoes": 9019,
+     "destaque": false,
+     "estrelas": 4,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLeeHm3OmkTwhhBhPUw98eQ1BnoNONxVLdeh4BNT663tOYRwfQYiGEM_70pL4Mjg-q5E5-LlBUSYfCnYx4RzeNAZEXuAbdqJD0t9m-0m7AhjoIfMP7X2NtraJmM3d0-OMNfl5DO2=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.0731978,
+      "longitude": -86.77652979999999
+     },
+     "hist": {
+      "2026-11-25": 4928
+     },
+     "link": "https://hotelesemporio.com/hoteles/emporio-cancun/?partner=10956&utm_source=google&utm_medium=organic&utm_campaign=MyBusiness",
+     "nota_google": 4.3,
+     "oferta": "Deal",
+     "token": "ChgIs8bVrunR-N01GgwvZy8xcTYyOWtjdGIQAQ",
      "visto": "2026-11-25"
     },
     "Hotel NYX Cancun": {
+     "avaliacoes": 8869,
      "destaque": true,
      "estrelas": 4,
-     "hist": {
-      "2026-11-25": 9772
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLe1TK2_zp6ZqJjYeE_eh6cY5pAw4irc0D9ACP8-UZNR2UJQAyk_jrViyokCDA25ZcCuI2puqT4nap_5ojEYCu-DODugcn8gyTB5QurtETeXZmFef29hY0U2GpKBGsaByLQnoFf3=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.114281,
+      "longitude": -86.7586275
      },
-     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Hotel+NYX+Cancun&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "hist": {
+      "2026-11-25": 6702
+     },
+     "link": "https://www.nyxhotels.com/?utm_source=google&utm_medium=organic&utm_campaign=GoogleMyBusiness&utm_content=nyxhotelcan&partner=7870",
      "nota_booking": 8.2,
+     "nota_google": 4.5,
      "oferta": "",
      "regiao": "km 11,5",
+     "token": "ChoIjf-U-OOG4_-nARoNL2cvMTFiNXFoa2g2NRAB",
+     "visto": "2026-11-25"
+    },
+    "Hotel Riu Cancun": {
+     "avaliacoes": 11090,
+     "destaque": false,
+     "estrelas": 5,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLeURfeFzirnlb-w068c4Gbm_QdsRcpv3zIT87FiS-hdfNvAPy4EK3djNjOEY2lcjquAYHQPTBowYgC46u-bv3g8qsCWAag96B0GxUVfuWk2dQuwOmEONeH1mM6Z6enXfqZweKV8ZQ=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.1374471,
+      "longitude": -86.7485116
+     },
+     "hist": {
+      "2026-11-25": 12968
+     },
+     "link": "https://www.riu.com/en/hotel/mexico/cancun/hotel-riu-cancun?utm_source=google&utm_medium=organic&utm_campaign=my_business&utm_content=CNC",
+     "nota_google": 4.4,
+     "oferta": "",
+     "token": "ChgI7cS52uGqgr7WARoLL2cvMXRzXzdudHAQAQ",
+     "visto": "2026-11-25"
+    },
+    "Hyatt Vivid Cancun": {
+     "avaliacoes": 3401,
+     "destaque": false,
+     "estrelas": 5,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLcx_sr1rwRyP7HFKD5K2i7QWu5bJ9jgXn5yZ9KWXvPR8JQH709x5pyJ-fgiwB4TFQRMED3c5hEuEmZOmvA2v8C_ufZOCalcbUJdFEaRrG3DcIcER9HHylCtn9YCUlXbXmJh3-DY=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.1772907,
+      "longitude": -86.8075708
+     },
+     "hist": {
+      "2026-11-25": 12478
+     },
+     "link": "https://www.hyattinclusivecollection.com/en/resorts-hotels/hyatt-vivid/mexico/cancun/?src=corp_lclb_google_seo_drevc&utm_source=google&utm_medium=organic&utm_campaign=lmr",
+     "nota_google": 4.3,
+     "oferta": "",
+     "token": "ChoI5-rVu6nRwa23ARoNL2cvMTFmbXFjZzM3MRAB",
      "visto": "2026-11-25"
     },
     "Hyatt Zilara Cancun": {
@@ -138,6 +234,78 @@
      "regiao": "km 12,5 · só adultos",
      "visto": "2026-11-25"
     },
+    "Meliá Casa Maya Cancún": {
+     "avaliacoes": 10212,
+     "destaque": false,
+     "estrelas": 4,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLfqJauugSCy-xQQZOIikDklVJuYLHgICkWUalov1KF-7RSmrHE_19rN0JIMgBC9YwIj1gc5uTOwWYFPXs5T7PCTx0TXQUVCLVq9BT8aHVqw_LK94_sFOZuBGooERXUQlrSsRvVK5A=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.144842,
+      "longitude": -86.778877
+     },
+     "hist": {
+      "2026-11-25": 6225
+     },
+     "link": "https://www.melia.com/en/hotels/mexico/cancun/melia-casa-maya-cancun-all-inclusive?utm_campaign=google&utm_content=5936&utm_medium=organic&utm_source=directories",
+     "nota_google": 4.4,
+     "oferta": "",
+     "token": "ChgI2uP-1rmKmsiRARoLL2cvMXRmM3B6OWsQAQ",
+     "visto": "2026-11-25"
+    },
+    "Occidental Costa Cancún": {
+     "avaliacoes": 11301,
+     "destaque": false,
+     "estrelas": 4,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLfc-hlDcit_IiL80PPpXZD9isSSNDW70CTO9F7EPrwGt67AX6q_Fe6EMMmTrykheJu0iz2xT5k5lISNJbPQeVcE90PZBPw0HqrjoHD72wzrLyFyKgOZVzoN-cZBgTDFFqn0cBAu9Wu6ijjz=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.145224499999998,
+      "longitude": -86.7890364
+     },
+     "hist": {
+      "2026-11-25": 6570
+     },
+     "link": "https://www.barcelo.com/es-mx/occidental-costa-cancun/?utm_source=google&utm_medium=organic&utm_campaign=my_business&utm_content=7378",
+     "nota_google": 4.4,
+     "oferta": "",
+     "token": "ChgIjfy4zILjo4jsARoLL2cvMXRmZDgwc2QQAQ",
+     "visto": "2026-11-25"
+    },
+    "Paradisus Cancun Resort": {
+     "avaliacoes": 17591,
+     "destaque": false,
+     "estrelas": 5,
+     "foto": "https://lh3.googleusercontent.com/grass-proxy/AIM7gW3HSa9fwzNgb6npbXo_RUmGqyX6XZd0ZEo5h4p3R1FtCaycH6hdixXOWuChdf9Cq7xzEol4G4g2BFTABqZ8LyVsHCwdOmPagyPfuDFcgRmJQ4gTuX6NxLI7Lky16VEUQynvRshadg-WlebqmQQ9QrZkRuYIYVGnHjsWtgRwxe5zYWeDqW4W1Q6E=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.083659,
+      "longitude": -86.771986
+     },
+     "hist": {
+      "2026-11-25": 14235
+     },
+     "link": "https://www.melia.com/en/hotels/mexico/cancun/paradisus-cancun?utm_campaign=google&utm_content=5836&utm_medium=organic&utm_source=directories",
+     "nota_google": 4.6,
+     "oferta": "",
+     "token": "ChkIz-v1utnl0Y-RARoML2cvMXB2MmxkeTRiEAE",
+     "visto": "2026-11-25"
+    },
+    "Park Royal Beach Cancun": {
+     "avaliacoes": 20426,
+     "destaque": false,
+     "estrelas": 4,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLdKjp1zu8V9JhkQEPxTrDltqwQ6thPka-sCyXE3Mo0SFOrV9NTYkqIY9JtCC7a5aBc4pgTDShi_Gvgwe9g1wOkw0UaZzUPqNMq5zyFYKTO3n1S7WNF1TVdduVJpEtyt2fmW9S6T=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.1116582,
+      "longitude": -86.7607488
+     },
+     "hist": {
+      "2026-11-25": 7733
+     },
+     "link": "https://www.park-royalhotels.com/park-royal-beach-cancun.html?utm_medium=organic&utm_source=google&utm_campaign=google-my-business&utm_term=google-local&utm_id=parkroyal-beachcancun",
+     "nota_google": 4.5,
+     "oferta": "",
+     "token": "ChgI5N-XyIm5lfq_ARoLL2cvMXRqODV4Y2YQAQ",
+     "visto": "2026-11-25"
+    },
     "Royal Select at Grand Park Royal": {
      "destaque": true,
      "estrelas": 5,
@@ -148,6 +316,24 @@
      "nota_booking": 8.3,
      "oferta": "",
      "regiao": "só adultos",
+     "visto": "2026-11-25"
+    },
+    "Royal Solaris Cancun": {
+     "avaliacoes": 5580,
+     "destaque": false,
+     "estrelas": 4,
+     "foto": "https://lh3.googleusercontent.com/grass-proxy/AIM7gW3lpQOeErPVZqOPBog2rtPmKhT8bOuh5n7eGrX4XZuTfQwuR-gBWk9o4G2qvPHBgHYaTdlndFls_OrII6UrvdSzSRjlSSCwlUccyUqeSfZYrbMZKCWoyLqWy2x6DtQn52jCyeWeJdTH-7qrrSnQTnFqz_11pf_oyniBbJWDcPJQyq9Fdd6Gli9trg=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.049615799999998,
+      "longitude": -86.78256300000001
+     },
+     "hist": {
+      "2026-11-25": 7782
+     },
+     "link": "https://www.hotelessolaris.com/cancun/royal-solaris-cancun",
+     "nota_google": 4.3,
+     "oferta": "Deal",
+     "token": "ChoI_InvlemoxZ6xARoNL2cvMTFidHdzNTMwdhAB",
      "visto": "2026-11-25"
     },
     "Royalton CHIC Cancun": {
@@ -173,20 +359,45 @@
      "oferta": "",
      "regiao": "Punta Cancún",
      "visto": "2026-11-25"
+    },
+    "The Royal Sands by Holiday Inn Club Vacations": {
+     "avaliacoes": 5613,
+     "destaque": false,
+     "estrelas": 4,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLenZqgb4FhvwXqBZEdjMJOmZ8KNrj16LnT5-9okTbHAXzrVZMgYWKs3aCtAYDbefLMzz-Y1acoikJKdOlIv4n-AuJom0BBavFJ9ZhpkIm2JQtsqWHHESbjDtiVRRWO3bLZyKrqycWn28v5R=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.098288,
+      "longitude": -86.76689990000001
+     },
+     "hist": {
+      "2026-11-25": 8178
+     },
+     "link": "https://www.holidayinnclub.com/explore-resorts/royal-sands-resort?utm_source=local&utm_medium=organic&utm_campaign=royal-sands-gmb-listing",
+     "nota_google": 4.5,
+     "oferta": "",
+     "token": "ChcIr_Syutilx_MjGgsvZy8xdGgweW16NhAB",
+     "visto": "2026-11-25"
     }
    }
   },
   "cancun-voo": {
    "atualizado": "2026-11-25",
    "fonte": "Google Voos (levantamento de 25/11)",
+   "google": {
+    "faixa": [
+     6200,
+     9900
+    ],
+    "nivel": "typical"
+   },
    "hist": {
     "2026-11-25": 7161
    },
    "opcoes": [
     {
      "cias": [
-      "Gol",
-      "Avianca"
+      "Avianca",
+      "Gol"
      ],
      "duracao": 1100,
      "paradas": 2,
@@ -194,7 +405,7 @@
     },
     {
      "cias": [
-      "Copa"
+      "COPA"
      ],
      "duracao": 636,
      "paradas": 1,
@@ -202,11 +413,28 @@
     },
     {
      "cias": [
-      "LATAM"
+      "COPA"
      ],
-     "duracao": 935,
+     "duracao": 783,
+     "paradas": 1,
+     "preco": 7941
+    },
+    {
+     "cias": [
+      "COPA"
+     ],
+     "duracao": 657,
+     "paradas": 1,
+     "preco": 8468
+    },
+    {
+     "cias": [
+      "Aeromexico",
+      "Gol"
+     ],
+     "duracao": 1085,
      "paradas": 2,
-     "preco": 8901
+     "preco": 13559
     }
    ]
   },
