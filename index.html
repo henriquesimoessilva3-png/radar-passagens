@@ -480,8 +480,8 @@ function pintaDatas() {
 
 function pintaExt() {
   const el = $("#extst"); if (!el) return;
-  const velha = bx.ext && bx.ext < "2.1";
-  el.innerHTML = velha ? `<b style="color:#c2410c">Extensão ${esc(bx.ext)} desatualizada:</b> baixe o ZIP de novo e, em chrome://extensions, remova e carregue a pasta extensao (versão 2.1) para usar nota do Google e melhores datas.` : bx.ext ? `Extensão ${esc(bx.ext)} conectada · as buscas abrem em abas de fundo e fecham sozinhas`
+  const velha = bx.ext && bx.ext < "2.2";
+  el.innerHTML = velha ? `<b style="color:#c2410c">Extensão ${esc(bx.ext)}:</b> faça a instalação automática uma única vez (<a href="https://github.com/henriquesimoessilva3-png/radar-passagens#extens%C3%A3o-do-chrome" target="_blank" rel="noopener">como fazer</a>) e ela passa a se atualizar sozinha.` : bx.ext ? `Extensão ${esc(bx.ext)} conectada · as buscas abrem em abas de fundo e fecham sozinhas`
     : (bx.ext === null ? "" : "") + `<b style="color:#c2410c">Extensão não encontrada.</b> Instale a versão 2 (pasta <code>extensao</code> do repositório) para buscar aqui dentro. Sem ela, use os links abaixo.`;
 }
 

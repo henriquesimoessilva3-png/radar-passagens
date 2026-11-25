@@ -40,9 +40,18 @@ Os dois abrem uma issue já preenchida ("Monitorar: …"). Ao criar a issue, a A
 
 ### Extensão do Chrome
 
-1. Chrome → `chrome://extensions` → ligue o **Modo do desenvolvedor**.
-2. **Carregar sem compactação** → escolha a pasta `extensao` deste repositório (baixe o repositório como ZIP e descompacte).
-3. Para atualizar: baixe o ZIP de novo, substitua a pasta e clique no ícone de recarregar da extensão em `chrome://extensions`.
+**Instalação com atualização automática (uma vez só, no Mac):**
+
+1. Abra o app **Terminal** e cole este comando (ele baixa o Radar para a pasta `radar-passagens` da sua pasta de usuário e agenda uma atualização a cada hora):
+
+   ```
+   git clone https://github.com/henriquesimoessilva3-png/radar-passagens.git ~/radar-passagens && (crontab -l 2>/dev/null; echo "17 * * * * cd ~/radar-passagens && git pull -q") | crontab -
+   ```
+
+2. Chrome → `chrome://extensions` → **Remover** a versão antiga do Radar.
+3. **Carregar sem compactação** → escolha a pasta `radar-passagens/extensao` (dentro da sua pasta de usuário).
+
+Pronto: o computador baixa as novidades sozinho e a extensão se recarrega quando percebe a versão nova (confere a cada 15 minutos e sempre que você abre o painel).
 
 A partir da versão 2, a extensão também faz a aba **Buscar viagem** do painel funcionar: ao clicar em *Buscar em todos os sites*, ela abre o Google Voos, o Kayak, o Booking e o Hoteis.com em abas de fundo, lê os resultados, fecha as abas e mostra tudo no painel (passagens de um lado, hotéis do outro, com o preço de cada site lado a lado). Os sites das companhias aéreas por enquanto abrem direto, já com rota e datas.
 

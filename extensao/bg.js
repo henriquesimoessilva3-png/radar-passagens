@@ -2,6 +2,19 @@
 importScripts("fontes.js");
 
 const ativos = {};
+
+// Autoatualização: quando a pasta da extensão no computador recebe arquivos novos (git pull automático),
+// a extensão percebe que a versão no disco mudou e se recarrega sozinha.
+async function versaoNoDisco() {
+  try { return (await (await fetch(chrome.runtime.getURL("manifest.json") + "?t=" + Date.now(), {cache: "no-store"})).json()).version; } catch (e) { return null; }
+}
+async function checarAtualizacao() {
+  const v = await versaoNoDisco();
+  if (v && v !== chrome.runtime.getManifest().version && !Object.keys(ativos).length) chrome.runtime.reload();
+}
+chrome.alarms.create("atualiza", {periodInMinutes: 15});
+chrome.alarms.onAlarm.addListener(a => { if (a.name === "atualiza") checarAtualizacao(); });
+chrome.runtime.onStartup.addListener(checarAtualizacao);
 const espera = ms => new Promise(r => setTimeout(r, ms));
 
 async function rodarFonte(f, p, envia, busca) {
@@ -40,6 +53,8 @@ chrome.runtime.onMessage.addListener((m, sender) => {
     ativos[m.id].abas.forEach(t => chrome.tabs.remove(t).catch(() => {}));
     return;
   }
+  if (m.tipo === "recarregar") { chrome.runtime.reload(); return; }
+  if (m.tipo === "checar") { checarAtualizacao(); return; }
   if (m.tipo === "notas") {
     const envia = d => chrome.tabs.sendMessage(tabPainel, {radarExt: "notaG", id: m.id, ...d}).catch(() => {});
     const fila = [...m.nomes];
