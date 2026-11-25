@@ -87,7 +87,7 @@
     {
       "id": "cancun-hotel",
       "tipo": "hotel",
-      "nome": "Cancún all inclusive (abril/2027)",
+      "nome": "Cancún km 9–13, all inclusive (abril/2027)",
       "q": "resorts all inclusive Zona Hotelera Cancún",
       "checkin": "2027-04-23",
       "checkout": "2027-04-30",
@@ -114,6 +114,32 @@
         "Beach Palace",
         "Hilton Cancun Mar Caribe",
         "Royal Select"
+      ],
+      "queda_alerta": 0.05,
+      "ativo": true
+    },
+    {
+      "id": "mujeres-hotel",
+      "tipo": "hotel",
+      "nome": "Isla Mujeres e Costa Mujeres (abril/2027)",
+      "q": "resorts all inclusive Costa Mujeres Isla Mujeres",
+      "checkin": "2027-04-23",
+      "checkout": "2027-04-30",
+      "adultos": 2,
+      "estrelas": [
+        4,
+        5
+      ],
+      "nota_min": 4.3,
+      "all_inclusive": true,
+      "beira_mar": true,
+      "destaques": [
+        "Catalonia",
+        "Ocean Allure",
+        "Devossion",
+        "Privilege Aluxes",
+        "Riu Latino",
+        "Majestic"
       ],
       "queda_alerta": 0.05,
       "ativo": true

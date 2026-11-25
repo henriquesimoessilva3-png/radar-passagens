@@ -1,0 +1,438 @@
+{
+ "alertas": [],
+ "atualizado": "2026-11-25 08:50",
+ "itens": {
+  "cancun-hotel": {
+   "atualizado": "2026-11-25",
+   "fonte": "Booking (levantamento de 25/11)",
+   "hoteis": {
+    "Beach Palace Cancun": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 23982
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Beach+Palace+Cancun&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.5,
+     "oferta": "",
+     "regiao": "km 11,5",
+     "visto": "2026-11-25"
+    },
+    "Dreams Sands Cancun": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 14151
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Dreams+Sands+Cancun&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.0,
+     "oferta": "",
+     "regiao": "Punta Cancún",
+     "visto": "2026-11-25"
+    },
+    "Grand Fiesta Americana Coral Beach": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 24449
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Grand+Fiesta+Americana+Coral+Beach&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.9,
+     "oferta": "Black Friday −59%",
+     "regiao": "km 9,5",
+     "visto": "2026-11-25"
+    },
+    "Grand Park Royal Cancun": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 12394
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Grand+Park+Royal+Cancun&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.0,
+     "oferta": "",
+     "regiao": "km 10,5",
+     "visto": "2026-11-25"
+    },
+    "Hilton Cancun Mar Caribe": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 18768
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Hilton+Cancun+Mar+Caribe&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.2,
+     "oferta": "",
+     "regiao": "",
+     "visto": "2026-11-25"
+    },
+    "Hotel NYX Cancun": {
+     "destaque": true,
+     "estrelas": 4,
+     "hist": {
+      "2026-11-25": 9772
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Hotel+NYX+Cancun&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.2,
+     "oferta": "",
+     "regiao": "km 11,5",
+     "visto": "2026-11-25"
+    },
+    "Hyatt Zilara Cancun": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 21836
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Hyatt+Zilara+Cancun&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 9.4,
+     "oferta": "",
+     "regiao": "km 11,5 · só adultos",
+     "visto": "2026-11-25"
+    },
+    "Hyatt Ziva Cancun": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 26508
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Hyatt+Ziva+Cancun&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 9.1,
+     "oferta": "",
+     "regiao": "Punta Cancún",
+     "visto": "2026-11-25"
+    },
+    "Krystal Cancun": {
+     "destaque": true,
+     "estrelas": 4,
+     "hist": {
+      "2026-11-25": 11160
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Krystal+Cancun&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 7.8,
+     "oferta": "",
+     "regiao": "km 9",
+     "visto": "2026-11-25"
+    },
+    "Le Blanc Spa Resort Cancun": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 35891
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Le+Blanc+Spa+Resort+Cancun&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 9.3,
+     "oferta": "",
+     "regiao": "km 10 · só adultos",
+     "visto": "2026-11-25"
+    },
+    "Live Aqua Cancun": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 27115
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Live+Aqua+Cancun&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.8,
+     "oferta": "Black Friday −50%",
+     "regiao": "km 12,5 · só adultos",
+     "visto": "2026-11-25"
+    },
+    "Royal Select at Grand Park Royal": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 18208
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Royal+Select+at+Grand+Park+Royal&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.3,
+     "oferta": "",
+     "regiao": "só adultos",
+     "visto": "2026-11-25"
+    },
+    "Royalton CHIC Cancun": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 15188
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Royalton+CHIC+Cancun&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.1,
+     "oferta": "Black Friday −30%",
+     "regiao": "só adultos",
+     "visto": "2026-11-25"
+    },
+    "Sunscape Cancun": {
+     "destaque": true,
+     "estrelas": 4,
+     "hist": {
+      "2026-11-25": 11655
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Sunscape+Cancun&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.5,
+     "oferta": "",
+     "regiao": "Punta Cancún",
+     "visto": "2026-11-25"
+    }
+   }
+  },
+  "cancun-voo": {
+   "atualizado": "2026-11-25",
+   "fonte": "Google Voos (levantamento de 25/11)",
+   "hist": {
+    "2026-11-25": 7161
+   },
+   "opcoes": [
+    {
+     "cias": [
+      "Gol",
+      "Avianca"
+     ],
+     "duracao": 1100,
+     "paradas": 2,
+     "preco": 7161
+    },
+    {
+     "cias": [
+      "Copa"
+     ],
+     "duracao": 636,
+     "paradas": 1,
+     "preco": 7391
+    },
+    {
+     "cias": [
+      "LATAM"
+     ],
+     "duracao": 935,
+     "paradas": 2,
+     "preco": 8901
+    }
+   ]
+  },
+  "mujeres-hotel": {
+   "atualizado": "2026-11-25",
+   "fonte": "Booking (levantamento de 25/11)",
+   "hoteis": {
+    "Almare Isla Mujeres": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 28734
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Almare+Isla+Mujeres&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.5,
+     "oferta": "Black Friday −30%",
+     "regiao": "Isla Mujeres · só adultos",
+     "visto": "2026-11-25"
+    },
+    "Catalonia Grand Costa Mujeres": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 17800
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Catalonia+Grand+Costa+Mujeres&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.7,
+     "oferta": "Black Friday −52%",
+     "regiao": "Costa Mujeres · só suítes",
+     "visto": "2026-11-25"
+    },
+    "Devossion by Live Aqua Isla Mujeres": {
+     "destaque": true,
+     "estrelas": null,
+     "hist": {
+      "2026-11-25": 16886
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Devossion+by+Live+Aqua+Isla+Mujeres&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.2,
+     "oferta": "",
+     "regiao": "Isla Mujeres",
+     "visto": "2026-11-25"
+    },
+    "Grand Palladium Select Costa Mujeres": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 25759
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Grand+Palladium+Select+Costa+Mujeres&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.3,
+     "oferta": "Black Friday −40%",
+     "regiao": "Costa Mujeres",
+     "visto": "2026-11-25"
+    },
+    "Impression Isla Mujeres by Hyatt": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 64864
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Impression+Isla+Mujeres+by+Hyatt&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 9.3,
+     "oferta": "Black Friday −58%",
+     "regiao": "Isla Mujeres · só adultos",
+     "visto": "2026-11-25"
+    },
+    "Majestic Elegance Costa Mujeres": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 20018
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Majestic+Elegance+Costa+Mujeres&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.6,
+     "oferta": "",
+     "regiao": "Costa Mujeres",
+     "visto": "2026-11-25"
+    },
+    "Majestic Mirage Costa Mujeres": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 21894
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Majestic+Mirage+Costa+Mujeres&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.5,
+     "oferta": "",
+     "regiao": "Costa Mujeres · só adultos",
+     "visto": "2026-11-25"
+    },
+    "Ocean Allure Costa Mujeres": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 19322
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Ocean+Allure+Costa+Mujeres&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.9,
+     "oferta": "Black Friday −55%",
+     "regiao": "Costa Mujeres · só adultos",
+     "visto": "2026-11-25"
+    },
+    "Privilege Aluxes Isla Mujeres": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 18029
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Privilege+Aluxes+Isla+Mujeres&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.5,
+     "oferta": "",
+     "regiao": "Isla Mujeres · só adultos",
+     "visto": "2026-11-25"
+    },
+    "Riu Latino Costa Mujeres": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 20376
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Riu+Latino+Costa+Mujeres&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.7,
+     "oferta": "",
+     "regiao": "Costa Mujeres · só adultos",
+     "visto": "2026-11-25"
+    },
+    "Secrets Playa Blanca Costa Mujeres": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 38425
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Secrets+Playa+Blanca+Costa+Mujeres&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 9.2,
+     "oferta": "",
+     "regiao": "Costa Mujeres · só adultos",
+     "visto": "2026-11-25"
+    },
+    "TRS Coral Hotel": {
+     "destaque": true,
+     "estrelas": 5,
+     "hist": {
+      "2026-11-25": 33731
+     },
+     "link": "https://www.booking.com/searchresults.pt-br.html?ss=TRS+Coral+Hotel&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "nota_booking": 8.8,
+     "oferta": "Black Friday −40%",
+     "regiao": "Costa Mujeres · só adultos",
+     "visto": "2026-11-25"
+    }
+   }
+  }
+ },
+ "viagens": [
+  {
+   "adultos": 2,
+   "ativo": true,
+   "destino": "CUN",
+   "id": "cancun-voo",
+   "ida": "2027-04-23",
+   "nome": "BH → Cancún (abril/2027)",
+   "origem": "CNF",
+   "queda_alerta": 0.05,
+   "tipo": "voo",
+   "volta": "2027-04-30"
+  },
+  {
+   "adultos": 2,
+   "all_inclusive": true,
+   "ativo": true,
+   "beira_mar": true,
+   "checkin": "2027-04-23",
+   "checkout": "2027-04-30",
+   "destaques": [
+    "Grand Park Royal",
+    "Sunscape",
+    "Dreams Sands",
+    "Royalton CHIC",
+    "NYX",
+    "Krystal Cancun",
+    "Hyatt Zilara",
+    "Hyatt Ziva",
+    "Coral Beach",
+    "Live Aqua",
+    "Le Blanc",
+    "Beach Palace",
+    "Hilton Cancun Mar Caribe",
+    "Royal Select"
+   ],
+   "estrelas": [
+    4,
+    5
+   ],
+   "id": "cancun-hotel",
+   "nome": "Cancún km 9–13, all inclusive (abril/2027)",
+   "nota_min": 4.3,
+   "q": "resorts all inclusive Zona Hotelera Cancún",
+   "queda_alerta": 0.05,
+   "tipo": "hotel"
+  },
+  {
+   "adultos": 2,
+   "all_inclusive": true,
+   "ativo": true,
+   "beira_mar": true,
+   "checkin": "2027-04-23",
+   "checkout": "2027-04-30",
+   "destaques": [
+    "Catalonia",
+    "Ocean Allure",
+    "Devossion",
+    "Privilege Aluxes",
+    "Riu Latino",
+    "Majestic"
+   ],
+   "estrelas": [
+    4,
+    5
+   ],
+   "id": "mujeres-hotel",
+   "nome": "Isla Mujeres e Costa Mujeres (abril/2027)",
+   "nota_min": 4.3,
+   "q": "resorts all inclusive Costa Mujeres Isla Mujeres",
+   "queda_alerta": 0.05,
+   "tipo": "hotel"
+  }
+ ]
+}

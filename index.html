@@ -5,84 +5,105 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Radar de Viagens</title>
 <style>
-:root{--bg:#f4f1ea;--card:#fffdf8;--ink:#17202a;--mut:#667085;--line:#e2ddd0;--acc:#0b5c8f;
---otimo:#0a7d4f;--otimo-bg:#dff5ea;--bom:#3d7a12;--bom-bg:#eaf5d8;--obs:#8a6a00;--obs-bg:#fbf0c9;--norm:#667085;--norm-bg:#eceae4}
-@media (prefers-color-scheme:dark){:root{--bg:#10151b;--card:#19212b;--ink:#eef2f6;--mut:#9aa7b5;--line:#2a3441;--acc:#6cbcf0;
---otimo:#5fe0a6;--otimo-bg:#0e3a28;--bom:#b4e07a;--bom-bg:#26380f;--obs:#f1cf62;--obs-bg:#3b3110;--norm:#9aa7b5;--norm-bg:#232c37}}
+:root{--bg:#f3f7f8;--card:#ffffff;--ink:#0f2530;--mut:#5d6f78;--line:#dfe8eb;--acc:#0b8f8c;--acc-2:#ff6a4d;--sea1:#14b8b3;--sea2:#0b6fa4;
+--otimo:#0f7a52;--otimo-bg:#dcf5ea;--bom:#3f7d12;--bom-bg:#eaf6d9;--obs:#8a6a00;--obs-bg:#fbf0c9;--norm:#5d6f78;--norm-bg:#edf1f3;--chip:#eef6f6}
+@media (prefers-color-scheme:dark){:root{--bg:#0b1419;--card:#131f26;--ink:#eaf3f6;--mut:#94a8b2;--line:#22323b;--acc:#3fd0c9;--acc-2:#ff8a72;--sea1:#0d6f73;--sea2:#0a3f63;
+--otimo:#5fe0a6;--otimo-bg:#0e3a28;--bom:#b4e07a;--bom-bg:#26380f;--obs:#f1cf62;--obs-bg:#3b3110;--norm:#94a8b2;--norm-bg:#1d2a32;--chip:#17323a}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-.wrap{max-width:1080px;margin:0 auto;padding:20px 16px 60px}
-header h1{margin:0;font-size:26px;letter-spacing:-.02em}
-header p{margin:4px 0 0;color:var(--mut);font-size:13px}
-.bar{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 6px;align-items:center}
-.seg{display:flex;flex-wrap:wrap;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:4px}
-.seg button{border:0;background:none;color:var(--mut);font:inherit;font-weight:600;padding:7px 12px;border-radius:7px;cursor:pointer}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Arial,Helvetica,sans-serif}
+a{color:var(--acc)}
+.hero{background:linear-gradient(135deg,var(--sea1),var(--sea2));color:#fff;padding:26px 0 0}
+.hero .in,.wrap{max-width:1140px;margin:0 auto;padding:0 16px}
+.hero h1{margin:0;font-size:30px;letter-spacing:-.01em}
+.hero p{margin:4px 0 18px;opacity:.9;font-size:14px}
+.nav{display:flex;gap:6px;flex-wrap:wrap}
+.nav button{border:0;background:rgba(255,255,255,.16);color:#fff;font:inherit;font-weight:700;padding:11px 18px;border-radius:12px 12px 0 0;cursor:pointer}
+.nav button.on{background:var(--bg);color:var(--ink)}
+.wrap{padding-top:22px;padding-bottom:60px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px;align-items:center}
+.seg{display:flex;flex-wrap:wrap;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px}
+.seg button{border:0;background:none;color:var(--mut);font:inherit;font-weight:700;padding:7px 12px;border-radius:9px;cursor:pointer}
 .seg button.on{background:var(--acc);color:#fff}
-@media (prefers-color-scheme:dark){.seg button.on{color:#06141f}}
-.busca{flex:1 1 220px;min-width:200px;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 12px}
-.busca:focus{outline:2px solid var(--acc);outline-offset:1px}
-.resumo{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0 22px}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.busca{flex:1 1 220px;min-width:200px;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.resumo{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:6px 0 24px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
 .kpi b{display:block;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
-.kpi span{color:var(--mut);font-size:12px}
-h2{font-size:18px;margin:28px 0 10px;display:flex;align-items:baseline;gap:10px}
-h2::first-letter{text-transform:uppercase}
-h2 small{font-size:12px;color:var(--mut);font-weight:500;text-transform:none}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
-.of{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.kpi span{color:var(--mut);font-size:12.5px}
+h2{font-size:20px;margin:30px 0 4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+h2 small{font-size:13px;color:var(--mut);font-weight:400}
+.sub{color:var(--mut);font-size:13px;margin:0 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.of{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px}
 .of.otimo{border-color:var(--otimo)}.of.bom{border-color:var(--bom)}
 .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
-.dest{font-weight:700;font-size:17px;line-height:1.2}
-.dest small{display:block;font-weight:500;color:var(--mut);font-size:12px}
-.tag{font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;white-space:nowrap}
+.dest{font-weight:700;font-size:17px;line-height:1.25}
+.dest small{display:block;font-weight:400;color:var(--mut);font-size:12.5px}
+.tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;white-space:nowrap}
 .tag.otimo{background:var(--otimo-bg);color:var(--otimo)}.tag.bom{background:var(--bom-bg);color:var(--bom)}
 .tag.observacao{background:var(--obs-bg);color:var(--obs)}.tag.normal{background:var(--norm-bg);color:var(--norm)}
 .nums{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
 .preco{font-size:30px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .pct{font-size:22px;font-weight:800;color:var(--otimo)}
-.meta{color:var(--mut);font-size:12.5px}
+.meta{color:var(--mut);font-size:13px}
 .links{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
-.links a{font-size:12px;font-weight:600;color:var(--acc);text-decoration:none;border:1px solid var(--line);border-radius:7px;padding:4px 8px}
+.links a{font-size:12.5px;font-weight:700;color:var(--acc);text-decoration:none;border:1px solid var(--line);border-radius:9px;padding:5px 10px;background:var(--card)}
 .links a:hover{border-color:var(--acc)}
 .extra{border-top:1px solid var(--line);padding-top:8px;font-size:12.5px;color:var(--mut)}
 .extra b{color:var(--ink);font-size:14px}
 .extra svg{display:block;width:100%;height:auto;margin:4px 0 2px}
 .extra .t{font-weight:700;color:var(--ink);font-size:11px;letter-spacing:.04em;text-transform:uppercase}
 .bar-n{fill:var(--norm)}.bar-min{fill:var(--acc)}.eixo{stroke:var(--line);stroke-width:1}
-.lin{fill:none;stroke:var(--acc);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}.pt{fill:var(--acc);stroke:var(--card);stroke-width:2}
+.lin{fill:none;stroke:var(--acc);stroke-width:2.5;stroke-linejoin:round;stroke-linecap:round}.pt{fill:var(--acc);stroke:var(--card);stroke-width:2}
 .rot{font-size:9px;fill:var(--mut);text-anchor:middle}.hit{fill:transparent}.hit:hover{fill:var(--ink);fill-opacity:.08}
-.tab{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:13px}
+.tab{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:13px}
 .tab th{text-align:left;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);padding:10px 12px;border-bottom:1px solid var(--line)}
 .tab td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
 .tab tr:last-child td{border-bottom:0}
 .tab td b{font-size:16px}.tab .g{color:var(--otimo)}.tab .r{color:var(--mut)}
-.rolar{overflow-x:auto}.nota{color:var(--mut);font-size:12.5px;margin:0 0 12px}
-.vazio{background:var(--card);border:1px dashed var(--line);border-radius:12px;padding:22px;color:var(--mut);text-align:center}
+.rolar{overflow-x:auto}.nota{color:var(--mut);font-size:13px;margin:0 0 12px}
+.vazio{background:var(--card);border:1px dashed var(--line);border-radius:16px;padding:22px;color:var(--mut);text-align:center}
 footer{margin-top:36px;color:var(--mut);font-size:12px}
-.form{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end;margin-bottom:14px}
-.form label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--mut);font-weight:600}
-.form input,.form select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;align-items:end;margin-bottom:14px}
+.form label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--mut);font-weight:700}
+.form input,.form select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 10px}
 .form .chk{flex-direction:row;align-items:center;gap:8px;color:var(--ink)}
 .form .full{grid-column:1/-1}
-.btn{display:inline-block;font:inherit;font-weight:700;font-size:13px;color:#fff;background:var(--acc);border:0;border-radius:8px;padding:9px 14px;text-decoration:none;cursor:pointer}
-@media (prefers-color-scheme:dark){.btn{color:#06141f}}
-.alerta{background:var(--otimo-bg);color:var(--ink);border:1px solid var(--otimo);border-radius:12px;padding:10px 14px;margin:0 0 8px;font-size:14px}
+.btn{display:inline-block;font:inherit;font-weight:700;font-size:14px;color:#fff;background:var(--acc-2);border:0;border-radius:10px;padding:10px 16px;text-decoration:none;cursor:pointer}
+.alerta{background:var(--otimo-bg);border:1px solid var(--otimo);border-radius:14px;padding:12px 16px;margin:0 0 8px;font-size:14px}
 .alerta b.q{color:var(--otimo);font-size:18px}
-.star{color:#c98a00}.dest-on{background:var(--obs-bg)}
-.of>svg,.tab svg{display:block;width:100%;max-width:340px;height:44px}
-.sobe{color:#b42318}.desce{color:var(--otimo)}
+.star{color:#e0a100;letter-spacing:1px}
+.sobe{color:#c2410c;font-weight:700}.desce{color:var(--otimo);font-weight:700}
+.of>svg,.tab svg,.hc svg{display:block;width:100%;height:40px}
+/* cartoes de hotel */
+.hc{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.hc.top3{border:2px solid var(--acc)}
+.hc .img{height:120px;background:linear-gradient(135deg,var(--sea1),var(--sea2));background-size:cover;background-position:center;position:relative}
+.hc .img span{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px}
+.hc .img i{position:absolute;right:10px;top:10px;background:var(--acc-2);color:#fff;font-style:normal;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px}
+.hc .bd{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.hc h3{margin:0;font-size:16px;line-height:1.25}
+.hc .linha{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;color:var(--mut)}
+.nb{background:var(--sea2);color:#fff;font-weight:800;font-size:13px;padding:3px 7px;border-radius:8px}
+.hc .vl{font-size:26px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.hc .vl small{font-size:13px;font-weight:400;color:var(--mut);letter-spacing:0}
+.hc .go{margin-top:auto;text-align:center;font-weight:700;font-size:13px;color:#fff;background:var(--acc);text-decoration:none;border-radius:10px;padding:9px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.chips button{font:inherit;font-size:13px;font-weight:700;border:1px solid var(--line);background:var(--card);color:var(--mut);padding:6px 12px;border-radius:99px;cursor:pointer}
+.chips button.on{background:var(--chip);border-color:var(--acc);color:var(--acc)}
+.voo{display:grid;grid-template-columns:minmax(220px,1fr) 2fr;gap:16px;align-items:center}
+@media (max-width:640px){.voo{grid-template-columns:1fr}.hero h1{font-size:24px}.nav button{padding:9px 12px;font-size:14px}}
+.opc{display:grid;gap:6px}.opc div{display:flex;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13.5px}
+.opc div b{font-size:16px}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <h1>✈ Radar de Viagens</h1>
+<header class="hero"><div class="in">
+  <h1>🌴 Radar de Viagens</h1>
   <p id="sub">Carregando…</p>
-</header>
-<div class="bar">
-  <div class="seg" id="visao">
-    <button data-v="ofertas" class="on">Passagens</button><button data-v="viagens">Viagens monitoradas</button><button data-v="hoteis">Buscar hotéis</button><button data-v="anac">Histórico por destino</button>
-  </div>
+  <nav class="nav" id="visao"><button data-v="viagens" class="on">Minhas viagens</button><button data-v="hoteis">Buscar hotéis</button><button data-v="ofertas">Passagens em promoção</button><button data-v="anac">Quando comprar</button></nav>
+</div></header>
+<div class="wrap">
+<div class="bar" id="barra">
   <div class="seg" id="origens"></div>
   <div class="seg" id="tipo">
     <button data-v="todos" class="on">Todos</button><button data-v="nac">Nacionais</button><button data-v="int">Internacionais</button>
@@ -102,7 +123,7 @@ footer{margin-top:36px;color:var(--mut);font-size:12px}
 </div>
 <script>
 const $ = s => document.querySelector(s);
-const st = {origem: null, tipo: "todos", filtro: "bons", visao: "ofertas", regiao: "todas", cidades: ""};
+const st = {origem: null, tipo: "todos", filtro: "bons", visao: "viagens", regiao: "todas", cidades: ""};
 const REG = {NE: "AL BA CE MA PB PE PI RN SE", SE: "ES MG RJ SP", S: "PR RS SC", CO: "DF GO MS MT", N: "AC AM AP PA RO RR TO"};
 const UF_REG = {}; for (const r in REG) REG[r].split(" ").forEach(u => UF_REG[u] = r);
 let UF = {};
@@ -243,22 +264,25 @@ function lerForm(id) {
   return f;
 }
 
+const hst = {teto: false, ordem: "preco", so5: false, adultos: false};
+const noites = v => Math.round((new Date(v.checkout) - new Date(v.checkin)) / 864e5) || 1;
+
 function renderHoteis() {
   $("#resumo").innerHTML = "";
   const hoje = new Date(), d1 = new Date(hoje.getTime() + 30 * 864e5), d2 = new Date(d1.getTime() + 7 * 864e5), iso = x => x.toISOString().slice(0, 10);
-  $("#lista").innerHTML = `<p class="nota">Monte a busca uma vez e abra o mesmo filtro em vários sites. Para acompanhar o preço todo dia, use <b>Monitorar esta busca</b> (abre uma issue já preenchida no GitHub; o robô inclui sozinho).</p>
+  $("#lista").innerHTML = `<h2>Buscar hotéis <small>no Brasil ou fora</small></h2><p class="sub">Preencha uma vez e abra a mesma busca, com os mesmos filtros, em vários sites. Para o robô acompanhar o preço todo dia, clique em <b>Monitorar esta busca</b>.</p>
   <div class="form" id="fh">
-    <label class="full">Destino<input name="destino" value="Zona Hotelera, Cancún" placeholder="Cidade, bairro ou região"></label>
+    <label class="full">Destino<input name="destino" value="Zona Hotelera, Cancún" placeholder="Cidade, bairro ou região (ex.: Porto de Galinhas, Maragogi, Punta Cana)"></label>
     <label>Check-in<input type="date" name="checkin" value="${iso(d1)}"></label>
     <label>Check-out<input type="date" name="checkout" value="${iso(d2)}"></label>
     <label>Adultos<input type="number" min="1" max="8" name="adultos" value="2"></label>
-    <label>Nota mínima (Google)<select name="nota"><option value="4">4,0+ (Booking 7+)</option><option value="4.3" selected>4,3+ (Booking 8+)</option><option value="4.5">4,5+ (Booking 9+)</option></select></label>
+    <label>Nota mínima<select name="nota"><option value="4">Booking 7+ (Google 4,0+)</option><option value="4.3" selected>Booking 8+ (Google 4,3+)</option><option value="4.5">Booking 9+ (Google 4,5+)</option></select></label>
     <label class="chk"><input type="checkbox" name="e4" checked>4 estrelas</label>
     <label class="chk"><input type="checkbox" name="e5" checked>5 estrelas</label>
     <label class="chk"><input type="checkbox" name="ai" checked>All inclusive</label>
     <label class="chk"><input type="checkbox" name="praia" checked>Beira-mar</label>
     <div class="full links" id="lh"></div>
-    <div class="full"><a class="btn" id="mh" target="_blank" rel="noopener">Monitorar esta busca</a></div>
+    <div class="full"><a class="btn" id="mh" target="_blank" rel="noopener">🔔 Monitorar esta busca</a></div>
   </div>`;
   const upd = () => {
     const f = lerForm("#fh"); f.estrelas = [f.e4 && 4, f.e5 && 5].filter(Boolean);
@@ -269,35 +293,67 @@ function renderHoteis() {
   $("#fh").addEventListener("input", upd); upd();
 }
 
+function cardHotel(x, n, top) {
+  const nota = x.nota_booking != null ? `<span class="nb" title="Nota Booking">${Number(x.nota_booking).toFixed(1).replace(".", ",")}</span>` : x.nota_google != null ? `<span class="nb" title="Nota Google">${String(x.nota_google).replace(".", ",")}/5</span>` : "";
+  const img = x.foto ? ` style="background-image:url('${esc(x.foto)}')"` : "";
+  return `<article class="hc ${top ? "top3" : ""}"><div class="img"${img}>${x.regiao ? `<span>${esc(x.regiao)}</span>` : ""}${x.oferta ? `<i>${esc(x.oferta)}</i>` : ""}</div>
+    <div class="bd"><h3>${esc(x.n)}</h3>
+    <div class="linha"><span class="star">${"★".repeat(x.estrelas || 0)}</span>${nota}</div>
+    <div class="vl">${brl(x.hoje)} <small>${n} noites · ${brl(Math.round(x.hoje / n))}/noite</small></div>
+    <div class="linha"><span>Menor já visto: <b>${brl(x.min)}</b></span><span>${varPct(x.ini, x.hoje)}</span></div>
+    ${spark(x.hist)}
+    ${x.link ? `<a class="go" href="${esc(x.link)}" target="_blank" rel="noopener">Ver disponibilidade</a>` : ""}</div></article>`;
+}
+
 function renderViagens() {
-  const vs = (V && V.viagens) || [], it = (V && V.itens) || {};
+  const vs = ((V && V.viagens) || []).filter(v => v.ativo !== false), it = (V && V.itens) || {};
   const al = (V && V.alertas) || [];
-  $("#resumo").innerHTML = `<div class="kpi"><b>${vs.filter(v => v.ativo !== false).length}</b><span>viagens monitoradas</span></div><div class="kpi"><b>${al.length}</b><span>alertas nos últimos 30 dias</span></div>`;
-  let h = al.slice(0, 8).map(a => `<div class="alerta">🔔 <b>${esc(a.item)}</b> ${esc(a.extra || "")} · ${esc(a.viagem)}: ${brl(a.de)} → <b>${brl(a.para)}</b> <b class="q">−${Math.round(a.queda * 100)}%</b> <span class="meta">(${dataBR(a.dia)})</span></div>`).join("");
-  if (!vs.length) h += `<div class="vazio">Nenhuma viagem monitorada ainda.</div>`;
+  const voo = vs.find(v => v.tipo === "voo"), vi = voo && it[voo.id];
+  const menorVoo = vi ? ultimo(vi.hist) : null;
+  let menorHotel = null;
+  vs.filter(v => v.tipo === "hotel").forEach(v => Object.values((it[v.id] || {}).hoteis || {}).forEach(x => { const p = ultimo(x.hist); if (p && (!menorHotel || p < menorHotel)) menorHotel = p; }));
+  $("#resumo").innerHTML = `<div class="kpi"><b>${brl(menorVoo)}</b><span>voo mais barato · ${voo ? esc(voo.origem + " → " + voo.destino) : "–"} (${voo ? voo.adultos || 1 : ""} adultos)</span></div>
+    <div class="kpi"><b>${brl(menorHotel)}</b><span>hotel all inclusive mais barato · 7 noites</span></div>
+    <div class="kpi"><b>${menorVoo && menorHotel ? brl(menorVoo + menorHotel) : "–"}</b><span>viagem completa (voo + hotel)</span></div>
+    <div class="kpi"><b>${al.length}</b><span>alertas de queda nos últimos 30 dias</span></div>`;
+  let h = al.slice(0, 6).map(a => `<div class="alerta">🔔 <b>${esc(a.item)}</b> ${esc(a.extra || "")} · ${esc(a.viagem)}: ${brl(a.de)} → <b>${brl(a.para)}</b> <b class="q">−${Math.round(a.queda * 100)}%</b> <span class="meta">(${dataBR(a.dia)})</span></div>`).join("");
+  if (!vs.length) h += `<div class="vazio">Nenhuma viagem monitorada ainda. Use a aba <b>Buscar hotéis</b> ou o formulário no fim desta página.</div>`;
   for (const v of vs) {
     const i = it[v.id] || {};
+    const fonte = i.fonte ? ` · fonte: ${esc(i.fonte)}` : i.atualizado ? ` · atualizado em ${dataBR(i.atualizado)}` : "";
     if (v.tipo === "voo") {
-      const op = (i.opcoes || []).slice(0, 3).map(o => `<b>${brl(o.preco)}</b> · ${esc(o.cias.join(", "))} · ${o.paradas ? o.paradas + (o.paradas > 1 ? " paradas" : " parada") : "direto"}`).join("<br>");
-      const g = i.google ? ` · Google: <b>${{low: "preço baixo", typical: "preço típico", high: "preço alto"}[i.google.nivel] || i.google.nivel}</b>${i.google.faixa ? ` (faixa ${brl(i.google.faixa[0])}–${brl(i.google.faixa[1])})` : ""}` : "";
-      h += `<h2>✈ ${esc(v.nome)} <small>${esc(v.origem)} → ${esc(v.destino)} · ${dataBR(v.ida)} a ${dataBR(v.volta)} · ${v.adultos || 1} adulto(s)</small></h2>
-        <div class="of"><div class="nums"><span class="preco">${brl(ultimo(i.hist))}</span>${varPct(primeiro(i.hist), ultimo(i.hist))}</div>
-        <div class="meta">Menor já visto: <b>${brl(minimo(i.hist))}</b>${g}</div>${spark(i.hist)}<div class="meta">${op || "Aguardando a primeira busca do robô."}</div>
-        <div class="links"><a target="_blank" rel="noopener" href="https://www.google.com/travel/flights?hl=pt-BR&curr=BRL&q=${encodeURIComponent(`Flights from ${v.origem} to ${v.destino} on ${v.ida} through ${v.volta} for ${v.adultos || 1} adults`)}">Google Flights</a><a target="_blank" rel="noopener" href="https://www.kayak.com.br/flights/${v.origem}-${v.destino}/${v.ida}/${v.volta}/${v.adultos || 1}adults?sort=price_a">Kayak</a><a target="_blank" rel="noopener" href="https://www.decolar.com/shop/flights/results/roundtrip/${v.origem}/${v.destino}/${v.ida}/${v.volta}/${v.adultos || 1}/0/0">Decolar</a></div></div>`;
+      const nome = o => o.paradas ? o.paradas + (o.paradas > 1 ? " paradas" : " parada") : "direto";
+      const op = (i.opcoes || []).slice(0, 4).map(o => `<div><span>${esc(o.cias.join(" + "))} · ${nome(o)}${o.duracao ? " · " + Math.floor(o.duracao / 60) + "h" + String(o.duracao % 60).padStart(2, "0") : ""}</span><b>${brl(o.preco)}</b></div>`).join("");
+      const g = i.google ? `Google: <b>${{low: "preço baixo", typical: "preço típico", high: "preço alto"}[i.google.nivel] || i.google.nivel}</b>${i.google.faixa ? ` (faixa ${brl(i.google.faixa[0])}–${brl(i.google.faixa[1])})` : ""}` : "";
+      h += `<h2>✈️ ${esc(v.nome)}</h2><p class="sub">${esc(v.origem)} → ${esc(v.destino)} · ${dataBR(v.ida)} a ${dataBR(v.volta)} · ${v.adultos || 1} adultos, ida e volta${fonte}</p>
+        <div class="of voo"><div><div class="meta">Menor preço hoje</div><div class="preco">${brl(ultimo(i.hist))}</div><div class="meta">Menor já visto: <b>${brl(minimo(i.hist))}</b> ${varPct(primeiro(i.hist), ultimo(i.hist))}<br>${g}</div>${spark(i.hist)}
+        <div class="links" style="margin-top:8px"><a target="_blank" rel="noopener" href="https://www.google.com/travel/flights?hl=pt-BR&curr=BRL&q=${encodeURIComponent(`Flights from ${v.origem} to ${v.destino} on ${v.ida} through ${v.volta} for ${v.adultos || 1} adults`)}">Google Voos</a><a target="_blank" rel="noopener" href="https://www.kayak.com.br/flights/${v.origem}-${v.destino}/${v.ida}/${v.volta}/${v.adultos || 1}adults?sort=price_a">Kayak</a><a target="_blank" rel="noopener" href="https://www.decolar.com/shop/flights/results/roundtrip/${v.origem}/${v.destino}/${v.ida}/${v.volta}/${v.adultos || 1}/0/0">Decolar</a></div></div>
+        <div class="opc">${op || '<div class="meta">Aguardando a primeira busca do robô.</div>'}</div></div>`;
     } else {
-      const hs = Object.entries(i.hoteis || {}).map(([n, x]) => ({n, ...x, hoje: ultimo(x.hist), min: minimo(x.hist), ini: primeiro(x.hist)})).sort((a, b) => (b.destaque - a.destaque) || a.hoje - b.hoje);
+      const n = noites(v);
+      let hs = Object.entries(i.hoteis || {}).map(([nm, x]) => ({n: nm, ...x, hoje: ultimo(x.hist), min: minimo(x.hist), ini: primeiro(x.hist), adulto: /adult|só adultos/i.test(nm + " " + (x.regiao || ""))})).filter(x => x.hoje);
+      const total = hs.length;
+      if (hst.teto) hs = hs.filter(x => x.hoje <= 14000);
+      if (hst.so5) hs = hs.filter(x => x.estrelas === 5);
+      if (hst.adultos) hs = hs.filter(x => x.adulto);
+      hs.sort(hst.ordem === "nota" ? (a, b) => ((b.nota_booking || b.nota_google * 2 || 0) - (a.nota_booking || a.nota_google * 2 || 0)) || a.hoje - b.hoje : (a, b) => a.hoje - b.hoje);
       const f = {destino: v.q.replace(/^(resorts |hotéis )?(all inclusive )?/i, ""), checkin: v.checkin, checkout: v.checkout, adultos: v.adultos || 2, estrelas: v.estrelas, nota: String(v.nota_min || ""), ai: v.all_inclusive, praia: v.beira_mar};
-      h += `<h2>🏨 ${esc(v.nome)} <small>${dataBR(v.checkin)} a ${dataBR(v.checkout)} · ${v.adultos || 2} adulto(s) · preço total da estadia</small></h2>`;
-      h += hs.length ? `<div class="rolar"><table class="tab"><thead><tr><th>Hotel</th><th>Nota</th><th>Hoje</th><th>Menor visto</th><th>Desde o início</th><th>Evolução</th></tr></thead><tbody>${hs.map(x => `<tr class="${x.destaque ? "dest-on" : ""}"><td><b>${x.link ? `<a href="${esc(x.link)}" target="_blank" rel="noopener">${esc(x.n)}</a>` : esc(x.n)}</b><br><span class="star">${"★".repeat(x.estrelas || 0)}</span>${x.oferta ? " · " + esc(x.oferta) : ""}</td><td><b>${x.nota ?? "–"}</b><br><span class="meta">${x.avaliacoes ? x.avaliacoes.toLocaleString("pt-BR") + " aval." : ""}</span></td><td><b>${brl(x.hoje)}</b></td><td>${brl(x.min)}</td><td>${varPct(x.ini, x.hoje)}</td><td style="min-width:160px">${spark(x.hist)}</td></tr>`).join("")}</tbody></table></div>`
-        : `<div class="vazio">Aguardando a primeira busca do robô.</div>`;
-      h += `<div class="links" style="margin-top:8px">${linksHotel(f)}</div>`;
+      h += `<h2>🏝️ ${esc(v.nome)}</h2><p class="sub">${dataBR(v.checkin)} a ${dataBR(v.checkout)} · ${n} noites · ${v.adultos || 2} adultos · preço total da estadia com impostos · ${hs.length} de ${total} hotéis${fonte}</p>
+        <div class="chips" data-v="${esc(v.id)}"><button data-k="teto" class="${hst.teto ? "on" : ""}">Até R$ 14 mil</button><button data-k="so5" class="${hst.so5 ? "on" : ""}">Só 5 estrelas</button><button data-k="adultos" class="${hst.adultos ? "on" : ""}">Só adultos</button><button data-k="ordem" class="${hst.ordem === "nota" ? "on" : ""}">${hst.ordem === "nota" ? "Ordenado por nota" : "Ordenado por preço"}</button></div>`;
+      h += hs.length ? `<div class="grid">${hs.map((x, k) => cardHotel(x, n, k < 3 && hst.ordem === "preco" && !hst.teto ? false : false)).join("")}</div>` : `<div class="vazio">${total ? "Nenhum hotel com esses filtros." : "Aguardando a primeira busca do robô."}</div>`;
+      h += `<div class="links" style="margin-top:12px">${linksHotel(f)}</div>`;
     }
   }
-  h += `<h2>Nova viagem monitorada</h2><div class="form" id="fv">
-    <label>Origem (IATA)<input name="origem" value="CNF"></label><label>Destino (IATA)<input name="destino" placeholder="ex.: CUN, REC, LIS"></label>
+  h += `<h2>➕ Monitorar outro voo</h2><p class="sub">Para hotéis, use a aba <b>Buscar hotéis</b>.</p><div class="form" id="fv">
+    <label>Origem (código)<input name="origem" value="CNF"></label><label>Destino (código)<input name="destino" placeholder="ex.: CUN, REC, LIS"></label>
     <label>Ida<input type="date" name="ida"></label><label>Volta<input type="date" name="volta"></label><label>Adultos<input type="number" min="1" max="8" name="adultos" value="2"></label>
-    <div class="full"><a class="btn" id="mv" target="_blank" rel="noopener">Monitorar este voo</a> <span class="meta">Para hotéis, use a aba <b>Buscar hotéis</b>.</span></div></div>`;
+    <div class="full"><a class="btn" id="mv" target="_blank" rel="noopener">🔔 Monitorar este voo</a></div></div>`;
   $("#lista").innerHTML = h;
+  document.querySelectorAll(".chips").forEach(c => c.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    const k = b.dataset.k; if (k === "ordem") hst.ordem = hst.ordem === "nota" ? "preco" : "nota"; else hst[k] = !hst[k];
+    renderViagens();
+  }));
   const upd = () => { const f = lerForm("#fv"); $("#mv").href = issueLink(`${f.origem}-${f.destino} ${f.ida}`, {tipo: "voo", nome: `${f.origem.toUpperCase()} → ${f.destino.toUpperCase()} (${dataBR(f.ida)}–${dataBR(f.volta)})`, origem: f.origem.toUpperCase(), destino: f.destino.toUpperCase(), ida: f.ida, volta: f.volta, adultos: +f.adultos, queda_alerta: 0.05}); };
   $("#fv").addEventListener("input", upd); upd();
 }
@@ -313,7 +369,7 @@ function render() {
   opcoes();
   $("#tipo").style.display = $("#filtro").style.display = anac || extra ? "none" : "";
   $("#regiao").style.display = extra || (!anac && st.tipo === "int") ? "none" : "";
-  $("#origens").style.display = $("#cidades").style.display = extra ? "none" : "";
+  $("#barra").style.display = extra ? "none" : "";
   try { history.replaceState(null, "", "#" + st.visao); } catch (e) {}
   if (st.visao === "viagens") return renderViagens();
   if (st.visao === "hoteis") return renderHoteis();
@@ -364,7 +420,7 @@ Promise.all([pega("data/deals.json"), pega("data/anac.json").catch(() => null), 
   Object.values(ap).forEach(v => UF[v[0]] = v[2]);
   st.origem = (d.origens.find(o => o.principal) || d.origens[0]).id;
   $("#origens").innerHTML = d.origens.map(o => `<button data-v="${o.id}" class="${o.id === st.origem ? "on" : ""}">${esc(o.nome)}</button>`).join("");
-  $("#sub").textContent = `Ida e volta, 1 adulto, preços do Google Flights · atualizado em ${d.atualizado.slice(8, 10)}/${d.atualizado.slice(5, 7)} às ${d.atualizado.slice(11)}`;
+  $("#sub").textContent = `Voos e hotéis monitorados todo dia · passagens atualizadas em ${d.atualizado.slice(8, 10)}/${d.atualizado.slice(5, 7)} às ${d.atualizado.slice(11)}`;
   $("#rodape").innerHTML = `Histórico ANAC: só voos nacionais; mostra em que meses a passagem costuma ser <b>vendida</b> mais barata (mês da compra, não da viagem). “Preço bom” = pelo menos 15% abaixo da mediana do histórico da rota, ou classificado como baixo pelo Google Flights. Buscas usadas no mês: <b>${d.buscas_no_mes}</b> de ${d.limite_mensal}. Confira sempre o preço final no site antes de comprar.`;
   seg("#visao", "visao"); seg("#origens", "origem"); seg("#tipo", "tipo"); seg("#regiao", "regiao");
   try { st.cidades = localStorage.getItem("radar-cidades") || ""; } catch (e) {}

@@ -33,6 +33,23 @@ def total(prop):
     return None, False
 
 
+RUIDO = {"all", "inclusive", "resort", "resorts", "hotel", "spa", "cancun", "the", "by", "&", "-", "only", "adults", "and", "a", "de"}
+
+
+def chave_nome(nome):
+    return " ".join(w for w in norm(nome).replace("-", " ").replace(",", " ").split() if w not in RUIDO)
+
+
+def achar(hoteis, nome):
+    """Reaproveita o registro de um hotel ja salvo com nome parecido (Booking x Google)."""
+    k = chave_nome(nome)
+    for atual in hoteis:
+        ka = chave_nome(atual)
+        if k and ka and (k in ka or ka in k):
+            return atual
+    return nome
+
+
 def passa_filtros(prop, v):
     if prop.get("type") not in (None, "hotel"):
         return False
@@ -83,13 +100,15 @@ def monitorar_hotel(v, dia, item):
             continue
         if not ja_total:
             preco *= noites
-        nome = p.get("name", "?")
+        nome = achar(hoteis, p.get("name", "?"))
         h = hoteis.setdefault(nome, {"hist": {}})
+        fotos = p.get("images") or []
         h.update(
-            estrelas=p.get("extracted_hotel_class"),
-            nota=p.get("overall_rating"),
+            estrelas=p.get("extracted_hotel_class") or h.get("estrelas"),
+            nota_google=p.get("overall_rating"),
+            foto=(fotos[0].get("thumbnail") if fotos else h.get("foto", "")),
             avaliacoes=p.get("reviews"),
-            link=p.get("link") or "",
+            link=p.get("link") or h.get("link", ""),
             token=p.get("property_token") or "",
             gps=p.get("gps_coordinates"),
             oferta=p.get("deal_description") or p.get("deal") or "",
