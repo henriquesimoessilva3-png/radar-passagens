@@ -574,12 +574,36 @@ function pintaExt() {
   const el = $("#extst"); if (!el) return;
   const velha = bx.ext && bx.ext < "2.2";
   el.innerHTML = velha ? `<b style="color:#c2410c">Extensão ${esc(bx.ext)}:</b> faça a instalação automática uma única vez (<a href="https://github.com/henriquesimoessilva3-png/radar-passagens#extens%C3%A3o-do-chrome" target="_blank" rel="noopener">como fazer</a>) e ela passa a se atualizar sozinha.` : bx.ext ? `Extensão ${esc(bx.ext)} conectada · as buscas abrem em abas de fundo e fecham sozinhas`
-    : (bx.ext === null ? "" : "") + `<b style="color:#c2410c">Extensão não encontrada.</b> Instale a versão 2 (pasta <code>extensao</code> do repositório) para buscar aqui dentro. Sem ela, use os links abaixo.`;
+    : `Sem a extensão (celular): a busca usa o servidor do Radar, com Google Voos e Google Hotéis. No computador com a extensão, entram também Booking, Hoteis.com e Kayak.`;
+}
+
+const SERVIDOR = "https://southamerica-east1-radar-viagens-hss.cloudfunctions.net/buscar";
+async function buscarServidor(f) {
+  bx.id = "s" + Date.now(); const id = bx.id;
+  bx.fontes = {"Google Voos": {nome: "Google Voos", tipo: "voo", status: "buscando", url: "#"}, "Google Hotéis": {nome: "Google Hotéis", tipo: "hotel", status: "buscando", url: "#"}};
+  bx.res = {}; bx.rodando = true; bx.notasG = {}; bx.notasPend = false; pintaRes();
+  const q = new URLSearchParams({origem: f.origem, aeroporto: f.aeroporto, ida: f.ida, volta: f.volta, adultos: +f.adultos || 2, destino: f.destino || "",
+    ai: f.ai ? "1" : "", estrelas: [f.e4 && 4, f.e5 && 5].filter(Boolean).join(","), notaG: f.notaG || "", paradas: f.escalas === "" || f.escalas == null ? "" : String(+f.escalas + 1)});
+  try {
+    const r = await fetch(SERVIDOR + "?" + q), d = await r.json();
+    if (id !== bx.id) return;
+    if (d.erro) throw new Error(d.erro);
+    const fim = (nome, x) => { bx.fontes[nome] = {...bx.fontes[nome], status: x && x.itens && x.itens.length ? "ok" : x && x.erro ? "erro" : "vazio", erro: x && x.erro, itens: x ? x.itens : []}; if (x) bx.res[nome] = x.itens; };
+    fim("Google Voos", d.voos);
+    if (d.hoteis) d.hoteis.itens = d.hoteis.itens.map(h => ({...h, ai: h.ai || !!f.ai, nota: null}));
+    fim("Google Hotéis", d.hoteis);
+    (d.hoteis && d.hoteis.itens || []).forEach(h => { if (h.notaG) bx.notasG[chaveH(h.nome)] = {nome: h.nome, notaG: h.notaG, avG: h.avG}; });
+  } catch (e) {
+    if (id !== bx.id) return;
+    Object.values(bx.fontes).forEach(x => { x.status = "erro"; x.erro = String(e.message || e); });
+    $("#extst").innerHTML = `<b style="color:#c2410c">A busca pelo servidor falhou:</b> ${esc(String(e.message || e))}`;
+  }
+  bx.rodando = false; pintaRes();
 }
 
 function buscarAgora(f) {
   bx.f = f; salvaPref(f);
-  if (!bx.ext) { pintaExt(); $("#extst").scrollIntoView({behavior: "smooth", block: "center"}); return; }
+  if (!bx.ext) return buscarServidor(f);
   if (bx.id) window.postMessage({radar: "cancelar", id: bx.id}, "*");
   bx.id = "b" + Date.now(); bx.fontes = {}; bx.res = {}; bx.rodando = true; bx.notasG = {}; bx.notasPend = false;
   const p = {origem: f.origem, aeroporto: f.aeroporto, destino: f.destino, ida: f.ida, volta: f.volta, adultos: +f.adultos || 2,
