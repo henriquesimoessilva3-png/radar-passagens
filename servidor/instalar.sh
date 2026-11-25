@@ -23,7 +23,7 @@ gcloud secrets describe serpapi >/dev/null 2>&1 || gcloud secrets create serpapi
 gcloud secrets add-iam-policy-binding serpapi --member=serviceAccount:$SA --role=roles/secretmanager.secretAccessor >/dev/null
 echo "== Publicando a função"
 rm -rf /tmp/rp && git clone -q --depth 1 https://github.com/henriquesimoessilva3-png/radar-passagens /tmp/rp
-gcloud functions deploy buscar --gen2 --runtime=nodejs20 --region=$REG --source=/tmp/rp/servidor --entry-point=buscar \
+gcloud functions deploy buscar --gen2 --runtime=nodejs22 --region=$REG --source=/tmp/rp/servidor --entry-point=buscar \
   --trigger-http --allow-unauthenticated --memory=256Mi --max-instances=2 --quiet
 echo "== Alerta de gasto (R\$ 10/mês)"
 gcloud billing budgets create --billing-account=$CONTA --display-name="Radar Viagens" --budget-amount=10BRL \
