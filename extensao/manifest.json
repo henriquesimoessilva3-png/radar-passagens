@@ -1,0 +1,8 @@
+{
+  "manifest_version": 3,
+  "name": "Radar de Viagens",
+  "version": "1.0",
+  "description": "Manda o voo ou hotel da página aberta (Booking, Google Voos/Hotéis, Hoteis.com, Expedia, Decolar, Kayak) para o monitoramento do Radar.",
+  "action": { "default_popup": "popup.html", "default_title": "Monitorar no Radar" },
+  "permissions": ["activeTab", "storage"]
+}

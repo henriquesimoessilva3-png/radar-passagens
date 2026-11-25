@@ -1,0 +1,53 @@
+name: Adicionar viagem monitorada
+
+# Abra uma issue com título começando por "Monitorar:" e um bloco JSON no corpo
+# (o painel e a extensão do Chrome montam essa issue para você).
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  adicionar:
+    if: startsWith(github.event.issue.title, 'Monitorar:') && github.event.issue.user.login == github.repository_owner
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Incluir no config.json
+        id: inc
+        env:
+          CORPO: ${{ github.event.issue.body }}
+        run: |
+          python - <<'PY'
+          import json, os, re
+          corpo = os.environ.get("CORPO", "")
+          m = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", corpo, re.S) or re.search(r"(\{.*\})", corpo, re.S)
+          v = json.loads(m.group(1))
+          assert v.get("tipo") in ("voo", "hotel"), "tipo deve ser voo ou hotel"
+          base = re.sub(r"[^a-z0-9]+", "-", (v.get("nome") or v["tipo"]).lower()).strip("-")[:40]
+          cfg = json.load(open("config.json", encoding="utf-8"))
+          ids = {x["id"] for x in cfg.setdefault("viagens", [])}
+          vid, n = base, 2
+          while vid in ids:
+              vid, n = f"{base}-{n}", n + 1
+          v["id"] = vid
+          v.setdefault("ativo", True)
+          v.setdefault("queda_alerta", 0.05)
+          v.setdefault("adultos", 2)
+          cfg["viagens"].append(v)
+          json.dump(cfg, open("config.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+          open(os.environ["GITHUB_OUTPUT"], "a").write(f"id={vid}\n")
+          PY
+      - name: Salvar e fechar a issue
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "radar-bot"
+          git config user.email "radar-bot@users.noreply.github.com"
+          git add config.json
+          git commit -m "Monitorar: ${{ steps.inc.outputs.id }}"
+          git push
+          gh issue close ${{ github.event.issue.number }} --comment "Incluída no monitoramento como \`${{ steps.inc.outputs.id }}\`. Entra na próxima execução do robô (ou rode a Action manualmente)."

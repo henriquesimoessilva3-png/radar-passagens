@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+body{width:320px;margin:0;font:13px/1.4 system-ui,sans-serif;color:#17202a;background:#f4f1ea}
+.w{padding:12px}h1{font-size:15px;margin:0 0 8px}
+label{display:flex;flex-direction:column;gap:3px;margin-bottom:7px;font-size:11px;font-weight:600;color:#667085}
+input,select{font:inherit;padding:6px 8px;border:1px solid #e2ddd0;border-radius:7px;background:#fffdf8;color:#17202a}
+.r{display:flex;gap:6px}.r label{flex:1}
+.b{display:block;width:100%;text-align:center;margin-top:6px;padding:9px;border:0;border-radius:8px;background:#0b5c8f;color:#fff;font-weight:700;cursor:pointer;text-decoration:none}
+.s{background:#fffdf8;color:#0b5c8f;border:1px solid #e2ddd0}
+.m{color:#667085;font-size:11px;margin:4px 0 8px}
+.hot,.voo{display:none}.tipo-hotel .hot,.tipo-voo .voo{display:block}
+</style></head>
+<body><div class="w" id="w">
+<h1>✈ Radar de Viagens</h1>
+<div class="m" id="site">Lendo a página…</div>
+<label>Tipo<select id="tipo"><option value="hotel">Hotel / destino</option><option value="voo">Voo</option></select></label>
+<label>Nome<input id="nome"></label>
+<div class="hot"><label>Busca (hotel ou região)<input id="q"></label>
+<div class="r"><label>Check-in<input type="date" id="checkin"></label><label>Check-out<input type="date" id="checkout"></label></div>
+<div class="r"><label>Nota mín. Google<select id="nota"><option value="">qualquer</option><option value="4">4,0+</option><option value="4.3" selected>4,3+</option><option value="4.5">4,5+</option></select></label>
+<label>Estrelas<select id="est"><option value="">qualquer</option><option value="4,5" selected>4 e 5</option><option value="5">só 5</option></select></label></div>
+<div class="r"><label><span><input type="checkbox" id="ai"> All inclusive</span></label><label><span><input type="checkbox" id="praia"> Beira-mar</span></label></div></div>
+<div class="voo"><div class="r"><label>Origem<input id="origem" maxlength="3"></label><label>Destino<input id="destino" maxlength="3"></label></div>
+<div class="r"><label>Ida<input type="date" id="ida"></label><label>Volta<input type="date" id="volta"></label></div></div>
+<div class="r"><label>Adultos<input type="number" id="adultos" min="1" max="8" value="2"></label><label>Alerta de queda<select id="queda"><option value="0.03">3%</option><option value="0.05" selected>5%</option><option value="0.1">10%</option></select></label></div>
+<button class="b" id="go">Monitorar no Radar</button>
+<a class="b s" id="painel" target="_blank">Abrir painel</a>
+<label style="margin-top:10px">Repositório do Radar<input id="repo"></label>
+</div><script src="popup.js"></script></body></html>
