@@ -5,35 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Radar de Viagens</title>
 <style>
-:root{--bg:#f3f7f8;--card:#ffffff;--ink:#0f2530;--mut:#5d6f78;--line:#dfe8eb;--acc:#0b8f8c;--acc-2:#ff6a4d;--sea1:#14b8b3;--sea2:#0b6fa4;
---otimo:#0f7a52;--otimo-bg:#dcf5ea;--bom:#3f7d12;--bom-bg:#eaf6d9;--obs:#8a6a00;--obs-bg:#fbf0c9;--norm:#5d6f78;--norm-bg:#edf1f3;--chip:#eef6f6}
-@media (prefers-color-scheme:dark){:root{--bg:#0b1419;--card:#131f26;--ink:#eaf3f6;--mut:#94a8b2;--line:#22323b;--acc:#3fd0c9;--acc-2:#ff8a72;--sea1:#0d6f73;--sea2:#0a3f63;
---otimo:#5fe0a6;--otimo-bg:#0e3a28;--bom:#b4e07a;--bom-bg:#26380f;--obs:#f1cf62;--obs-bg:#3b3110;--norm:#94a8b2;--norm-bg:#1d2a32;--chip:#17323a}}
+:root{--bg:#ffffff;--card:#ffffff;--ink:#1a1a1a;--mut:#595959;--line:#e7e7e7;--acc:#0096c7;--acc-2:#008234;--sea1:#003b95;--sea2:#003b95;
+--otimo:#008234;--otimo-bg:#e7f6ec;--bom:#3f7d12;--bom-bg:#eaf6d9;--obs:#8a6a00;--obs-bg:#fdf3d0;--norm:#595959;--norm-bg:#f2f2f2;--chip:#ebf3ff;--amarelo:#febb02;--azul:#0aa5b8;--coral:#ff6b5b;--sol:#ffc93c}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 Arial,Helvetica,sans-serif}
 a{color:var(--acc)}
-.hero{background:linear-gradient(135deg,var(--sea1),var(--sea2));color:#fff;padding:26px 0 0}
+.hero{background:linear-gradient(120deg,#00c6c2 0%,#14a9e0 55%,#ff9f6e 100%);color:#fff;padding:22px 0 46px;position:relative}
+.hero:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:34px;background:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 1200 40%27 preserveAspectRatio=%27none%27%3E%3Cpath d=%27M0 22 C200 2 400 40 600 22 S1000 4 1200 22 V40 H0Z%27 fill=%27%23ffffff%27/%3E%3C/svg%3E") center/100% 100% no-repeat}
+.hero h1:before{content:"☀️ ";}
 .hero .in,.wrap{max-width:1140px;margin:0 auto;padding:0 16px}
-.hero h1{margin:0;font-size:30px;letter-spacing:-.01em}
+.hero h1{margin:0;font-size:28px;text-shadow:0 1px 2px rgba(0,0,0,.15);letter-spacing:-.01em}
 .hero p{margin:4px 0 18px;opacity:.9;font-size:14px}
 .nav{display:flex;gap:6px;flex-wrap:wrap}
-.nav button{border:0;background:rgba(255,255,255,.16);color:#fff;font:inherit;font-weight:700;padding:11px 18px;border-radius:12px 12px 0 0;cursor:pointer}
-.nav button.on{background:var(--bg);color:var(--ink)}
+.nav button{border:1px solid transparent;background:none;color:#fff;font:inherit;font-weight:500;padding:9px 16px;border-radius:99px;cursor:pointer}
+.nav button:hover{background:rgba(255,255,255,.1)}
+.nav button.on{border-color:#fff;background:rgba(255,255,255,.12);font-weight:700}
 .wrap{padding-top:22px;padding-bottom:60px}
 .bar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px;align-items:center}
 .seg{display:flex;flex-wrap:wrap;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px}
 .seg button{border:0;background:none;color:var(--mut);font:inherit;font-weight:700;padding:7px 12px;border-radius:9px;cursor:pointer}
 .seg button.on{background:var(--acc);color:#fff}
 .busca{flex:1 1 220px;min-width:200px;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
-.resumo{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:6px 0 24px}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.resumo{margin-top:-8px!important;display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:6px 0 24px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;box-shadow:0 2px 8px rgba(26,26,26,.08)}
 .kpi b{display:block;font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums}
 .kpi span{color:var(--mut);font-size:12.5px}
-h2{font-size:20px;margin:30px 0 4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+h2{font-size:22px;color:#0b6f86;margin:30px 0 4px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 h2 small{font-size:13px;color:var(--mut);font-weight:400}
 .sub{color:var(--mut);font-size:13px;margin:0 0 12px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
-.of{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.of{background:var(--card);border:1px solid var(--line);border-radius:8px;box-shadow:0 2px 8px rgba(26,26,26,.06);padding:16px;display:flex;flex-direction:column;gap:8px}
 .of.otimo{border-color:var(--otimo)}.of.bom{border-color:var(--bom)}
 .top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
 .dest{font-weight:700;font-size:17px;line-height:1.25}
@@ -63,33 +64,42 @@ h2 small{font-size:13px;color:var(--mut);font-weight:400}
 .rolar{overflow-x:auto}.nota{color:var(--mut);font-size:13px;margin:0 0 12px}
 .vazio{background:var(--card);border:1px dashed var(--line);border-radius:16px;padding:22px;color:var(--mut);text-align:center}
 footer{margin-top:36px;color:var(--mut);font-size:12px}
-.form{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;align-items:end;margin-bottom:14px}
+.form{background:var(--card);border:4px solid var(--sol);border-radius:8px;padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;align-items:end;margin-bottom:14px}
 .form label{display:flex;flex-direction:column;gap:4px;font-size:12px;color:var(--mut);font-weight:700}
 .form input,.form select{font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 10px}
 .form .chk{flex-direction:row;align-items:center;gap:8px;color:var(--ink)}
 .form .full{grid-column:1/-1}
-.btn{display:inline-block;font:inherit;font-weight:700;font-size:14px;color:#fff;background:var(--acc-2);border:0;border-radius:10px;padding:10px 16px;text-decoration:none;cursor:pointer}
+.btn{display:inline-block;font:inherit;font-weight:700;font-size:14px;color:#fff;background:var(--coral);border:0;border-radius:4px;padding:10px 16px;text-decoration:none;cursor:pointer}
 .alerta{background:var(--otimo-bg);border:1px solid var(--otimo);border-radius:14px;padding:12px 16px;margin:0 0 8px;font-size:14px}
 .alerta b.q{color:var(--otimo);font-size:18px}
 .star{color:#e0a100;letter-spacing:1px}
 .sobe{color:#c2410c;font-weight:700}.desce{color:var(--otimo);font-weight:700}
 .of>svg,.tab svg,.hc svg{display:block;width:100%;height:40px}
 /* cartoes de hotel */
-.hc{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
-.hc.top3{border:2px solid var(--acc)}
-.hc .img{height:120px;background:linear-gradient(135deg,var(--sea1),var(--sea2));background-size:cover;background-position:center;position:relative}
-.hc .img span{position:absolute;left:10px;top:10px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px}
-.hc .img i{position:absolute;right:10px;top:10px;background:var(--acc-2);color:#fff;font-style:normal;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px}
-.hc .bd{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
-.hc h3{margin:0;font-size:16px;line-height:1.25}
-.hc .linha{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;color:var(--mut)}
-.nb{background:var(--sea2);color:#fff;font-weight:800;font-size:13px;padding:3px 7px;border-radius:8px}
-.hc .vl{font-size:26px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.hc .vl small{font-size:13px;font-weight:400;color:var(--mut);letter-spacing:0}
-.hc .go{margin-top:auto;text-align:center;font-weight:700;font-size:13px;color:#fff;background:var(--acc);text-decoration:none;border-radius:10px;padding:9px}
+.lh{display:flex;flex-direction:column;gap:14px}
+.hc{background:#fff;border:1px solid var(--line);border-radius:8px;display:grid;grid-template-columns:220px 1fr 210px;gap:16px;padding:16px;box-shadow:0 2px 8px rgba(26,26,26,.06)}
+.hc:hover{box-shadow:0 4px 16px rgba(26,26,26,.14)}
+.hc .img{height:200px;border-radius:8px;background:linear-gradient(160deg,#bff1f0 0%,#38c6d9 55%,#f6dcae 56%,#fbe8c6 100%);background-size:cover;background-position:center;position:relative}
+.hc .img i{position:absolute;left:8px;top:8px;background:var(--otimo);color:#fff;font-style:normal;font-size:12px;font-weight:700;padding:3px 8px;border-radius:4px}
+.hc .mid{display:flex;flex-direction:column;gap:6px;min-width:0}
+.hc h3{margin:0;font-size:20px;line-height:1.25;color:#0b6f86}
+.hc .loc{font-size:13px;color:var(--acc);text-decoration:underline}
+.hc .tg{display:flex;flex-wrap:wrap;gap:6px}
+.hc .tg span{font-size:12px;border:1px solid var(--otimo);color:var(--otimo);border-radius:4px;padding:2px 6px}
+.hc .tg span.az{border-color:var(--line);color:var(--mut)}
+.hc .dir{display:flex;flex-direction:column;align-items:flex-end;text-align:right;gap:4px;border-left:1px solid var(--line);padding-left:16px}
+.hc .sc{display:flex;gap:8px;align-items:center}
+.hc .sc div{font-size:13px;line-height:1.2}.hc .sc div b{display:block;font-size:15px;color:var(--ink)}
+.nb{background:var(--azul);color:#fff;font-weight:700;font-size:16px;min-width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:6px 6px 6px 0;padding:0 4px}
+.hc .vl{font-size:26px;font-weight:800;margin-top:auto;font-variant-numeric:tabular-nums}
+.hc .pn{font-size:12.5px;color:var(--mut)}
+.hc .go{display:block;text-align:center;font-weight:700;font-size:15px;color:#fff;background:var(--coral);text-decoration:none;border-radius:4px;padding:10px 14px;width:100%}
+.hc .go:hover{background:#f0503f}
+@media (max-width:760px){.hc{grid-template-columns:1fr}.hc .img{height:170px}.hc .dir{border-left:0;padding-left:0;align-items:stretch;text-align:left;border-top:1px solid var(--line);padding-top:10px}}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
 .chips button{font:inherit;font-size:13px;font-weight:700;border:1px solid var(--line);background:var(--card);color:var(--mut);padding:6px 12px;border-radius:99px;cursor:pointer}
 .chips button.on{background:var(--chip);border-color:var(--acc);color:var(--acc)}
+.chips button{border-radius:99px}
 .voo{display:grid;grid-template-columns:minmax(220px,1fr) 2fr;gap:16px;align-items:center}
 @media (max-width:640px){.voo{grid-template-columns:1fr}.hero h1{font-size:24px}.nav button{padding:9px 12px;font-size:14px}}
 .opc{display:grid;gap:6px}.opc div{display:flex;justify-content:space-between;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:13.5px}
@@ -98,7 +108,7 @@ footer{margin-top:36px;color:var(--mut);font-size:12px}
 </head>
 <body>
 <header class="hero"><div class="in">
-  <h1>🌴 Radar de Viagens</h1>
+  <h1>Radar de Viagens</h1>
   <p id="sub">Carregando…</p>
   <nav class="nav" id="visao"><button data-v="viagens" class="on">Minhas viagens</button><button data-v="hoteis">Buscar hotéis</button><button data-v="ofertas">Passagens em promoção</button><button data-v="anac">Quando comprar</button></nav>
 </div></header>
@@ -293,16 +303,21 @@ function renderHoteis() {
   $("#fh").addEventListener("input", upd); upd();
 }
 
-function cardHotel(x, n, top) {
-  const nota = x.nota_booking != null ? `<span class="nb" title="Nota Booking">${Number(x.nota_booking).toFixed(1).replace(".", ",")}</span>` : x.nota_google != null ? `<span class="nb" title="Nota Google">${String(x.nota_google).replace(".", ",")}/5</span>` : "";
+function cardHotel(x, n) {
+  const nb = x.nota_booking != null ? Number(x.nota_booking) : x.nota_google != null ? x.nota_google * 2 : null;
+  const pal = nb == null ? "" : nb >= 9 ? "Excelente" : nb >= 8.5 ? "Muito bom" : nb >= 8 ? "Muito bom" : "Bom";
   const img = x.foto ? ` style="background-image:url('${esc(x.foto)}')"` : "";
-  return `<article class="hc ${top ? "top3" : ""}"><div class="img"${img}>${x.regiao ? `<span>${esc(x.regiao)}</span>` : ""}${x.oferta ? `<i>${esc(x.oferta)}</i>` : ""}</div>
-    <div class="bd"><h3>${esc(x.n)}</h3>
-    <div class="linha"><span class="star">${"★".repeat(x.estrelas || 0)}</span>${nota}</div>
-    <div class="vl">${brl(x.hoje)} <small>${n} noites · ${brl(Math.round(x.hoje / n))}/noite</small></div>
-    <div class="linha"><span>Menor já visto: <b>${brl(x.min)}</b></span><span>${varPct(x.ini, x.hoje)}</span></div>
-    ${spark(x.hist)}
-    ${x.link ? `<a class="go" href="${esc(x.link)}" target="_blank" rel="noopener">Ver disponibilidade</a>` : ""}</div></article>`;
+  const tags = [x.estrelas === 5 ? "5 estrelas" : x.estrelas ? x.estrelas + " estrelas" : "", "All inclusive", "Beira-mar"].filter(Boolean);
+  return `<article class="hc"><div class="img"${img}>${x.oferta ? `<i>${esc(x.oferta)}</i>` : ""}</div>
+    <div class="mid"><h3>${esc(x.n)} <span class="star" style="font-size:14px">${"★".repeat(x.estrelas || 0)}</span></h3>
+      ${x.regiao ? `<span class="loc">Zona Hoteleira · ${esc(x.regiao)}</span>` : ""}
+      <div class="tg">${tags.map((t, k) => `<span class="${k ? "" : "az"}">${esc(t)}</span>`).join("")}</div>
+      <div class="meta">Menor preço já visto: <b>${brl(x.min)}</b> ${varPct(x.ini, x.hoje)}</div>
+      ${spark(x.hist)}</div>
+    <div class="dir">${nb != null ? `<div class="sc"><div><b>${pal}</b>${x.nota_booking != null ? "nota Booking" : "nota Google"}</div><span class="nb">${nb.toFixed(1).replace(".", ",")}</span></div>` : ""}
+      <div class="pn" style="margin-top:auto">${n} noites, 2 adultos</div>
+      <div class="vl">${brl(x.hoje)}</div><div class="pn">${brl(Math.round(x.hoje / n))} por noite · impostos incluídos</div>
+      ${x.link ? `<a class="go" href="${esc(x.link)}" target="_blank" rel="noopener">Ver disponibilidade ›</a>` : ""}</div></article>`;
 }
 
 function renderViagens() {
@@ -340,7 +355,7 @@ function renderViagens() {
       const f = {destino: v.q.replace(/^(resorts |hotéis )?(all inclusive )?/i, ""), checkin: v.checkin, checkout: v.checkout, adultos: v.adultos || 2, estrelas: v.estrelas, nota: String(v.nota_min || ""), ai: v.all_inclusive, praia: v.beira_mar};
       h += `<h2>🏝️ ${esc(v.nome)}</h2><p class="sub">${dataBR(v.checkin)} a ${dataBR(v.checkout)} · ${n} noites · ${v.adultos || 2} adultos · preço total da estadia com impostos · ${hs.length} de ${total} hotéis${fonte}</p>
         <div class="chips" data-v="${esc(v.id)}"><button data-k="teto" class="${hst.teto ? "on" : ""}">Até R$ 14 mil</button><button data-k="so5" class="${hst.so5 ? "on" : ""}">Só 5 estrelas</button><button data-k="adultos" class="${hst.adultos ? "on" : ""}">Só adultos</button><button data-k="ordem" class="${hst.ordem === "nota" ? "on" : ""}">${hst.ordem === "nota" ? "Ordenado por nota" : "Ordenado por preço"}</button></div>`;
-      h += hs.length ? `<div class="grid">${hs.map((x, k) => cardHotel(x, n, k < 3 && hst.ordem === "preco" && !hst.teto ? false : false)).join("")}</div>` : `<div class="vazio">${total ? "Nenhum hotel com esses filtros." : "Aguardando a primeira busca do robô."}</div>`;
+      h += hs.length ? `<div class="lh">${hs.map(x => cardHotel(x, n)).join("")}</div>` : `<div class="vazio">${total ? "Nenhum hotel com esses filtros." : "Aguardando a primeira busca do robô."}</div>`;
       h += `<div class="links" style="margin-top:12px">${linksHotel(f)}</div>`;
     }
   }
