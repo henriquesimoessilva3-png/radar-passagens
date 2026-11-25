@@ -1,6 +1,6 @@
 {
-  "_ajuda": "orcamento_diario = buscas SerpApi por dia (plano gratis = 250/mes, entao 7/dia). confirmacoes_google = quantas dessas buscas checam o nivel de preco no Google Flights. duracao_viagem: 1 = fim de semana, 2 = 1 semana, 3 = 2 semanas.",
-  "orcamento_diario": 7,
+  "_ajuda": "orcamento_diario = buscas SerpApi por dia (plano gratis = 250/mes, entao 7/dia). confirmacoes_google = quantas dessas buscas checam o nivel de preco no Google Flights. duracao_viagem: 1 = fim de semana, 2 = 1 semana, 3 = 2 semanas. orcamento_viagens = buscas por dia para as viagens monitoradas (voo com data e hotéis); o total por dia não deve passar de 8 no plano grátis.",
+  "orcamento_diario": 6,
   "confirmacoes_google": 2,
   "limite_mensal": 245,
   "meses_a_frente": 6,
@@ -69,5 +69,54 @@
     "assentos_minimos_mes": 30,
     "assentos_minimos_ano": 500,
     "dias_entre_checagens": 7
-  }
+  },
+  "orcamento_viagens": 2,
+  "viagens": [
+    {
+      "id": "cancun-voo",
+      "tipo": "voo",
+      "nome": "BH → Cancún (abril/2027)",
+      "origem": "CNF",
+      "destino": "CUN",
+      "ida": "2027-04-23",
+      "volta": "2027-04-30",
+      "adultos": 2,
+      "queda_alerta": 0.05,
+      "ativo": true
+    },
+    {
+      "id": "cancun-hotel",
+      "tipo": "hotel",
+      "nome": "Cancún all inclusive (abril/2027)",
+      "q": "resorts all inclusive Zona Hotelera Cancún",
+      "checkin": "2027-04-23",
+      "checkout": "2027-04-30",
+      "adultos": 2,
+      "estrelas": [
+        4,
+        5
+      ],
+      "nota_min": 4.3,
+      "all_inclusive": true,
+      "beira_mar": true,
+      "destaques": [
+        "Grand Park Royal",
+        "Sunscape",
+        "Dreams Sands",
+        "Royalton CHIC",
+        "NYX",
+        "Krystal Cancun",
+        "Hyatt Zilara",
+        "Hyatt Ziva",
+        "Coral Beach",
+        "Live Aqua",
+        "Le Blanc",
+        "Beach Palace",
+        "Hilton Cancun Mar Caribe",
+        "Royal Select"
+      ],
+      "queda_alerta": 0.05,
+      "ativo": true
+    }
+  ]
 }

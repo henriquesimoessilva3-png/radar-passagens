@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: radar
@@ -24,6 +25,30 @@ jobs:
         env:
           SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
         run: python fetch.py
+      - name: Viagens monitoradas (voo com data e hotéis)
+        if: always()
+        continue-on-error: true
+        env:
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
+        run: python viagens.py
+      - name: Avisar alertas (issue no GitHub = notificação no app)
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          try:
+              novos = json.load(open("data/alertas_novos.json", encoding="utf-8"))
+          except Exception:
+              novos = []
+          if novos:
+              brl = lambda v: "R$ " + f"{v:,.0f}".replace(",", ".")
+              linhas = [f"- **{a['item']}** {a.get('extra','')} ({a['viagem']}): {brl(a['de'])} → **{brl(a['para'])}** (−{round(a['queda']*100)}%)" for a in novos]
+              corpo = "\n".join(linhas) + "\n\nPainel: https://" + os.environ["GITHUB_REPOSITORY_OWNER"] + ".github.io/" + os.environ["GITHUB_REPOSITORY"].split("/")[1] + "/#viagens"
+              subprocess.run(["gh", "issue", "create", "--title", f"🔔 Preço caiu: {len(novos)} alerta(s)", "--body", corpo], check=False)
+          PY
       - name: Histórico ANAC
         if: always()
         continue-on-error: true
