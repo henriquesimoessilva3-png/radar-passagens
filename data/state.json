@@ -1,9 +1,9 @@
 {
- "cursor_detalhe": 3,
- "cursor_outras": 2,
- "cursor_viagens": 2,
+ "cursor_detalhe": 4,
+ "cursor_outras": 3,
+ "cursor_viagens": 1,
  "uso": {
   "2026-10": 175,
-  "2026-11": 176
+  "2026-11": 184
  }
 }

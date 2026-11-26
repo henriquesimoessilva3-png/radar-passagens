@@ -1,6 +1,25 @@
 {
- "alertas": [],
- "atualizado": "2026-11-25 16:21",
+ "alertas": [
+  {
+   "de": 64864,
+   "dia": "2026-11-26",
+   "extra": "5★",
+   "item": "Impression Isla Mujeres by Hyatt",
+   "para": 57240,
+   "queda": 0.118,
+   "viagem": "Isla Mujeres e Costa Mujeres (abril/2027)"
+  },
+  {
+   "de": 18029,
+   "dia": "2026-11-26",
+   "extra": "5★",
+   "item": "Privilege Aluxes Isla Mujeres",
+   "para": 11117,
+   "queda": 0.383,
+   "viagem": "Isla Mujeres e Costa Mujeres (abril/2027)"
+  }
+ ],
+ "atualizado": "2026-11-26 16:05",
  "itens": {
   "cancun-hotel": {
    "atualizado": "2026-11-25",
@@ -381,7 +400,7 @@
    }
   },
   "cancun-voo": {
-   "atualizado": "2026-11-25",
+   "atualizado": "2026-11-26",
    "fonte": "Google Voos (levantamento de 25/11)",
    "google": {
     "faixa": [
@@ -391,7 +410,8 @@
     "nivel": "typical"
    },
    "hist": {
-    "2026-11-25": 7161
+    "2026-11-25": 7161,
+    "2026-11-26": 7201
    },
    "opcoes": [
     {
@@ -401,7 +421,25 @@
      ],
      "duracao": 1100,
      "paradas": 2,
-     "preco": 7161
+     "preco": 7201
+    },
+    {
+     "cias": [
+      "Avianca",
+      "Gol"
+     ],
+     "duracao": 1100,
+     "paradas": 2,
+     "preco": 7201
+    },
+    {
+     "cias": [
+      "Avianca",
+      "Gol"
+     ],
+     "duracao": 1100,
+     "paradas": 2,
+     "preco": 7379
     },
     {
      "cias": [
@@ -409,15 +447,7 @@
      ],
      "duracao": 636,
      "paradas": 1,
-     "preco": 7391
-    },
-    {
-     "cias": [
-      "COPA"
-     ],
-     "duracao": 783,
-     "paradas": 1,
-     "preco": 7941
+     "preco": 7422
     },
     {
      "cias": [
@@ -425,21 +455,12 @@
      ],
      "duracao": 657,
      "paradas": 1,
-     "preco": 8468
-    },
-    {
-     "cias": [
-      "Aeromexico",
-      "Gol"
-     ],
-     "duracao": 1085,
-     "paradas": 2,
-     "preco": 13559
+     "preco": 7422
     }
    ]
   },
   "mujeres-hotel": {
-   "atualizado": "2026-11-25",
+   "atualizado": "2026-11-26",
    "fonte": "Booking (levantamento de 25/11)",
    "hoteis": {
     "Almare Isla Mujeres": {
@@ -453,6 +474,24 @@
      "oferta": "Black Friday −30%",
      "regiao": "Isla Mujeres · só adultos",
      "visto": "2026-11-25"
+    },
+    "Beloved Playa Mujeres": {
+     "avaliacoes": 8517,
+     "destaque": false,
+     "estrelas": 5,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLcxR72T8SJfzj1Tz4znLDrDPbW9IYXT2CqYRrH6pmfgcEHNFRXFGUzVBf3psx0eq-UC7D0rxNyN96wdwDieC0RcrdbJR6Lc3bHvtQ2kcE3OpnBJqKgoNbcA3qiMEiIhqwozt2k=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.241198,
+      "longitude": -86.80473769999999
+     },
+     "hist": {
+      "2026-11-26": 31435
+     },
+     "link": "https://a2.adform.net/C/?bn=46366221;cpdir=https://www.belovedhotels.com/cancun/beloved-playa-mujeres/?partner=5830&utm_medium=gmb&utm_source=google&utm_campaign=gmb-bpm",
+     "nota_google": 4.9,
+     "oferta": "",
+     "token": "ChgIxJL4gLfgqbfhARoLL2cvMXdrNGYzNDEQAQ",
+     "visto": "2026-11-26"
     },
     "Catalonia Grand Costa Mujeres": {
      "destaque": true,
@@ -478,6 +517,42 @@
      "regiao": "Isla Mujeres",
      "visto": "2026-11-25"
     },
+    "Excellence Playa Mujeres": {
+     "avaliacoes": 18465,
+     "destaque": false,
+     "estrelas": 5,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLcBTg4VMOSvNVR0CCSOXCU756w4N0fREeipUMp2m6ckhBHYw9PeY7QyPzUP4WPN0stz9egKnPT9sAmx8CDbosoJbw1GEg5YzH_91l5L_iI8TSQ6KlSl98gGaxFpyVFQuXKaKxVW0LpmHi4d=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.2436202,
+      "longitude": -86.8054827
+     },
+     "hist": {
+      "2026-11-26": 28294
+     },
+     "link": "https://www.excellenceresorts.com/cancun/excellence-playa-mujeres/",
+     "nota_google": 4.9,
+     "oferta": "",
+     "token": "ChcIkaCysLudxY9yGgsvZy8xdGQ3cGNrbRAB",
+     "visto": "2026-11-26"
+    },
+    "Finest Playa Mujeres": {
+     "avaliacoes": 25589,
+     "destaque": false,
+     "estrelas": 5,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLcfFgnqIrX2t13UIXTwpifOM0Sb2ZnMJgGu9QJMuUEBV04XWytu4JkNGR_aNcFjA95Vz49KzrRvBRMWEqaLDKxRLneglj_S5PCHF1eMk1RVDsfVADMWPR0aoFb9KBoI6PPZ4o7OYfihXg=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.244564999999998,
+      "longitude": -86.806192
+     },
+     "hist": {
+      "2026-11-26": 23918
+     },
+     "link": "https://www.finestresorts.com/cancun/finest-playa-mujeres/",
+     "nota_google": 4.9,
+     "oferta": "",
+     "token": "ChkIyZ3s3YDm_ZF3Gg0vZy8xMWJ0bHJmbXJzEAE",
+     "visto": "2026-11-26"
+    },
     "Grand Palladium Select Costa Mujeres": {
      "destaque": true,
      "estrelas": 5,
@@ -491,16 +566,25 @@
      "visto": "2026-11-25"
     },
     "Impression Isla Mujeres by Hyatt": {
-     "destaque": true,
+     "avaliacoes": 466,
+     "destaque": false,
      "estrelas": 5,
-     "hist": {
-      "2026-11-25": 64864
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLdFnnZR0cP54EJCenT7RamQIZOjzAwwGtN_ncbzdqipve49dOtezWAiFSCW4vrr32gHtqxQWR-Q6PicVyU-HvCo_FPIHrYyefIoh5AhH7NJIN6D703hgr247U_8LIrHSWxUY9f2=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.2097961,
+      "longitude": -86.7207294
      },
-     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Impression+Isla+Mujeres+by+Hyatt&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "hist": {
+      "2026-11-25": 64864,
+      "2026-11-26": 57240
+     },
+     "link": "https://www.hyattinclusivecollection.com/en/resorts-hotels/impression-by-secrets/mexico/isla-mujeres/?src=corp_lclb_google_seo_seiim&utm_source=google&utm_medium=organic&utm_campaign=lmr",
      "nota_booking": 9.3,
-     "oferta": "Black Friday −58%",
+     "nota_google": 4.3,
+     "oferta": "",
      "regiao": "Isla Mujeres · só adultos",
-     "visto": "2026-11-25"
+     "token": "ChoIgrHD2pW-oNbTARoNL2cvMTF0OWI1MWZ5ORAB",
+     "visto": "2026-11-26"
     },
     "Majestic Elegance Costa Mujeres": {
      "destaque": true,
@@ -526,6 +610,24 @@
      "regiao": "Costa Mujeres · só adultos",
      "visto": "2026-11-25"
     },
+    "Mia Reef Isla Mujeres": {
+     "avaliacoes": 8575,
+     "destaque": false,
+     "estrelas": 5,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLeKj2CuBhw5nB_O9MQ4w0iFABPqIBl0-K-dOGyFm3VoeK8HIwhsvRU9HThnCRy2-D-C3lXvUJk66jnBCFIPG15Wk8zWGIO-bvtjig3dFMiJIsxkPCwzNNnsCCTueoDCTe79HJI=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.2631563,
+      "longitude": -86.7487326
+     },
+     "hist": {
+      "2026-11-26": 11846
+     },
+     "link": "https://www.hotelmiareefislamujeres.com/?partner=8570&utm_source=google&utm_medium=organic&utm_campaign=MyBusiness",
+     "nota_google": 4.6,
+     "oferta": "",
+     "token": "ChkImPew6LTh-K5GGg0vZy8xMWJ0bXF3Y2I3EAE",
+     "visto": "2026-11-26"
+    },
     "Ocean Allure Costa Mujeres": {
      "destaque": true,
      "estrelas": 5,
@@ -539,16 +641,25 @@
      "visto": "2026-11-25"
     },
     "Privilege Aluxes Isla Mujeres": {
+     "avaliacoes": 5370,
      "destaque": true,
      "estrelas": 5,
-     "hist": {
-      "2026-11-25": 18029
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLd5TkQilg7AAZ1qGLT11Ak14yj8Xt2vjC4gSdyKPnHCZBLu5HQc2NkEGj3jS0njePyvsXg8wEIXIQirsuLvAazEFWgIJigp4Qq_zad0LuyfHuYgnQJpVSdLbl_HdLuYuzDfUVKR=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.2575678,
+      "longitude": -86.750867
      },
-     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Privilege+Aluxes+Isla+Mujeres&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "hist": {
+      "2026-11-25": 18029,
+      "2026-11-26": 11117
+     },
+     "link": "https://www.privilegehotels.com/?utm_source=google&utm_medium=mybusiness&utm_campaign=boton",
      "nota_booking": 8.5,
+     "nota_google": 4.7,
      "oferta": "",
      "regiao": "Isla Mujeres · só adultos",
-     "visto": "2026-11-25"
+     "token": "ChgIyPjoup2Q8PM3GgwvZy8xMmhtY2dxOTgQAQ",
+     "visto": "2026-11-26"
     },
     "Riu Latino Costa Mujeres": {
      "destaque": true,
@@ -585,6 +696,24 @@
      "oferta": "Black Friday −40%",
      "regiao": "Costa Mujeres · só adultos",
      "visto": "2026-11-25"
+    },
+    "Villa del Palmar Cancun Family Beach Resort & Spa": {
+     "avaliacoes": 6566,
+     "destaque": false,
+     "estrelas": 5,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLfowIyVPlPrWj46JkcvHlJeV40DqXLb_DclTs7T65OognYwWPGhZeG_TKLI8VV66mSJcF49uVLHLY3l7y0hsCL2kae4uwGf3GN7BBFASzhIY4ykLWihPKTAdNrcZRIcv63Vggvs=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.231886600000003,
+      "longitude": -86.8038502
+     },
+     "hist": {
+      "2026-11-26": 10392
+     },
+     "link": "https://www.villapalmarcancun.com/?partner=8934&utm_source=googlemb&utm_medium=organic&utm_campaign=web_link",
+     "nota_google": 4.3,
+     "oferta": "",
+     "token": "ChcIpqWWj_aPj5VtGgsvZy8xdGZqeGJreRAB",
+     "visto": "2026-11-26"
     }
    }
   }
