@@ -1,20 +1,83 @@
 [
  {
-  "de": 64864,
-  "dia": "2026-11-26",
+  "de": 11658,
+  "dia": "2026-11-27",
+  "extra": "4★",
+  "item": "Grand Park Royal Cancun",
+  "para": 9241,
+  "queda": 0.207,
+  "viagem": "Cancún km 9–13, all inclusive (abril/2027)"
+ },
+ {
+  "de": 6702,
+  "dia": "2026-11-27",
+  "extra": "4★",
+  "item": "Hotel NYX Cancun",
+  "para": 6068,
+  "queda": 0.095,
+  "viagem": "Cancún km 9–13, all inclusive (abril/2027)"
+ },
+ {
+  "de": 12968,
+  "dia": "2026-11-27",
+  "extra": "5★",
+  "item": "Hotel Riu Cancun",
+  "para": 11526,
+  "queda": 0.111,
+  "viagem": "Cancún km 9–13, all inclusive (abril/2027)"
+ },
+ {
+  "de": 6570,
+  "dia": "2026-11-27",
+  "extra": "4★",
+  "item": "Occidental Costa Cancún",
+  "para": 5619,
+  "queda": 0.145,
+  "viagem": "Cancún km 9–13, all inclusive (abril/2027)"
+ },
+ {
+  "de": 7733,
+  "dia": "2026-11-27",
+  "extra": "4★",
+  "item": "Park Royal Beach Cancun",
+  "para": 6523,
+  "queda": 0.156,
+  "viagem": "Cancún km 9–13, all inclusive (abril/2027)"
+ },
+ {
+  "de": 11655,
+  "dia": "2026-11-27",
+  "extra": "4★",
+  "item": "Sunscape Cancun",
+  "para": 9406,
+  "queda": 0.193,
+  "viagem": "Cancún km 9–13, all inclusive (abril/2027)"
+ },
+ {
+  "de": 57240,
+  "dia": "2026-11-27",
   "extra": "5★",
   "item": "Impression Isla Mujeres by Hyatt",
-  "para": 57240,
-  "queda": 0.118,
+  "para": 52279,
+  "queda": 0.087,
   "viagem": "Isla Mujeres e Costa Mujeres (abril/2027)"
  },
  {
-  "de": 18029,
-  "dia": "2026-11-26",
+  "de": 11846,
+  "dia": "2026-11-27",
+  "extra": "5★",
+  "item": "Mia Reef Isla Mujeres",
+  "para": 10250,
+  "queda": 0.135,
+  "viagem": "Isla Mujeres e Costa Mujeres (abril/2027)"
+ },
+ {
+  "de": 11117,
+  "dia": "2026-11-27",
   "extra": "5★",
   "item": "Privilege Aluxes Isla Mujeres",
-  "para": 11117,
-  "queda": 0.383,
+  "para": 9924,
+  "queda": 0.107,
   "viagem": "Isla Mujeres e Costa Mujeres (abril/2027)"
  }
 ]

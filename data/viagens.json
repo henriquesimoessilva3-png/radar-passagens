@@ -1,6 +1,87 @@
 {
  "alertas": [
   {
+   "de": 11658,
+   "dia": "2026-11-27",
+   "extra": "4★",
+   "item": "Grand Park Royal Cancun",
+   "para": 9241,
+   "queda": 0.207,
+   "viagem": "Cancún km 9–13, all inclusive (abril/2027)"
+  },
+  {
+   "de": 6702,
+   "dia": "2026-11-27",
+   "extra": "4★",
+   "item": "Hotel NYX Cancun",
+   "para": 6068,
+   "queda": 0.095,
+   "viagem": "Cancún km 9–13, all inclusive (abril/2027)"
+  },
+  {
+   "de": 12968,
+   "dia": "2026-11-27",
+   "extra": "5★",
+   "item": "Hotel Riu Cancun",
+   "para": 11526,
+   "queda": 0.111,
+   "viagem": "Cancún km 9–13, all inclusive (abril/2027)"
+  },
+  {
+   "de": 6570,
+   "dia": "2026-11-27",
+   "extra": "4★",
+   "item": "Occidental Costa Cancún",
+   "para": 5619,
+   "queda": 0.145,
+   "viagem": "Cancún km 9–13, all inclusive (abril/2027)"
+  },
+  {
+   "de": 7733,
+   "dia": "2026-11-27",
+   "extra": "4★",
+   "item": "Park Royal Beach Cancun",
+   "para": 6523,
+   "queda": 0.156,
+   "viagem": "Cancún km 9–13, all inclusive (abril/2027)"
+  },
+  {
+   "de": 11655,
+   "dia": "2026-11-27",
+   "extra": "4★",
+   "item": "Sunscape Cancun",
+   "para": 9406,
+   "queda": 0.193,
+   "viagem": "Cancún km 9–13, all inclusive (abril/2027)"
+  },
+  {
+   "de": 57240,
+   "dia": "2026-11-27",
+   "extra": "5★",
+   "item": "Impression Isla Mujeres by Hyatt",
+   "para": 52279,
+   "queda": 0.087,
+   "viagem": "Isla Mujeres e Costa Mujeres (abril/2027)"
+  },
+  {
+   "de": 11846,
+   "dia": "2026-11-27",
+   "extra": "5★",
+   "item": "Mia Reef Isla Mujeres",
+   "para": 10250,
+   "queda": 0.135,
+   "viagem": "Isla Mujeres e Costa Mujeres (abril/2027)"
+  },
+  {
+   "de": 11117,
+   "dia": "2026-11-27",
+   "extra": "5★",
+   "item": "Privilege Aluxes Isla Mujeres",
+   "para": 9924,
+   "queda": 0.107,
+   "viagem": "Isla Mujeres e Costa Mujeres (abril/2027)"
+  },
+  {
    "de": 64864,
    "dia": "2026-11-26",
    "extra": "5★",
@@ -19,10 +100,10 @@
    "viagem": "Isla Mujeres e Costa Mujeres (abril/2027)"
   }
  ],
- "atualizado": "2026-11-26 16:05",
+ "atualizado": "2026-11-27 16:01",
  "itens": {
   "cancun-hotel": {
-   "atualizado": "2026-11-25",
+   "atualizado": "2026-11-27",
    "fonte": "Booking (levantamento de 25/11)",
    "hoteis": {
     "Beach Palace Cancun": {
@@ -53,19 +134,20 @@
      "avaliacoes": 5503,
      "destaque": false,
      "estrelas": 4,
-     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLerlZkBrdeEm3OeLt5a4ILdl0tsafC9MmS3sdTRxBWsWPmNoBUdiVHHJTDe9OLnLyeEYwlY9SsQVgoxg5wG2imVCRKkuyixjJtSIjQCRmPePVTe3VoKUO81C0_4IeTWiYeJ9ZQnWw=s287-w287-h192-n-k-no-v1",
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLd1ikHOs17Fysy38zOFTG_TcPNzsWJW4sN3xmXnt2K5LmsVwVsHPFsHQ-wL_dsW-pdUA5IumjxlX0pegOVVni50Ka4wMy087nGoxIr-iUowIHdbBqRhpig2wU2RYwgGpqQdTc7b=s287-w287-h192-n-k-no-v1",
      "gps": {
       "latitude": 21.139466,
       "longitude": -86.75128
      },
      "hist": {
-      "2026-11-25": 4992
+      "2026-11-25": 4992,
+      "2026-11-27": 4873
      },
      "link": "https://www.fiestamericana.com/hoteles-y-resorts/fiesta-americana-cancun-villas",
      "nota_google": 4.5,
      "oferta": "Deal",
      "token": "ChcIiqSJq-DOraUlGgsvZy8xdGhtbTE1eBAB",
-     "visto": "2026-11-25"
+     "visto": "2026-11-27"
     },
     "Grand Fiesta Americana Coral Beach": {
      "destaque": true,
@@ -80,24 +162,43 @@
      "visto": "2026-11-25"
     },
     "Grand Park Royal Cancun": {
-     "avaliacoes": 24280,
+     "avaliacoes": 3864,
      "destaque": true,
      "estrelas": 4,
-     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLd98Dr6GxNV0iBXVAXrRp-FstebM1iIzT-onxgAicjm8BkwyuDz_kmtsl278T-38JhhJf0wHaRhSBnRAUTQolIb1U4dMxuosG-LLOUUVGDX-UNcbxJKBjr49__SIT9GG8bR6p0=s287-w287-h192-n-k-no-v1",
+     "foto": "https://lh3.googleusercontent.com/grass-proxy/AIM7gW0Nxmz24rjkRjd66e3JTWpWXru0KKL4qg4gO2lQLvOKndF6Tc3EtT3hOJFH1hxRwv-YYjThdWZU5ZKZB7iYXiNzs3EQKBLVP6quC0e91TiYsfdC5H-bPXgWZ7S4QbsEgLWsjizRB4WGv2fMaEM83DHL7a_N2BlpaLxx6EnS0zDjClj9fOpXTP8C=s287-w287-h192-n-k-no-v1",
      "gps": {
-      "latitude": 21.1236543,
-      "longitude": -86.75419649999999
+      "latitude": 21.143721,
+      "longitude": -86.7837488
      },
      "hist": {
-      "2026-11-25": 11658
+      "2026-11-25": 11658,
+      "2026-11-27": 9241
      },
-     "link": "https://www.park-royalhotels.com/grand-park-royal-cancun.html?utm_medium=organic&utm_source=google&utm_campaign=google-my-business&utm_term=google-local&utm_id=parkroyal-grancancun",
+     "link": "https://www.holidayinnclub.com/explore-resorts/royal-cancun-resort?utm_source=local&utm_medium=organic&utm_campaign=royal-cancun-gmb-listing",
      "nota_booking": 8.0,
-     "nota_google": 4.7,
+     "nota_google": 4.5,
      "oferta": "",
      "regiao": "km 10,5",
-     "token": "ChkI7dG6rMuX0L4JGg0vZy8xMWJ0bXF3Y3RnEAE",
-     "visto": "2026-11-25"
+     "token": "ChkIiqGcmcGkku-dARoML2cvMXB2NjAzbnNmEAE",
+     "visto": "2026-11-27"
+    },
+    "Hard Rock Hotel Cancun": {
+     "avaliacoes": 30299,
+     "destaque": false,
+     "estrelas": 4,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLcUlWdwz6zESUFRrf5zCtJU8ueOqOjgWxo8MWfGWdx6a4rLsV-UFZJE4O85NFYz2oP3GuV-qgdqcunZwRt1gOHglJKHTn59nYH3N-BT13Ft_xmGMrgb3HfZusB1EdFrb8wuInVWnA=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.0896127,
+      "longitude": -86.7708629
+     },
+     "hist": {
+      "2026-11-27": 16397
+     },
+     "link": "https://hotel.hardrock.com/cancun?utm_source=mybusiness&utm_medium=organic",
+     "nota_google": 4.7,
+     "oferta": "",
+     "token": "ChkIoKPpxZmVoc7IARoML2cvMXE1Ym5qX3huEAE",
+     "visto": "2026-11-27"
     },
     "Hilton Cancun Mar Caribe": {
      "avaliacoes": 4226,
@@ -120,34 +221,36 @@
      "visto": "2026-11-25"
     },
     "Hotel Emporio Cancún optional All-Inclusive": {
-     "avaliacoes": 9019,
+     "avaliacoes": 9022,
      "destaque": false,
      "estrelas": 4,
-     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLeeHm3OmkTwhhBhPUw98eQ1BnoNONxVLdeh4BNT663tOYRwfQYiGEM_70pL4Mjg-q5E5-LlBUSYfCnYx4RzeNAZEXuAbdqJD0t9m-0m7AhjoIfMP7X2NtraJmM3d0-OMNfl5DO2=s287-w287-h192-n-k-no-v1",
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLdjyEp0RcLXHhS_rX02WsC8Of4LiCYyFb3kUStwrXsHHnzb8uUOPnRmMZfuPOpw77EfWe_dRqTv8XrRnUYRZIK-Jtkma2FOJQ5KpJmememJ45ctCpPY-z6svl84Vos0evHugjOU=s287-w287-h192-n-k-no-v1",
      "gps": {
       "latitude": 21.0731978,
       "longitude": -86.77652979999999
      },
      "hist": {
-      "2026-11-25": 4928
+      "2026-11-25": 4928,
+      "2026-11-27": 4694
      },
      "link": "https://hotelesemporio.com/hoteles/emporio-cancun/?partner=10956&utm_source=google&utm_medium=organic&utm_campaign=MyBusiness",
      "nota_google": 4.3,
-     "oferta": "Deal",
+     "oferta": "",
      "token": "ChgIs8bVrunR-N01GgwvZy8xcTYyOWtjdGIQAQ",
-     "visto": "2026-11-25"
+     "visto": "2026-11-27"
     },
     "Hotel NYX Cancun": {
-     "avaliacoes": 8869,
+     "avaliacoes": 8872,
      "destaque": true,
      "estrelas": 4,
-     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLe1TK2_zp6ZqJjYeE_eh6cY5pAw4irc0D9ACP8-UZNR2UJQAyk_jrViyokCDA25ZcCuI2puqT4nap_5ojEYCu-DODugcn8gyTB5QurtETeXZmFef29hY0U2GpKBGsaByLQnoFf3=s287-w287-h192-n-k-no-v1",
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLeeTSif20ws9vXbxyrkA_A9GKytHPEVfRWCrScotn3wvMYUw-wTlQqdAYXr13gTCxGCo7X0pU4VrC9LxUsSNxUZJdKrhwKyORIGdKHp341iSm1VAIv1ldpgBqx6yVO9R-xxoZao=s287-w287-h192-n-k-no-v1",
      "gps": {
       "latitude": 21.114281,
       "longitude": -86.7586275
      },
      "hist": {
-      "2026-11-25": 6702
+      "2026-11-25": 6702,
+      "2026-11-27": 6068
      },
      "link": "https://www.nyxhotels.com/?utm_source=google&utm_medium=organic&utm_campaign=GoogleMyBusiness&utm_content=nyxhotelcan&partner=7870",
      "nota_booking": 8.2,
@@ -155,25 +258,26 @@
      "oferta": "",
      "regiao": "km 11,5",
      "token": "ChoIjf-U-OOG4_-nARoNL2cvMTFiNXFoa2g2NRAB",
-     "visto": "2026-11-25"
+     "visto": "2026-11-27"
     },
     "Hotel Riu Cancun": {
-     "avaliacoes": 11090,
+     "avaliacoes": 7105,
      "destaque": false,
      "estrelas": 5,
-     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLeURfeFzirnlb-w068c4Gbm_QdsRcpv3zIT87FiS-hdfNvAPy4EK3djNjOEY2lcjquAYHQPTBowYgC46u-bv3g8qsCWAag96B0GxUVfuWk2dQuwOmEONeH1mM6Z6enXfqZweKV8ZQ=s287-w287-h192-n-k-no-v1",
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLfzuV2Dol9oW-h-Lzdm8-aMN3cnj2kPFmEUdgq5zdIS8Zz7-qREl-SB8xAtkKXhWk3BDSqyAc5hz01aQId6m0rlwRvhdn-MO0ACnRvAkVQyw_OrNHO7nshZIMf-m5J-WLbsoC_3=s287-w287-h192-n-k-no-v1",
      "gps": {
-      "latitude": 21.1374471,
-      "longitude": -86.7485116
+      "latitude": 21.1387386,
+      "longitude": -86.7503223
      },
      "hist": {
-      "2026-11-25": 12968
+      "2026-11-25": 12968,
+      "2026-11-27": 11526
      },
-     "link": "https://www.riu.com/en/hotel/mexico/cancun/hotel-riu-cancun?utm_source=google&utm_medium=organic&utm_campaign=my_business&utm_content=CNC",
-     "nota_google": 4.4,
+     "link": "https://www.riu.com/en/hotel/mexico/cancun/hotel-riu-palace-las-americas?utm_source=google&utm_medium=organic&utm_campaign=my_business&utm_content=XLA",
+     "nota_google": 4.6,
      "oferta": "",
-     "token": "ChgI7cS52uGqgr7WARoLL2cvMXRzXzdudHAQAQ",
-     "visto": "2026-11-25"
+     "token": "ChcIrLj67aaZp6htGgsvZy8xdmdfZHh2OBAB",
+     "visto": "2026-11-27"
     },
     "Hyatt Vivid Cancun": {
      "avaliacoes": 3401,
@@ -272,22 +376,23 @@
      "visto": "2026-11-25"
     },
     "Occidental Costa Cancún": {
-     "avaliacoes": 11301,
+     "avaliacoes": 11320,
      "destaque": false,
      "estrelas": 4,
-     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLfc-hlDcit_IiL80PPpXZD9isSSNDW70CTO9F7EPrwGt67AX6q_Fe6EMMmTrykheJu0iz2xT5k5lISNJbPQeVcE90PZBPw0HqrjoHD72wzrLyFyKgOZVzoN-cZBgTDFFqn0cBAu9Wu6ijjz=s287-w287-h192-n-k-no-v1",
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLfeDoe8Wsh99LbboJjRXh4Va1-uOU8AvvNQu7ofxjb8IWVTWdhAUz4hOacg7qqqjqH954n7bigcEmkV5U2jhgK5lqZHcsgC3cClVobFnDlS6ZcFA-pV1ZzcsCmAfc2VXm46MotnFhjpPVwc=s287-w287-h192-n-k-no-v1",
      "gps": {
       "latitude": 21.145224499999998,
       "longitude": -86.7890364
      },
      "hist": {
-      "2026-11-25": 6570
+      "2026-11-25": 6570,
+      "2026-11-27": 5619
      },
      "link": "https://www.barcelo.com/es-mx/occidental-costa-cancun/?utm_source=google&utm_medium=organic&utm_campaign=my_business&utm_content=7378",
      "nota_google": 4.4,
      "oferta": "",
      "token": "ChgIjfy4zILjo4jsARoLL2cvMXRmZDgwc2QQAQ",
-     "visto": "2026-11-25"
+     "visto": "2026-11-27"
     },
     "Paradisus Cancun Resort": {
      "avaliacoes": 17591,
@@ -308,22 +413,23 @@
      "visto": "2026-11-25"
     },
     "Park Royal Beach Cancun": {
-     "avaliacoes": 20426,
+     "avaliacoes": 20447,
      "destaque": false,
      "estrelas": 4,
-     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLdKjp1zu8V9JhkQEPxTrDltqwQ6thPka-sCyXE3Mo0SFOrV9NTYkqIY9JtCC7a5aBc4pgTDShi_Gvgwe9g1wOkw0UaZzUPqNMq5zyFYKTO3n1S7WNF1TVdduVJpEtyt2fmW9S6T=s287-w287-h192-n-k-no-v1",
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLcD6ElWLNkSTioQd0bd5MM-Ms-SNYB_ezT3JLZHHbYd6HCRdDL9Gb371VjY3fdtigua4M8JaBPJv-EDmhIxbr1X7Vzq3r9NMXTlJoTyiACk7gPOZJHttCPuLmBbNciKzmJTGsmX=s287-w287-h192-n-k-no-v1",
      "gps": {
       "latitude": 21.1116582,
       "longitude": -86.7607488
      },
      "hist": {
-      "2026-11-25": 7733
+      "2026-11-25": 7733,
+      "2026-11-27": 6523
      },
      "link": "https://www.park-royalhotels.com/park-royal-beach-cancun.html?utm_medium=organic&utm_source=google&utm_campaign=google-my-business&utm_term=google-local&utm_id=parkroyal-beachcancun",
      "nota_google": 4.5,
-     "oferta": "",
+     "oferta": "Great Deal",
      "token": "ChgI5N-XyIm5lfq_ARoLL2cvMXRqODV4Y2YQAQ",
-     "visto": "2026-11-25"
+     "visto": "2026-11-27"
     },
     "Royal Select at Grand Park Royal": {
      "destaque": true,
@@ -368,34 +474,62 @@
      "visto": "2026-11-25"
     },
     "Sunscape Cancun": {
+     "avaliacoes": 8441,
      "destaque": true,
      "estrelas": 4,
-     "hist": {
-      "2026-11-25": 11655
+     "foto": "https://lh3.googleusercontent.com/grass-proxy/AIM7gW2NupDnccnKrgvxIjRL9cky2nPh3n9smBn9fL6i3e2vAWvc5ODoh00-FOpEuETgQ_HPKihEYb7RNE1Ll7-Z_zPSj6uxEw7rE5NTFeg9Qt8T45hzUNwXkzuuX3uyDOJKlabEu0HEkFxPnUJI0YmDfk2fOXLC17qSe3YgZa8172kWKGl_likcqIv6=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.120712299999997,
+      "longitude": -86.75526239999999
      },
-     "link": "https://www.booking.com/searchresults.pt-br.html?ss=Sunscape+Cancun&checkin=2027-04-23&checkout=2027-04-30&group_adults=2&no_rooms=1&selected_currency=BRL",
+     "hist": {
+      "2026-11-25": 11655,
+      "2026-11-27": 9406
+     },
+     "link": "https://www.hyatt.com/sunscape/en-US/sucun-sunscape-cancun-resort-spa?src=corp_lclb_google_seo_sucun&utm_source=google&utm_medium=organic&utm_campaign=lmr",
      "nota_booking": 8.5,
+     "nota_google": 4.4,
      "oferta": "",
      "regiao": "Punta Cancún",
-     "visto": "2026-11-25"
+     "token": "ChcIxNqfgo2hybVNGgsvZy8xdGRnNDg3YxAB",
+     "visto": "2026-11-27"
     },
-    "The Royal Sands by Holiday Inn Club Vacations": {
-     "avaliacoes": 5613,
+    "Sunset Royal Beach Resort": {
+     "avaliacoes": 6302,
      "destaque": false,
      "estrelas": 4,
-     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLenZqgb4FhvwXqBZEdjMJOmZ8KNrj16LnT5-9okTbHAXzrVZMgYWKs3aCtAYDbefLMzz-Y1acoikJKdOlIv4n-AuJom0BBavFJ9ZhpkIm2JQtsqWHHESbjDtiVRRWO3bLZyKrqycWn28v5R=s287-w287-h192-n-k-no-v1",
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLcTLYsemFmCOHeDyUaSPtp8BOX58V2gE6A6jS4GO2P9_a_dMLqnxXer47SEG4UXe_CEBadud25PwI5G2P-QRuI9A8ol79QOyTkujuahVQ87DigcdJ5tGJhEatr_mBFDeSQAdg48=s287-w287-h192-n-k-no-v1",
+     "gps": {
+      "latitude": 21.126262500000003,
+      "longitude": -86.7522927
+     },
+     "hist": {
+      "2026-11-27": 6529
+     },
+     "link": "https://www.sunsetworldresorts.com/sunset-royal-beach-resort/",
+     "nota_google": 4.3,
+     "oferta": "",
+     "token": "ChcIoPCRzpmY8qlLGgsvZy8xdmw5cnR3dhAB",
+     "visto": "2026-11-27"
+    },
+    "The Royal Sands by Holiday Inn Club Vacations": {
+     "avaliacoes": 5615,
+     "destaque": false,
+     "estrelas": 4,
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLeF7rG-Bv1SZ73BWlMvVh0ihx9heWX6rIueqvln7H6QqscxsZHzMhaQzsx7fv8TAJqSyEvh5qeyYCNd78D0Rpt21zomOf2jAIFoveZpnTM9zUx2pT57RQD2X9eMYCmwwoxors7eaWIqAIS-=s287-w287-h192-n-k-no-v1",
      "gps": {
       "latitude": 21.098288,
       "longitude": -86.76689990000001
      },
      "hist": {
-      "2026-11-25": 8178
+      "2026-11-25": 8178,
+      "2026-11-27": 9673
      },
      "link": "https://www.holidayinnclub.com/explore-resorts/royal-sands-resort?utm_source=local&utm_medium=organic&utm_campaign=royal-sands-gmb-listing",
      "nota_google": 4.5,
      "oferta": "",
      "token": "ChcIr_Syutilx_MjGgsvZy8xdGgweW16NhAB",
-     "visto": "2026-11-25"
+     "visto": "2026-11-27"
     }
    }
   },
@@ -460,7 +594,7 @@
    ]
   },
   "mujeres-hotel": {
-   "atualizado": "2026-11-26",
+   "atualizado": "2026-11-27",
    "fonte": "Booking (levantamento de 25/11)",
    "hoteis": {
     "Almare Isla Mujeres": {
@@ -485,13 +619,14 @@
       "longitude": -86.80473769999999
      },
      "hist": {
-      "2026-11-26": 31435
+      "2026-11-26": 31435,
+      "2026-11-27": 31918
      },
      "link": "https://a2.adform.net/C/?bn=46366221;cpdir=https://www.belovedhotels.com/cancun/beloved-playa-mujeres/?partner=5830&utm_medium=gmb&utm_source=google&utm_campaign=gmb-bpm",
      "nota_google": 4.9,
      "oferta": "",
      "token": "ChgIxJL4gLfgqbfhARoLL2cvMXdrNGYzNDEQAQ",
-     "visto": "2026-11-26"
+     "visto": "2026-11-27"
     },
     "Catalonia Grand Costa Mujeres": {
      "destaque": true,
@@ -518,40 +653,42 @@
      "visto": "2026-11-25"
     },
     "Excellence Playa Mujeres": {
-     "avaliacoes": 18465,
+     "avaliacoes": 18492,
      "destaque": false,
      "estrelas": 5,
-     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLcBTg4VMOSvNVR0CCSOXCU756w4N0fREeipUMp2m6ckhBHYw9PeY7QyPzUP4WPN0stz9egKnPT9sAmx8CDbosoJbw1GEg5YzH_91l5L_iI8TSQ6KlSl98gGaxFpyVFQuXKaKxVW0LpmHi4d=s287-w287-h192-n-k-no-v1",
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLea5IYFjdXwrUne68sznxFtyfeC2wSXyPSsAFv-gR176ZAgyChu21G7AP18JsmyJVOLi3-wzV3kTGHKX847gtQHd2SvCjafXT1XeGlnK5NvZj4PtVM8tX0PBcgolBq0esrUS6JjvInUp3TN=s287-w287-h192-n-k-no-v1",
      "gps": {
       "latitude": 21.2436202,
       "longitude": -86.8054827
      },
      "hist": {
-      "2026-11-26": 28294
+      "2026-11-26": 28294,
+      "2026-11-27": 27260
      },
      "link": "https://www.excellenceresorts.com/cancun/excellence-playa-mujeres/",
      "nota_google": 4.9,
      "oferta": "",
      "token": "ChcIkaCysLudxY9yGgsvZy8xdGQ3cGNrbRAB",
-     "visto": "2026-11-26"
+     "visto": "2026-11-27"
     },
     "Finest Playa Mujeres": {
-     "avaliacoes": 25589,
+     "avaliacoes": 25595,
      "destaque": false,
      "estrelas": 5,
-     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLcfFgnqIrX2t13UIXTwpifOM0Sb2ZnMJgGu9QJMuUEBV04XWytu4JkNGR_aNcFjA95Vz49KzrRvBRMWEqaLDKxRLneglj_S5PCHF1eMk1RVDsfVADMWPR0aoFb9KBoI6PPZ4o7OYfihXg=s287-w287-h192-n-k-no-v1",
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLdWdS0OYk4zYkKYSklCZx0JHTri2ZuwzafI82Y0ZJdRXJITEeOhWed54UqL9NEkmA0AlEctKWh3cnX8pP5jhC9TLpiOgNqyfu0c7sRJT7GCafQzWPTa1ZFsD2qzs_PYALS44FlnQ6_tig=s287-w287-h192-n-k-no-v1",
      "gps": {
       "latitude": 21.244564999999998,
       "longitude": -86.806192
      },
      "hist": {
-      "2026-11-26": 23918
+      "2026-11-26": 23918,
+      "2026-11-27": 23044
      },
      "link": "https://www.finestresorts.com/cancun/finest-playa-mujeres/",
      "nota_google": 4.9,
      "oferta": "",
      "token": "ChkIyZ3s3YDm_ZF3Gg0vZy8xMWJ0bHJmbXJzEAE",
-     "visto": "2026-11-26"
+     "visto": "2026-11-27"
     },
     "Grand Palladium Select Costa Mujeres": {
      "destaque": true,
@@ -576,7 +713,8 @@
      },
      "hist": {
       "2026-11-25": 64864,
-      "2026-11-26": 57240
+      "2026-11-26": 57240,
+      "2026-11-27": 52279
      },
      "link": "https://www.hyattinclusivecollection.com/en/resorts-hotels/impression-by-secrets/mexico/isla-mujeres/?src=corp_lclb_google_seo_seiim&utm_source=google&utm_medium=organic&utm_campaign=lmr",
      "nota_booking": 9.3,
@@ -584,7 +722,7 @@
      "oferta": "",
      "regiao": "Isla Mujeres · só adultos",
      "token": "ChoIgrHD2pW-oNbTARoNL2cvMTF0OWI1MWZ5ORAB",
-     "visto": "2026-11-26"
+     "visto": "2026-11-27"
     },
     "Majestic Elegance Costa Mujeres": {
      "destaque": true,
@@ -611,22 +749,23 @@
      "visto": "2026-11-25"
     },
     "Mia Reef Isla Mujeres": {
-     "avaliacoes": 8575,
+     "avaliacoes": 8576,
      "destaque": false,
      "estrelas": 5,
-     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLeKj2CuBhw5nB_O9MQ4w0iFABPqIBl0-K-dOGyFm3VoeK8HIwhsvRU9HThnCRy2-D-C3lXvUJk66jnBCFIPG15Wk8zWGIO-bvtjig3dFMiJIsxkPCwzNNnsCCTueoDCTe79HJI=s287-w287-h192-n-k-no-v1",
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLe3KY2Ozj9pLN4Jrq8J25FBu23wWtLhP_CuVLjycSE-R6anbMt5KaE_uYnPty3SGIFQ0zMCgoeb_o2hxHAriN5TNGcalHdonXndnQbQz7F1vSwrBpW3XkdwlgTwu7hyA-_SkZo=s287-w287-h192-n-k-no-v1",
      "gps": {
       "latitude": 21.2631563,
       "longitude": -86.7487326
      },
      "hist": {
-      "2026-11-26": 11846
+      "2026-11-26": 11846,
+      "2026-11-27": 10250
      },
      "link": "https://www.hotelmiareefislamujeres.com/?partner=8570&utm_source=google&utm_medium=organic&utm_campaign=MyBusiness",
      "nota_google": 4.6,
      "oferta": "",
      "token": "ChkImPew6LTh-K5GGg0vZy8xMWJ0bXF3Y2I3EAE",
-     "visto": "2026-11-26"
+     "visto": "2026-11-27"
     },
     "Ocean Allure Costa Mujeres": {
      "destaque": true,
@@ -641,17 +780,18 @@
      "visto": "2026-11-25"
     },
     "Privilege Aluxes Isla Mujeres": {
-     "avaliacoes": 5370,
+     "avaliacoes": 5377,
      "destaque": true,
      "estrelas": 5,
-     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLd5TkQilg7AAZ1qGLT11Ak14yj8Xt2vjC4gSdyKPnHCZBLu5HQc2NkEGj3jS0njePyvsXg8wEIXIQirsuLvAazEFWgIJigp4Qq_zad0LuyfHuYgnQJpVSdLbl_HdLuYuzDfUVKR=s287-w287-h192-n-k-no-v1",
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLdX4M-zWGdVS6_33OjFPUb_Y-Qvdg81c11IuZNNZROJHWvsvv-O4FbiDYgj8lAd-ZTNJu-2SdLUDuf7TrU3OWfT8MxK9g4f3KE3MPFmilf4EJht3sBsvOEodZ9syIjmX96Rkv6x=s287-w287-h192-n-k-no-v1",
      "gps": {
       "latitude": 21.2575678,
       "longitude": -86.750867
      },
      "hist": {
       "2026-11-25": 18029,
-      "2026-11-26": 11117
+      "2026-11-26": 11117,
+      "2026-11-27": 9924
      },
      "link": "https://www.privilegehotels.com/?utm_source=google&utm_medium=mybusiness&utm_campaign=boton",
      "nota_booking": 8.5,
@@ -659,7 +799,7 @@
      "oferta": "",
      "regiao": "Isla Mujeres · só adultos",
      "token": "ChgIyPjoup2Q8PM3GgwvZy8xMmhtY2dxOTgQAQ",
-     "visto": "2026-11-26"
+     "visto": "2026-11-27"
     },
     "Riu Latino Costa Mujeres": {
      "destaque": true,
@@ -701,19 +841,20 @@
      "avaliacoes": 6566,
      "destaque": false,
      "estrelas": 5,
-     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLfowIyVPlPrWj46JkcvHlJeV40DqXLb_DclTs7T65OognYwWPGhZeG_TKLI8VV66mSJcF49uVLHLY3l7y0hsCL2kae4uwGf3GN7BBFASzhIY4ykLWihPKTAdNrcZRIcv63Vggvs=s287-w287-h192-n-k-no-v1",
+     "foto": "https://lh3.googleusercontent.com/grass-cs/AABkmLfoIieG6VY7dB0OynCA30vL19V4a5G59pXeaHu0OutSsdpxPIHWqYp1CCwzBj02akagY-U8aBGlHcCBgsCBAosmKPFcLgkNsz2gsx48k3haS-WQ9Tkg0t71FpdHXFd73V-OOqJQ=s287-w287-h192-n-k-no-v1",
      "gps": {
       "latitude": 21.231886600000003,
       "longitude": -86.8038502
      },
      "hist": {
-      "2026-11-26": 10392
+      "2026-11-26": 10392,
+      "2026-11-27": 10004
      },
      "link": "https://www.villapalmarcancun.com/?partner=8934&utm_source=googlemb&utm_medium=organic&utm_campaign=web_link",
      "nota_google": 4.3,
      "oferta": "",
      "token": "ChcIpqWWj_aPj5VtGgsvZy8xdGZqeGJreRAB",
-     "visto": "2026-11-26"
+     "visto": "2026-11-27"
     }
    }
   }
